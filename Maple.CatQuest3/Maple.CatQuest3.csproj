@@ -60,8 +60,6 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="GameModel\" />
-	  <Folder Include="GameService\" />
-	  <Folder Include="GameSourceGen\" />
 	</ItemGroup>
  
 
