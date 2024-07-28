@@ -43,6 +43,6 @@ namespace Maple.CatQuest3.GameService
             return true;
         }
 
-    {
+    
     }
 }

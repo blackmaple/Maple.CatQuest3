@@ -18,8 +18,6 @@ namespace Maple.CatQuest3.GameService
         : GameService<CatQuest3GameContext>(logger, runtimeContext, gameSettings)
     {
         protected override CatQuest3GameContext LoadGameContext()
-        {
-            throw new NotImplementedException();
-        }
+        => new(this.RuntimeContext,  Logger);
     }
 }
