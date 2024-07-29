@@ -12,11 +12,21 @@ typeof(MonoCollectorMember),
 typeof(MonoRuntimeContext),
 typeof(MonoCollectorClassInfo)
 )]
+
+
+    [MonoCollectorType(typeof(Contexts))]
+    [MonoCollectorType(typeof(GameContext))]
+    [MonoCollectorType(typeof(GameStateContext))]
+
+
+    [MonoCollectorType(typeof(GoldComponent))]
+    [MonoCollectorType(typeof(ExperienceComponent))]
+    [MonoCollectorType(typeof(CrystalComponent))]
+    [MonoCollectorType(typeof(ValueGauge))]
     internal partial class CatQuest3GameContext
     {
-        public CatQuest3GameContext(MonoRuntimeContext monoRuntimeContext, ILogger logger) : base(monoRuntimeContext, EnumMonoCollectorTypeVersion.APP, logger, "20")
-        {
-        }
+        //public CatQuest3GameContext(MonoRuntimeContext monoRuntimeContext, ILogger logger) : base(monoRuntimeContext, EnumMonoCollectorTypeVersion.APP, logger, "20")
+        //{
+        //}
     }
-
 }

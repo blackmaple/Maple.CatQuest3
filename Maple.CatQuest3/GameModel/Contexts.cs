@@ -20,7 +20,7 @@ namespace Maple.CatQuest3
     [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorSettingsAttribute([80, 114, 111, 106, 101, 99, 116, 83, 116, 97, 114], [], [67, 111, 110, 116, 101, 120, 116, 115])]
                 
     //  class static Contexts _sharedInstance
-    //  [MonoCollectorSearchFieldAttribute(typeof(nint),"_sharedInstance", "_SHARED_INSTANCE", true)]
+      [MonoCollectorSearchFieldAttribute(typeof(Contexts.Ptr_Contexts),"_sharedInstance", "SHARED_INSTANCE", true)]
                 
     // class 0x8 AIContext <aI>k__BackingField
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"<aI>k__BackingField", "A_I")]
@@ -38,10 +38,10 @@ namespace Maple.CatQuest3
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"<framework>k__BackingField", "FRAMEWORK")]
             
     // class 0x1C GameContext <game>k__BackingField
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"<game>k__BackingField", "GAME")]
+     [MonoCollectorSearchFieldAttribute(typeof(GameContext.Ptr_GameContext),"<game>k__BackingField", "GAME")]
             
     // class 0x20 GameStateContext <gameState>k__BackingField
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"<gameState>k__BackingField", "GAME_STATE")]
+     [MonoCollectorSearchFieldAttribute(typeof(GameStateContext.Ptr_GameStateContext),"<gameState>k__BackingField", "GAME_STATE")]
             
     // class 0x24 GUIContext <gUI>k__BackingField
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"<gUI>k__BackingField", "G_UI")]
