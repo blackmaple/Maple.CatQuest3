@@ -21,34 +21,23 @@ namespace Maple.CatQuest3.GameSourceGen
         public GameStateContext.Ptr_GameStateContext Ptr_GameStateContext { get; }
 
 
-        public bool InGame()
-        {
-            return this.Ptr_Contexts;
-        }
-        public void ThrowIfNotInGame()
-        {
-            if (!this.InGame())
-            {
-                GameException.Throw("game is error");
-            }
-            
-        }
+
+
 
         public bool IsLoaded()
         {
-            var gameStateContext = this.Ptr_GameStateContext;
-            if (gameStateContext)
-            {
-                return gameStateContext.GET_IS_IN_GAME();
-            }
-            return default;
+            return this.Ptr_GameContext && false == this.Ptr_GameContext.GET_IS_REMOVE_PLAYER_EVENT();
         }
-        public void ThrowIfNotLoaded()
+        public bool ThrowIfNotLoaded()
         {
-            if (IsLoaded() == false)
+            if (IsLoaded())
             {
-                GameException.Throw("game is not loaded");
+                return true;
             }
+            return GameException.ThrowIfNotLoaded<bool>();
+
         }
+
+
     }
 }

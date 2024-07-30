@@ -24,6 +24,11 @@ namespace Maple.CatQuest3.GameService
 
 
 
+        protected override ValueTask F5_KeyDown()
+        {
+            return new (this.MonoTaskAsync(p => p.Output()));
+        }
+
         #region GameEnvironment
         private Task<CatQuest3GameEnvironment> GetGameEnvironmentAsync()
         {
@@ -32,11 +37,11 @@ namespace Maple.CatQuest3.GameService
         private async ValueTask<CatQuest3GameEnvironment> GetGameEnvironmentThrowIfErrorAsync()
         {
             var gameEnvironment = await this.GetGameEnvironmentAsync().ConfigureAwait(false);
-            if (await this.UnityTaskAsync((p, args) => args.IsLoaded(), (gameEnvironment)).ConfigureAwait(false))
+            if (await this.MonoTaskAsync((p, args) => args.IsLoaded(), (gameEnvironment)).ConfigureAwait(false))
             {
-                return GameException.Throw<CatQuest3GameEnvironment>("game is not loaded");
+                return gameEnvironment;
             }
-            return GameException.Throw<CatQuest3GameEnvironment>("game is not loaded");
+            return GameException.ThrowIfNotLoaded<CatQuest3GameEnvironment>();
         }
         #endregion
 

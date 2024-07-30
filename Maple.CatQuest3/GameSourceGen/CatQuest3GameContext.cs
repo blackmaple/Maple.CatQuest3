@@ -23,6 +23,12 @@ typeof(MonoCollectorClassInfo)
     [MonoCollectorType(typeof(ExperienceComponent))]
     [MonoCollectorType(typeof(CrystalComponent))]
     [MonoCollectorType(typeof(ValueGauge))]
+
+
+    [MonoCollectorType(typeof(EquipmentDatabase))]
+    [MonoCollectorType(typeof(EquipmentItemData))]
+
+    
     internal partial class CatQuest3GameContext
     {
         //public CatQuest3GameContext(MonoRuntimeContext monoRuntimeContext, ILogger logger) : base(monoRuntimeContext, EnumMonoCollectorTypeVersion.APP, logger, "20")

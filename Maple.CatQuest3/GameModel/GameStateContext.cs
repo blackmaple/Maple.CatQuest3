@@ -260,7 +260,7 @@ namespace Maple.CatQuest3
         ///   CrystalComponent get_crystal()
         /// </summary>
         /// <returns>class CrystalComponent</returns>
-        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_crystal")]
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_crystal", CallConvs = [typeof(CallConvCdecl)])]
         extern CrystalComponent.Ptr_CrystalComponent GET_CRYSTAL();
 
 
@@ -276,7 +276,7 @@ namespace Maple.CatQuest3
         ///   ExperienceComponent get_experience()
         /// </summary>
         /// <returns>class ExperienceComponent</returns>
-        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_experience")]
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_experience", CallConvs = [typeof(CallConvCdecl)])]
         extern ExperienceComponent.Ptr_ExperienceComponent GET_EXPERIENCE();
 
 
@@ -292,7 +292,7 @@ namespace Maple.CatQuest3
         ///   GoldComponent get_gold()
         /// </summary>
         /// <returns>class GoldComponent</returns>
-        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_gold")]
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_gold", CallConvs = [typeof(CallConvCdecl)])]
         extern GoldComponent.Ptr_GoldComponent GET_GOLD();
 
 
@@ -380,8 +380,8 @@ namespace Maple.CatQuest3
         ///   System.Boolean get_isInGame()
         /// </summary>
         /// <returns>struct System.Boolean</returns>
-        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_isInGame", CallConvs = [typeof(CallConvCdecl)])]
-        extern System.Boolean GET_IS_IN_GAME();
+        //[Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_isInGame", CallConvs = [typeof(CallConvCdecl)])]
+        //extern System.Boolean GET_IS_IN_GAME();
 
 
         /// <summary>

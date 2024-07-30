@@ -1,9 +1,55 @@
 ﻿using Maple.MonoGameAssistant.GameDTO;
+using Maple.MonoGameAssistant.Common;
+using Maple.MonoGameAssistant.Logger;
+using Microsoft.Extensions.Logging;
+
 
 namespace Maple.CatQuest3.GameSourceGen
 {
     internal static class CatQuest3GameContextExtensions
     {
+        #region Test
+        public static void Output(this CatQuest3GameContext @this)
+        {
+           var database= @this.EquipmentDatabase._INSTANCE;
+            if(database)
+            {
+                if (database.CONTENT_TABLE)
+                {
+                    @this.Logger.LogInformation("keyData");
+                    var keydata = database.CONTENT_TABLE.AsRef().keyData;
+                    foreach (var item in keydata)
+                    {
+                        @this.Logger.LogInformation("keyData:{k}",item.ToString());
+                    }
+
+                    @this.Logger.LogInformation("valueData");
+                    var valData = database.CONTENT_TABLE.AsRef().valueData;
+                    foreach (var item in valData)
+                    {
+                        @this.Logger.LogInformation("valueData:{valueData}|{guid}|{name}|{desc}", 
+                            item.ToString(),
+                            item.GUID.ToString(),
+                            item.ITEM_NAME.ToString(),
+                            item.ITEM_DESCRIPTION_TERM.ToString());
+
+                    }
+
+                    @this.Logger.LogInformation("_dict");
+                    var dicVal = database.CONTENT_TABLE.AsRef()._dict.AsRefArray();
+                    foreach (var dic in dicVal)
+                    {
+                        var item = dic.Value;
+                        @this.Logger.LogInformation("_dict:{_dict}|{guid}|{name}|{desc}",
+                        item.ToString(),
+                        item.GUID.ToString(),
+                        item.ITEM_NAME.ToString(),
+                        item.ITEM_DESCRIPTION_TERM.ToString());
+                    }
+                }
+            }
+        }
+        #endregion
 
         #region GameEnvironment
 

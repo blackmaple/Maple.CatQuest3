@@ -1,4 +1,5 @@
 
+using Maple.CatQuest3.GameModel.Data;
 using Maple.MonoGameAssistant.Core;
 using Maple.MonoGameAssistant.MonoCollectorDataV2;
 using System;
@@ -26,13 +27,13 @@ namespace Maple.CatQuest3
     //  [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"OffsetOfInstanceIDInCPlusPlusObject", "OFFSET_OF_INSTANCE_ID_IN_C_PLUS_PLUS_OBJECT", true)]
             
     //  class static EquipmentDatabase _instance
-    //  [MonoCollectorSearchFieldAttribute(typeof(nint),"_instance", "_INSTANCE", true)]
+      [MonoCollectorSearchFieldAttribute(typeof(EquipmentDatabase.Ptr_EquipmentDatabase),"_instance", "_INSTANCE", true)]
                 
     // struct 0x8 System.IntPtr m_CachedPtr
     // [MonoCollectorSearchFieldAttribute(typeof(System.IntPtr),"m_CachedPtr", "M_CACHED_PTR")]
             
     // class 0xC ProjectStar.DatabaseBase.ContentDict<EquipmentDatabase,ProjectStar.Data.EquipmentItemData> contentTable
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"contentTable", "CONTENT_TABLE")]
+      [MonoCollectorSearchFieldAttribute(typeof(EquipmentDatabaseContentDict.Ptr_ContentDict),"contentTable", "CONTENT_TABLE")]
             
     // class 0x10 EquipmentDatabase.PartTypeCountDictionary partTypeCountTable
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"partTypeCountTable", "PART_TYPE_COUNT_TABLE")]

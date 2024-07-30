@@ -26,16 +26,16 @@ namespace Maple.CatQuest3
     // [MonoCollectorSearchFieldAttribute(typeof(System.IntPtr),"m_CachedPtr", "M_CACHED_PTR")]
             
     // class 0xC System.String Guid
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"Guid", "GUID")]
+     [MonoCollectorSearchFieldAttribute(typeof(PMonoString),"Guid", "GUID")]
             
     // class 0x10 UnityEngine.Sprite icon
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"icon", "ICON")]
             
     // class 0x14 System.String setName
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"setName", "SET_NAME")]
+     [MonoCollectorSearchFieldAttribute(typeof(PMonoString),"setName", "SET_NAME")]
             
     // class 0x18 System.String itemName
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"itemName", "ITEM_NAME")]
+     [MonoCollectorSearchFieldAttribute(typeof(PMonoString),"itemName", "ITEM_NAME")]
             
     // class 0x1C ProjectStar.Data.EquipmentSkinData skinData
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"skinData", "SKIN_DATA")]
@@ -68,10 +68,10 @@ namespace Maple.CatQuest3
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"abilities", "ABILITIES")]
             
     // class 0x44 System.String itemNameTerm
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"itemNameTerm", "ITEM_NAME_TERM")]
+     [MonoCollectorSearchFieldAttribute(typeof(PMonoString),"itemNameTerm", "ITEM_NAME_TERM")]
             
     // class 0x48 System.String itemDescriptionTerm
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"itemDescriptionTerm", "ITEM_DESCRIPTION_TERM")]
+     [MonoCollectorSearchFieldAttribute(typeof(PMonoString),"itemDescriptionTerm", "ITEM_DESCRIPTION_TERM")]
             
     // enum 0x4C ProjectStar.Data.EquipmentPartType partType
     // [MonoCollectorSearchFieldAttribute(typeof(ProjectStar.Data.EquipmentPartType),"partType", "PART_TYPE")]
