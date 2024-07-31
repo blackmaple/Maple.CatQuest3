@@ -15,7 +15,7 @@ namespace Maple.CatQuest3.GameModel.Data
     /// 
     /// </summary>
     //[Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorSettingsAttribute([80, 114, 111, 106, 101, 99, 116, 83, 116, 97, 114], 0x02000CC5U)]
-   // [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorSettingsAttribute([80, 114, 111, 106, 101, 99, 116, 83, 116, 97, 114], [], [67, 111, 110, 116, 101, 110, 116, 68, 105, 99, 116])]
+    // [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorSettingsAttribute([80, 114, 111, 106, 101, 99, 116, 83, 116, 97, 114], [], [67, 111, 110, 116, 101, 110, 116, 68, 105, 99, 116])]
 
 
     // class 0x8 System.Collections.Generic.List<System.String> keyData
@@ -26,7 +26,7 @@ namespace Maple.CatQuest3.GameModel.Data
 
     // class 0x10 System.Collections.Generic.Dictionary<System.String,ProjectStar.Data.EquipmentItemData> _dict
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"_dict", "_DICT")]
-    public partial class EquipmentDatabaseContentDict
+    public partial class DatabaseBaseContentDict
     {
         //public const string Const_ImageName = "ProjectStar";
         //public static byte[] Static_ImageName { get; } = [80, 114, 111, 106, 101, 99, 116, 83, 116, 97, 114];
@@ -42,24 +42,23 @@ namespace Maple.CatQuest3.GameModel.Data
 
 
         [System.Runtime.InteropServices.StructLayoutAttribute(System.Runtime.InteropServices.LayoutKind.Explicit)]
-        public readonly unsafe partial struct Ref_ContentDict
+        public readonly unsafe partial struct Ref_ContentDict<T_KEY, T_DATATYPE>
+            where T_KEY : unmanaged
+            where T_DATATYPE : unmanaged
         {
             [FieldOffset(0)]
             public readonly REF_MONO_OBJECT _obj;
 
             [FieldOffset(0x8)]
-            public readonly PMonoList_x86<PMonoString> keyData;
+            public readonly PMonoList_x86<T_KEY> keyData;
 
             [FieldOffset(0xC)]
-            public readonly PMonoList_x86<EquipmentItemData.Ptr_EquipmentItemData> valueData;
+            public readonly PMonoList_x86<T_DATATYPE> valueData;
 
             [FieldOffset(0x10)]
-            public readonly PMonoDictionary_x86<PMonoString,EquipmentItemData.Ptr_EquipmentItemData> _dict;
+            public readonly PMonoDictionary_x86<T_KEY, T_DATATYPE> _dict;
 
         }
-
-
-
 
         [System.Runtime.InteropServices.StructLayoutAttribute(System.Runtime.InteropServices.LayoutKind.Sequential)]
         public readonly unsafe partial struct Ptr_ContentDict(nint ptr)
@@ -79,20 +78,44 @@ namespace Maple.CatQuest3.GameModel.Data
             [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
             public bool Valid() => _ptr != nint.Zero;
 
-            public ref Ref_ContentDict AsRef()
-                => ref _ptr.AsRefStruct<Ref_ContentDict>();
-
-
         }
 
+        [System.Runtime.InteropServices.StructLayoutAttribute(System.Runtime.InteropServices.LayoutKind.Sequential)]
+        public readonly unsafe partial struct Ptr_ContentDict<T_KEY, T_DATATYPE>(nint ptr)
+            where T_KEY : unmanaged
+            where T_DATATYPE : unmanaged
+        {
 
+            [System.Runtime.InteropServices.MarshalAsAttribute(System.Runtime.InteropServices.UnmanagedType.SysInt)]
+            readonly nint _ptr = ptr;
+            public static implicit operator Ptr_ContentDict<T_KEY, T_DATATYPE>(nint ptr) => new(ptr);
+            public static implicit operator nint(Ptr_ContentDict<T_KEY, T_DATATYPE> obj) => obj._ptr;
+            public static implicit operator bool(Ptr_ContentDict<T_KEY, T_DATATYPE> obj) => obj.Valid();
+
+            public override string ToString()
+            {
+                return _ptr.ToString("X8");
+            }
+
+            [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            public bool Valid() => _ptr != nint.Zero;
+
+            public ref Ref_ContentDict<T_KEY, T_DATATYPE> AsRef()
+                => ref _ptr.AsRefStruct<Ref_ContentDict<T_KEY, T_DATATYPE>>();
+
+            public PMonoList_x86<T_KEY> Keys => AsRef().keyData;
+
+            public PMonoList_x86<T_DATATYPE> Values => AsRef().valueData;
+
+            public PMonoDictionary_x86<T_KEY, T_DATATYPE> Dict => AsRef()._dict;
+        }
 
     }
 
     /// <summary>
     /// ["ProjectStar".""."ContentDict"]
     /// </summary>
-    public partial class EquipmentDatabaseContentDict
+    public partial class DatabaseBaseContentDict
     {
 
 

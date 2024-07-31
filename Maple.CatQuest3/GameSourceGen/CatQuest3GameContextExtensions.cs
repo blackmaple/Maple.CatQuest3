@@ -17,14 +17,14 @@ namespace Maple.CatQuest3.GameSourceGen
                 if (database.CONTENT_TABLE)
                 {
                     @this.Logger.LogInformation("keyData");
-                    var keydata = database.CONTENT_TABLE.AsRef().keyData;
+                    var keydata = database.CONTENT_TABLE.Keys;
                     foreach (var item in keydata)
                     {
                         @this.Logger.LogInformation("keyData:{k}",item.ToString());
                     }
 
                     @this.Logger.LogInformation("valueData");
-                    var valData = database.CONTENT_TABLE.AsRef().valueData;
+                    var valData = database.CONTENT_TABLE.Values;
                     foreach (var item in valData)
                     {
                         @this.Logger.LogInformation("valueData:{valueData}|{guid}|{name}|{desc}", 
@@ -36,7 +36,7 @@ namespace Maple.CatQuest3.GameSourceGen
                     }
 
                     @this.Logger.LogInformation("_dict");
-                    var dicVal = database.CONTENT_TABLE.AsRef()._dict.AsRefArray();
+                    var dicVal = database.CONTENT_TABLE.Dict.AsRefArray();
                     foreach (var dic in dicVal)
                     {
                         var item = dic.Value;
