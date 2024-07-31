@@ -2,6 +2,11 @@
 using Maple.MonoGameAssistant.Common;
 using Maple.MonoGameAssistant.Logger;
 using Microsoft.Extensions.Logging;
+using Maple.MonoGameAssistant.Core;
+using System;
+using System.Text;
+using System.Runtime.CompilerServices;
+using System.Reflection.Emit;
 
 
 namespace Maple.CatQuest3.GameSourceGen
@@ -11,28 +16,34 @@ namespace Maple.CatQuest3.GameSourceGen
         #region Test
         public static void Output(this CatQuest3GameContext @this)
         {
-           var database= @this.EquipmentDatabase._INSTANCE;
-            if(database)
+            var database = @this.EquipmentDatabase._INSTANCE;
+            if (database)
             {
                 if (database.CONTENT_TABLE)
                 {
                     @this.Logger.LogInformation("keyData");
                     var keydata = database.CONTENT_TABLE.Keys;
+                    @this.Logger.LogInformation("keyData1");
                     foreach (var item in keydata)
                     {
-                        @this.Logger.LogInformation("keyData:{k}",item.ToString());
+                        @this.Logger.LogInformation("keyData:{k}", item.ToString());
                     }
 
                     @this.Logger.LogInformation("valueData");
                     var valData = database.CONTENT_TABLE.Values;
                     foreach (var item in valData)
                     {
-                        @this.Logger.LogInformation("valueData:{valueData}|{guid}|{name}|{desc}", 
+
+
+                        item.GET_DESCRIPTION(out var desc, 1, out var num);
+                        var descfmt = LocalizationTools.Ptr_LocalizationTools.TRANSLATE_OR_DEFAULT_00(desc.Item1, desc.Item2);
+                        var itemDesc = string.Format(descfmt.ToString()!, num.ToString());
+                        var itemName = LocalizationTools.Ptr_LocalizationTools.TRANSLATE_OR_DEFAULT_00(item.ITEM_NAME_TERM, item.ITEM_NAME);
+                        @this.Logger.LogInformation("valueData:{valueData}|{guid}|{name}|{desc}",
                             item.ToString(),
                             item.GUID.ToString(),
-                            item.ITEM_NAME.ToString(),
-                            item.ITEM_DESCRIPTION_TERM.ToString());
-
+                             itemDesc,
+                             itemName.ToString());
                     }
 
                     @this.Logger.LogInformation("_dict");
@@ -48,6 +59,18 @@ namespace Maple.CatQuest3.GameSourceGen
                     }
                 }
             }
+        }
+        #endregion
+
+        #region language
+        static PMonoString GetLocalName(PMonoString pNameTrm, PMonoString pName)
+        {
+            return LocalizationTools.Ptr_LocalizationTools.TRANSLATE_OR_DEFAULT_00(pNameTrm, pName);
+        }
+        static string? GetLocalDesc(PMonoString pNameTrm, PMonoString pName, int num)
+        {
+            var fmt = GetLocalName(pNameTrm, pName);
+            return string.Format(fmt.ToString()!, num.ToString());
         }
         #endregion
 
@@ -122,7 +145,7 @@ namespace Maple.CatQuest3.GameSourceGen
         }
         public static GameCurrencyInfoDTO UpdateGameCurrencyInfo(this CatQuest3GameContext @this, CatQuest3GameEnvironment gameEnvironment, GameCurrencyModifyDTO gameCurrency)
         {
-            var count =  (Enum.TryParse<EnumGameCurrencyType>(gameCurrency.CurrencyObject, out var currencyType), currencyType) switch
+            var count = (Enum.TryParse<EnumGameCurrencyType>(gameCurrency.CurrencyObject, out var currencyType), currencyType) switch
             {
                 (true, EnumGameCurrencyType.Gold) => gameEnvironment.SetGold(gameCurrency.IntValue),
                 (true, EnumGameCurrencyType.Crystal) => gameEnvironment.SetCrystal(gameCurrency.IntValue),
@@ -133,6 +156,170 @@ namespace Maple.CatQuest3.GameSourceGen
         }
         #endregion
 
+        #region Inventory
+        private static GameValueInfoDTO[] GetEquipmentAtt(EquipmentItemData.Ptr_EquipmentItemData itemData)
+        {
+            return [];
+        }
+        private static GameValueInfoDTO[] GetShipBlueprintAtt(ShipBlueprintItemData.Ptr_ShipBlueprintItemData itemData)
+        {
+            return [];
+        }
+        public static IEnumerable<GameInventoryDisplayDTO> GetListGameInventoryDisplay(this CatQuest3GameContext @this, CatQuest3GameEnvironment gameEnvironment)
+        {
+            var equipmentTable = gameEnvironment.Ptr_EquipmentDatabase.CONTENT_TABLE;
+            foreach (var item in equipmentTable.Values)
+            {
+                var guid = item.GUID.ToString();
+                if (false == string.IsNullOrEmpty(guid))
+                {
+
+                    var name = GetLocalName(item.ITEM_NAME_TERM, item.ITEM_NAME);
+
+
+                    item.GET_DESCRIPTION(out var localDesc, 1, out var num);
+
+                    var desc = GetLocalDesc(localDesc.Item1, localDesc.Item2, num);
+
+                    yield return new GameInventoryDisplayDTO()
+                    {
+                        ObjectId = guid,
+                        DisplayCategory = EnumGameInventoryType.Equipment.ToString(),
+                        DisplayName = name.ToString(),
+                        DisplayDesc = desc,
+                        ItemAttributes = GetEquipmentAtt(item)
+                    };
+                }
+
+            }
+
+
+            var shipBulepriteTable = gameEnvironment.Ptr_ShipBlueprintDatabase.CONTENT_TABLE;
+            foreach (var item in shipBulepriteTable.Values)
+            {
+                var guid = item.GUID.ToString();
+
+
+                if (false == string.IsNullOrEmpty(guid))
+                {
+                    var name = GetLocalName(item.ITEM_NAME_TERM, item.ITEM_NAME);
+                    item.GET_DESCRIPTION(out var localDesc, 1, out var num);
+                    var desc = GetLocalDesc(localDesc.Item1, localDesc.Item2, num);
+                    yield return new GameInventoryDisplayDTO()
+                    {
+                        ObjectId = guid,
+                        DisplayCategory = EnumGameInventoryType.ShipBlueprint.ToString(),
+                        DisplayName = name.ToString(),
+                        DisplayDesc = desc,
+                        ItemAttributes = GetShipBlueprintAtt(item)
+                    };
+                }
+
+            }
+        }
+
+        public static bool FindEquipmentByUnlocked(this CatQuest3GameEnvironment gameEnvironment, ReadOnlySpan<char> guid, out EquipmentItemData.Ptr_EquipmentItemData itemData, out int level)
+        {
+            Unsafe.SkipInit(out level);
+            Unsafe.SkipInit(out itemData);
+
+            var lockedData = gameEnvironment.Ptr_UnlockedEquipmentListComponent.VALUE;
+            foreach (var locked in lockedData)
+            {
+                itemData = locked.ITEM_DATA;
+                if (itemData.GUID.AsReadOnlySpan().SequenceEqual(guid))
+                {
+                    level = locked.LEVEL._CURR_VALUE;
+                    return true;
+                }
+            }
+            return default;
+        }
+        public static bool FindEquipmentByTable(this CatQuest3GameEnvironment gameEnvironment, ReadOnlySpan<char> guid, out EquipmentItemData.Ptr_EquipmentItemData itemData)
+        {
+            Unsafe.SkipInit(out itemData);
+            var itemTable = gameEnvironment.Ptr_EquipmentDatabase.CONTENT_TABLE;
+            foreach (var item in itemTable.Values)
+            {
+                if (item.GUID.AsReadOnlySpan().SequenceEqual(guid))
+                {
+                    itemData = item;
+                    return true;
+                }
+
+
+            }
+            return default;
+
+        }
+
+        public static bool FindShipBlueprintByUnlocked(this CatQuest3GameEnvironment gameEnvironment, ReadOnlySpan<char> guid, out ShipBlueprintItemData.Ptr_ShipBlueprintItemData itemData, out int level)
+        {
+            Unsafe.SkipInit(out level);
+            Unsafe.SkipInit(out itemData);
+
+            var lockedData = gameEnvironment.Ptr_UnlockedShipBlueprintsComponent.VALUE;
+            foreach (var locked in lockedData.COLLECTION)
+            {
+                itemData = locked.ITEM_DATA;
+                if (itemData.GUID.AsReadOnlySpan().SequenceEqual(guid))
+                {
+                    level = locked.LEVEL._CURR_VALUE;
+                    return true;
+                }
+            }
+            return default;
+        }
+        public static bool FindShipBlueprintByTable(this CatQuest3GameEnvironment gameEnvironment, ReadOnlySpan<char> guid, out ShipBlueprintItemData.Ptr_ShipBlueprintItemData itemData)
+        {
+            Unsafe.SkipInit(out itemData);
+            var itemTable = gameEnvironment.Ptr_ShipBlueprintDatabase.CONTENT_TABLE;
+            foreach (var item in itemTable.Values)
+            {
+                if (item.GUID.AsReadOnlySpan().SequenceEqual(guid))
+                {
+                    itemData = item;
+                    return true;
+                }
+
+
+            }
+            return default;
+
+        }
+
+        public static GameInventoryInfoDTO GetGameInventoryInfo(this CatQuest3GameContext @this, CatQuest3GameEnvironment gameEnvironment, GameInventoryObjectDTO inventoryObjectDTO)
+        {
+            if (false == Enum.TryParse<EnumGameInventoryType>(inventoryObjectDTO.InventoryCategory, out var inventoryCategory))
+            {
+                return GameInventoryObjectDTO.ThrowNotFound<GameInventoryInfoDTO>(inventoryObjectDTO.InventoryCategory);
+            }
+            if (inventoryCategory == EnumGameInventoryType.Equipment)
+            {
+                if (gameEnvironment.FindEquipmentByUnlocked(inventoryObjectDTO.InventoryObject, out var _, out var level))
+                {
+                    return new GameInventoryInfoDTO() { ObjectId = inventoryObjectDTO.InventoryObject, InventoryCount = level, };
+                }
+            }
+            else if (inventoryCategory == EnumGameInventoryType.ShipBlueprint)
+            {
+                if (gameEnvironment.FindShipBlueprintByUnlocked(inventoryObjectDTO.InventoryObject, out var _, out var level))
+                {
+                    return new GameInventoryInfoDTO() { ObjectId = inventoryObjectDTO.InventoryObject, InventoryCount = level, };
+                }
+            }
+            else if (inventoryCategory == EnumGameInventoryType.ShipSpell)
+            {
+
+            }
+            else if (inventoryCategory == EnumGameInventoryType.Spell)
+            {
+
+            }
+            return new GameInventoryInfoDTO() { ObjectId = inventoryObjectDTO.InventoryObject };
+
+        }
+        #endregion
     }
 
     public enum EnumGameCurrencyType
@@ -143,5 +330,12 @@ namespace Maple.CatQuest3.GameSourceGen
         Experience = 3,
     }
 
+    public enum EnumGameInventoryType
+    {
+        Equipment,
+        ShipBlueprint,
+        ShipSpell,
+        Spell,
+    }
 
 }

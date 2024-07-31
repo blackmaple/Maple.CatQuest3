@@ -41,21 +41,21 @@ namespace Maple.CatQuest3.GameModel.Data
 
 
 
-        [System.Runtime.InteropServices.StructLayoutAttribute(System.Runtime.InteropServices.LayoutKind.Explicit)]
+        [System.Runtime.InteropServices.StructLayoutAttribute(System.Runtime.InteropServices.LayoutKind.Sequential)]
         public readonly unsafe partial struct Ref_ContentDict<T_KEY, T_DATATYPE>
             where T_KEY : unmanaged
             where T_DATATYPE : unmanaged
         {
-            [FieldOffset(0)]
+         //   [FieldOffset(0)]
             public readonly REF_MONO_OBJECT _obj;
 
-            [FieldOffset(0x8)]
+       //     [FieldOffset(0x8)]
             public readonly PMonoList_x86<T_KEY> keyData;
 
-            [FieldOffset(0xC)]
+       //     [FieldOffset(0xC)]
             public readonly PMonoList_x86<T_DATATYPE> valueData;
 
-            [FieldOffset(0x10)]
+      //      [FieldOffset(0x10)]
             public readonly PMonoDictionary_x86<T_KEY, T_DATATYPE> _dict;
 
         }

@@ -21,13 +21,13 @@ namespace Maple.CatQuest3
     
                 
     // class 0x8 LevelValueGauge level
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"level", "LEVEL")]
+      [MonoCollectorSearchFieldAttribute(typeof(LevelValueGauge.Ptr_LevelValueGauge),"level", "LEVEL")]
             
     // class 0xC Sigtrap.Relays.Relay<InventoryItemBase,System.Int32> onUpgradedEvent
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"onUpgradedEvent", "ON_UPGRADED_EVENT")]
             
     // class 0x10 ProjectStar.Data.EquipmentItemData itemData
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"itemData", "ITEM_DATA")]
+      [MonoCollectorSearchFieldAttribute(typeof(EquipmentItemData.Ptr_EquipmentItemData),"itemData", "ITEM_DATA")]
     public partial class Equipment
     { 
         //public const string Const_ImageName = "ProjectStar";

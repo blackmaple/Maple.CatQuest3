@@ -1,4 +1,5 @@
-﻿using Maple.MonoGameAssistant.Core;
+﻿using Maple.CatQuest3.GameModel.Data;
+using Maple.MonoGameAssistant.Core;
 using Maple.MonoGameAssistant.GameDTO;
 
 namespace Maple.CatQuest3.GameSourceGen
@@ -14,6 +15,8 @@ namespace Maple.CatQuest3.GameSourceGen
                 this.Ptr_GameStateContext = contexts.GAME_STATE;
                 this.Ptr_Contexts = contexts;
             }
+            this.Ptr_EquipmentDatabase = @this.EquipmentDatabase._INSTANCE;
+            this.Ptr_ShipBlueprintDatabase = @this.ShipBlueprintDatabase._INSTANCE;
         }
 
         public Contexts.Ptr_Contexts Ptr_Contexts { get; }
@@ -21,8 +24,12 @@ namespace Maple.CatQuest3.GameSourceGen
         public GameStateContext.Ptr_GameStateContext Ptr_GameStateContext { get; }
 
 
+        public EquipmentDatabase.Ptr_EquipmentDatabase Ptr_EquipmentDatabase { get; }
+        public UnlockedEquipmentListComponent.Ptr_UnlockedEquipmentListComponent Ptr_UnlockedEquipmentListComponent => Ptr_GameContext.GET_UNLOCKED_EQUIPMENT_LIST();
 
 
+        public ShipBlueprintDatabase.Ptr_ShipBlueprintDatabase Ptr_ShipBlueprintDatabase { get; }
+        public UnlockedShipBlueprintsComponent.Ptr_UnlockedShipBlueprintsComponent Ptr_UnlockedShipBlueprintsComponent=> Ptr_GameContext.GET_UNLOCKED_SHIP_BLUEPRINTS();
 
         public bool IsLoaded()
         {

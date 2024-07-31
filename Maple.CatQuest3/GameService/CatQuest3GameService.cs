@@ -26,7 +26,7 @@ namespace Maple.CatQuest3.GameService
 
         protected override ValueTask F5_KeyDown()
         {
-            return new (this.MonoTaskAsync(p => p.Output()));
+            return new(this.MonoTaskAsync(p => p.Output()));
         }
 
         #region GameEnvironment
@@ -61,6 +61,18 @@ namespace Maple.CatQuest3.GameService
         {
             var gameEnvironment = await this.GetGameEnvironmentThrowIfErrorAsync().ConfigureAwait(false);
             return await this.MonoTaskAsync((p, args) => p.UpdateGameCurrencyInfo(gameEnvironment, args), currencyModifyDTO).ConfigureAwait(false);
+        }
+
+
+        public sealed override async ValueTask<GameInventoryDisplayDTO[]> GetListInventoryDisplayAsync()
+        {
+            var gameEnvironment = await this.GetGameEnvironmentThrowIfErrorAsync().ConfigureAwait(false);
+            return await this.MonoTaskAsync((p, args) => p.GetListGameInventoryDisplay(args).ToArray(), gameEnvironment).ConfigureAwait(false);
+        }
+        public sealed override async ValueTask<GameInventoryInfoDTO> GetInventoryInfoAsync(GameInventoryObjectDTO inventoryObjectDTO)
+        {
+            var gameEnvironment = await this.GetGameEnvironmentThrowIfErrorAsync().ConfigureAwait(false);
+            return await this.MonoTaskAsync((p, args) => p.GetGameInventoryInfo(args.gameEnvironment, args.inventoryObjectDTO), (gameEnvironment, inventoryObjectDTO)).ConfigureAwait(false);
         }
         #endregion
     }

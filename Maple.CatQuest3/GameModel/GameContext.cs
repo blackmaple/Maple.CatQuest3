@@ -1316,8 +1316,8 @@ namespace Maple.CatQuest3
         ///   UnlockedEquipmentListComponent get_unlockedEquipmentList()
         /// </summary>
         /// <returns>class UnlockedEquipmentListComponent</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_unlockedEquipmentList")]
-        ///  extern nint GET_UNLOCKED_EQUIPMENT_LIST ();
+          [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_unlockedEquipmentList")]
+           extern UnlockedEquipmentListComponent.Ptr_UnlockedEquipmentListComponent GET_UNLOCKED_EQUIPMENT_LIST ();
 
 
         /// <summary>
@@ -1332,8 +1332,8 @@ namespace Maple.CatQuest3
         ///   UnlockedShipBlueprintsComponent get_unlockedShipBlueprints()
         /// </summary>
         /// <returns>class UnlockedShipBlueprintsComponent</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_unlockedShipBlueprints")]
-        ///  extern nint GET_UNLOCKED_SHIP_BLUEPRINTS ();
+          [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_unlockedShipBlueprints")]
+           extern UnlockedShipBlueprintsComponent.Ptr_UnlockedShipBlueprintsComponent GET_UNLOCKED_SHIP_BLUEPRINTS ();
 
 
         /// <summary>
@@ -1348,8 +1348,8 @@ namespace Maple.CatQuest3
         ///   UnlockedShipSpellTableComponent get_unlockedShipSpellTable()
         /// </summary>
         /// <returns>class UnlockedShipSpellTableComponent</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_unlockedShipSpellTable")]
-        ///  extern nint GET_UNLOCKED_SHIP_SPELL_TABLE ();
+          [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_unlockedShipSpellTable")]
+           extern nint GET_UNLOCKED_SHIP_SPELL_TABLE ();
 
 
         /// <summary>
@@ -1364,8 +1364,8 @@ namespace Maple.CatQuest3
         ///   UnlockedSpellTableComponent get_unlockedSpellTable()
         /// </summary>
         /// <returns>class UnlockedSpellTableComponent</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_unlockedSpellTable")]
-        ///  extern nint GET_UNLOCKED_SPELL_TABLE ();
+          [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_unlockedSpellTable")]
+           extern UnlockedSpellTableComponent.Ptr_UnlockedSpellTableComponent GET_UNLOCKED_SPELL_TABLE ();
 
 
         /// <summary>

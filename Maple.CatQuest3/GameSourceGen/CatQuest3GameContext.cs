@@ -23,12 +23,35 @@ typeof(MonoCollectorClassInfo)
     [MonoCollectorType(typeof(ExperienceComponent))]
     [MonoCollectorType(typeof(CrystalComponent))]
     [MonoCollectorType(typeof(ValueGauge))]
+    [MonoCollectorType(typeof(LevelValueGauge))]
+
+    [MonoCollectorType(typeof(ShipBlueprintDatabase))]
+    [MonoCollectorType(typeof(ShipBlueprintItemData))]
+    [MonoCollectorType(typeof(UnlockedShipBlueprintsComponent))]
+    [MonoCollectorType(typeof(ShipBlueprintCollection))]
+    [MonoCollectorType(typeof(ShipBlueprint))]
+
+
+    [MonoCollectorType(typeof(SpellConfigDatabase))]
+    [MonoCollectorType(typeof(SpellConfigBase))]
+    [MonoCollectorType(typeof(SpellConfig))]
+    [MonoCollectorType(typeof(ShipSpellConfig))]
+    [MonoCollectorType(typeof(UnlockedShipSpellTableComponent))]
+    [MonoCollectorType(typeof(ShipSpellCollection))]
+    [MonoCollectorType(typeof(UnlockedSpellTableComponent))]
+    [MonoCollectorType(typeof(SpellCollection))]
 
 
     [MonoCollectorType(typeof(EquipmentDatabase))]
     [MonoCollectorType(typeof(EquipmentItemData))]
+    [MonoCollectorType(typeof(UnlockedEquipmentListComponent))]
+    [MonoCollectorType(typeof(Equipment))]
 
-    
+
+
+
+
+    [MonoCollectorType(typeof(LocalizationTools))]
     internal partial class CatQuest3GameContext
     {
         //public CatQuest3GameContext(MonoRuntimeContext monoRuntimeContext, ILogger logger) : base(monoRuntimeContext, EnumMonoCollectorTypeVersion.APP, logger, "20")
