@@ -26,7 +26,7 @@ namespace Maple.CatQuest3
     // [MonoCollectorSearchFieldAttribute(typeof(System.IntPtr),"m_CachedPtr", "M_CACHED_PTR")]
             
     // class 0xC System.String Guid
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"Guid", "GUID")]
+      [MonoCollectorSearchFieldAttribute(typeof(PMonoString),"Guid", "GUID")]
             
     // struct 0x10 System.Int32 baseUpgradeCost
     // [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"baseUpgradeCost", "BASE_UPGRADE_COST")]
@@ -35,7 +35,7 @@ namespace Maple.CatQuest3
     // [MonoCollectorSearchFieldAttribute(typeof(System.Single),"incrementBaseUpgradeCostMultiplier", "INCREMENT_BASE_UPGRADE_COST_MULTIPLIER")]
             
     // class 0x18 System.Collections.Generic.List<ShipCannonAttackConfig> attackConfigLevels
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"attackConfigLevels", "ATTACK_CONFIG_LEVELS")]
+      [MonoCollectorSearchFieldAttribute(typeof(PMonoList_x86<ShipCannonAttackConfig.Ptr_ShipCannonAttackConfig>),"attackConfigLevels", "ATTACK_CONFIG_LEVELS")]
             
     // struct 0x1C System.Int32 shipSpellSlot
     // [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"shipSpellSlot", "SHIP_SPELL_SLOT")]

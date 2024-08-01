@@ -21,7 +21,7 @@ namespace Maple.CatQuest3
     
                 
     // class 0x8 SpellCollection value
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"value", "VALUE")]
+      [MonoCollectorSearchFieldAttribute(typeof(SpellCollection.Ptr_SpellCollection),"value", "VALUE")]
     public partial class UnlockedSpellTableComponent
     { 
         //public const string Const_ImageName = "ProjectStar";

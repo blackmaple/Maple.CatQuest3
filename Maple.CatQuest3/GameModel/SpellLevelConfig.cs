@@ -12,12 +12,12 @@ namespace Maple.CatQuest3
 
 
     /// <summary>
-    /// class ["ProjectStar".""."SpellConfig"]
-    /// [SpellConfigBase]=>[GenericDatabaseEntry]=>[UnityEngine.ScriptableObject]=>[UnityEngine.Object]=>[System.Object]
-    /// [ProjectStar.Localization.ILocalizableData]
+    /// class ["ProjectStar".""."SpellLevelConfig"]
+    /// [SpellLevelConfigBase]=>[GenericDatabaseEntry]=>[UnityEngine.ScriptableObject]=>[UnityEngine.Object]=>[System.Object]
+    /// 
     /// </summary>
-    //[Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorSettingsAttribute([80, 114, 111, 106, 101, 99, 116, 83, 116, 97, 114], 0x020001FFU)]
-    [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorSettingsAttribute([80, 114, 111, 106, 101, 99, 116, 83, 116, 97, 114], [], [83, 112, 101, 108, 108, 67, 111, 110, 102, 105, 103])]
+    //[Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorSettingsAttribute([80, 114, 111, 106, 101, 99, 116, 83, 116, 97, 114], 0x02000203U)]
+    [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorSettingsAttribute([80, 114, 111, 106, 101, 99, 116, 83, 116, 97, 114], [], [83, 112, 101, 108, 108, 76, 101, 118, 101, 108, 67, 111, 110, 102, 105, 103])]
 
     //  struct static System.Int32 OffsetOfInstanceIDInCPlusPlusObject
     //  [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"OffsetOfInstanceIDInCPlusPlusObject", "OFFSET_OF_INSTANCE_ID_IN_C_PLUS_PLUS_OBJECT", true)]
@@ -28,18 +28,57 @@ namespace Maple.CatQuest3
     // class 0xC System.String Guid
     [MonoCollectorSearchFieldAttribute(typeof(PMonoString), "Guid", "GUID")]
 
-    // struct 0x10 System.Int32 baseUpgradeCost
-    // [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"baseUpgradeCost", "BASE_UPGRADE_COST")]
+    // class 0x10 System.String spellName
+    [MonoCollectorSearchFieldAttribute(typeof(nint), "spellName", "SPELL_NAME")]
 
-    // struct 0x14 System.Single incrementBaseUpgradeCostMultiplier
-    // [MonoCollectorSearchFieldAttribute(typeof(System.Single),"incrementBaseUpgradeCostMultiplier", "INCREMENT_BASE_UPGRADE_COST_MULTIPLIER")]
+    // class 0x14 System.String spellDescription
+    [MonoCollectorSearchFieldAttribute(typeof(nint), "spellDescription", "SPELL_DESCRIPTION")]
 
-    // class 0x18 System.Collections.Generic.List<SpellLevelConfig> spellLevels
-      [MonoCollectorSearchFieldAttribute(typeof(PMonoList_x86<SpellLevelConfig.Ptr_SpellLevelConfig>),"spellLevels", "SPELL_LEVELS")]
+    // class 0x18 UnityEngine.Sprite UISprite
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"UISprite", "UI_SPRITE")]
 
-    // class 0x1C BasicLine secondarySpellDetails
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"secondarySpellDetails", "SECONDARY_SPELL_DETAILS")]
-    public partial class SpellConfig
+    // abstract class 0x1C SpawningEffectConfigBase spellFirer
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"spellFirer", "SPELL_FIRER")]
+
+    // class 0x20 SpawnSourceVfxEffect vfxEffect
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"vfxEffect", "VFX_EFFECT")]
+
+    // class 0x24 TintSourceEffect tintEffect
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"tintEffect", "TINT_EFFECT")]
+
+    // class 0x28 CameraShakeConfig cameraShakeEffect
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"cameraShakeEffect", "CAMERA_SHAKE_EFFECT")]
+
+    // class 0x2C ChargeConfig chargeConfig
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"chargeConfig", "CHARGE_CONFIG")]
+
+    // class 0x30 SoundData soundEffect
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"soundEffect", "SOUND_EFFECT")]
+
+    // class 0x34 System.String spellNameTerm
+    [MonoCollectorSearchFieldAttribute(typeof(nint), "spellNameTerm", "SPELL_NAME_TERM")]
+
+    // class 0x38 System.String spellDescriptionTerm
+    [MonoCollectorSearchFieldAttribute(typeof(nint), "spellDescriptionTerm", "SPELL_DESCRIPTION_TERM")]
+
+    // enum 0x3C ElementalType elementalType
+    //[MonoCollectorSearchFieldAttribute(typeof(ElementalType), "elementalType", "ELEMENTAL_TYPE")]
+
+    // struct 0x40 System.Boolean stackable
+    // [MonoCollectorSearchFieldAttribute(typeof(System.Boolean),"stackable", "STACKABLE")]
+
+    // struct 0x41 System.Boolean clearOnReceivingAttack
+    // [MonoCollectorSearchFieldAttribute(typeof(System.Boolean),"clearOnReceivingAttack", "CLEAR_ON_RECEIVING_ATTACK")]
+
+    // struct 0x42 System.Boolean overrideInputRumble
+    // [MonoCollectorSearchFieldAttribute(typeof(System.Boolean),"overrideInputRumble", "OVERRIDE_INPUT_RUMBLE")]
+
+    // enum 0x44 VibrationPresetReferences inputRumbleEffect
+    // [MonoCollectorSearchFieldAttribute(typeof(VibrationPresetReferences),"inputRumbleEffect", "INPUT_RUMBLE_EFFECT")]
+
+    // struct 0x48 System.Int32 manaCost
+    // [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"manaCost", "MANA_COST")]
+    public partial class SpellLevelConfig
     {
         //public const string Const_ImageName = "ProjectStar";
         //public static byte[] Static_ImageName { get; } = [80, 114, 111, 106, 101, 99, 116, 83, 116, 97, 114];
@@ -47,10 +86,10 @@ namespace Maple.CatQuest3
         //public const string Const_Namespace = "";
         //public static byte[] Static_Namespace { get; } = [];
 
-        //public const string Const_ClassName = "SpellConfig";
-        //public static byte[] Static_ClassName { get; } = [83, 112, 101, 108, 108, 67, 111, 110, 102, 105, 103];
+        //public const string Const_ClassName = "SpellLevelConfig";
+        //public static byte[] Static_ClassName { get; } = [83, 112, 101, 108, 108, 76, 101, 118, 101, 108, 67, 111, 110, 102, 105, 103];
 
-        //public const uint Const_TypeToken = 0x020001FFU;
+        //public const uint Const_TypeToken = 0x02000203U;
 
 
 
@@ -69,14 +108,14 @@ namespace Maple.CatQuest3
 
 
         [System.Runtime.InteropServices.StructLayoutAttribute(System.Runtime.InteropServices.LayoutKind.Sequential)]
-        public readonly unsafe partial struct Ptr_SpellConfig(nint ptr)
+        public readonly unsafe partial struct Ptr_SpellLevelConfig(nint ptr)
         {
 
             [System.Runtime.InteropServices.MarshalAsAttribute(System.Runtime.InteropServices.UnmanagedType.SysInt)]
             readonly nint _ptr = ptr;
-            public static implicit operator Ptr_SpellConfig(nint ptr) => new(ptr);
-            public static implicit operator nint(Ptr_SpellConfig obj) => obj._ptr;
-            public static implicit operator bool(Ptr_SpellConfig obj) => obj.Valid();
+            public static implicit operator Ptr_SpellLevelConfig(nint ptr) => new(ptr);
+            public static implicit operator nint(Ptr_SpellLevelConfig obj) => obj._ptr;
+            public static implicit operator bool(Ptr_SpellLevelConfig obj) => obj.Valid();
 
             public override string ToString()
             {
@@ -93,9 +132,9 @@ namespace Maple.CatQuest3
     }
 
     /// <summary>
-    /// ["ProjectStar".""."SpellConfig"]
+    /// ["ProjectStar".""."SpellLevelConfig"]
     /// </summary>
-    public partial class SpellConfig
+    public partial class SpellLevelConfig
     {
 
 
@@ -116,6 +155,15 @@ namespace Maple.CatQuest3
         /// <returns>struct System.Void</returns>
         /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("CheckNullArgument")]
         /// static extern void CHECK_NULL_ARGUMENT (nint arg, nint message);
+
+
+        /// <summary>
+        ///   System.Void ClearSpawnedSpellProxies(GameEntity owner)
+        /// </summary>
+        /// <param name="owner">class GameEntity</param>
+        /// <returns>struct System.Void</returns>
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("ClearSpawnedSpellProxies")]
+        ///  extern void CLEAR_SPAWNED_SPELL_PROXIES (nint owner);
 
 
         /// <summary>
@@ -270,20 +318,35 @@ namespace Maple.CatQuest3
 
 
         /// <summary>
+        ///   AoeCaster GetAoeCaster()
+        /// </summary>
+        /// <returns>class AoeCaster</returns>
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetAoeCaster")]
+        ///  extern nint GET_AOE_CASTER ();
+
+
+        /// <summary>
+        ///   AttackStat GetAttackStat()
+        /// </summary>
+        /// <returns>class AttackStat</returns>
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetAttackStat")]
+        ///  extern nint GET_ATTACK_STAT ();
+
+
+        /// <summary>
+        ///   BuffConfig GetBuffConfig()
+        /// </summary>
+        /// <returns>class BuffConfig</returns>
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetBuffConfig")]
+        ///  extern nint GET_BUFF_CONFIG ();
+
+
+        /// <summary>
         ///   System.IntPtr GetCachedPtr()
         /// </summary>
         /// <returns>struct System.IntPtr</returns>
         /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetCachedPtr")]
         ///  extern System.IntPtr GET_CACHED_PTR ();
-
-
-        /// <summary>
-        ///   SpellLevelConfigBase GetConfigAtLevel(System.Int32 level)
-        /// </summary>
-        /// <param name="level">struct System.Int32</param>
-        /// <returns>abstract class SpellLevelConfigBase</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetConfigAtLevel")]
-        ///  extern nint GET_CONFIG_AT_LEVEL (System.Int32 level);
 
 
         /// <summary>
@@ -326,6 +389,14 @@ namespace Maple.CatQuest3
         /// <returns>struct System.Int32</returns>
         /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetOffsetOfInstanceIDInCPlusPlusObject")]
         /// static extern System.Int32 GET_OFFSET_OF_INSTANCE_ID_IN_C_PLUS_PLUS_OBJECT ();
+
+
+        /// <summary>
+        ///   ProjectileFirer GetProjectileFirer()
+        /// </summary>
+        /// <returns>class ProjectileFirer</returns>
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetProjectileFirer")]
+        ///  extern nint GET_PROJECTILE_FIRER ();
 
 
         /// <summary>
@@ -392,6 +463,30 @@ namespace Maple.CatQuest3
         /// <returns>class UnityEngine.Object</returns>
         /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Internal_InstantiateSingleWithParent_Injected")]
         /// static extern nint INTERNAL_INSTANTIATE_SINGLE_WITH_PARENT_INJECTED (nint data, nint parent, UnityEngine.Vector3& pos, UnityEngine.Quaternion& rot);
+
+
+        /// <summary>
+        ///   System.Boolean IsCombatModifierBuff()
+        /// </summary>
+        /// <returns>struct System.Boolean</returns>
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("IsCombatModifierBuff")]
+        ///  extern System.Boolean IS_COMBAT_MODIFIER_BUFF ();
+
+
+        /// <summary>
+        ///   System.Boolean IsHealingSpell()
+        /// </summary>
+        /// <returns>struct System.Boolean</returns>
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("IsHealingSpell")]
+        ///  extern System.Boolean IS_HEALING_SPELL ();
+
+
+        /// <summary>
+        ///   System.Boolean IsIncomingDamagePercentageReductionBuff()
+        /// </summary>
+        /// <returns>struct System.Boolean</returns>
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("IsIncomingDamagePercentageReductionBuff")]
+        ///  extern System.Boolean IS_INCOMING_DAMAGE_PERCENTAGE_REDUCTION_BUFF ();
 
 
         /// <summary>
@@ -511,12 +606,22 @@ namespace Maple.CatQuest3
         ///  extern void UPDATE_LOCALIZED_CONTENTS (nint collection);
 
 
+        /// <summary>
+        ///   System.Void UpdateSpawnedSpells(GameEntity owner, System.Collections.Generic.IEnumerable<UnityEngine.GameObject> spawnedObjs)
+        /// </summary>
+        /// <param name="owner">class GameEntity</param>
+        /// <param name="spawnedObjs">interface System.Collections.Generic.IEnumerable<UnityEngine.GameObject></param>
+        /// <returns>struct System.Void</returns>
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("UpdateSpawnedSpells")]
+        ///  extern void UPDATE_SPAWNED_SPELLS (nint owner, nint spawnedObjs);
+
+
 
         /// <summary>
         ///   System.Void .ctor()
         /// </summary>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute(".ctor", Search = typeof(Search_SpellConfig))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute(".ctor", Search = typeof(Search_SpellLevelConfig))]
         ///  extern void .CTOR_00 ();
 
 
@@ -524,7 +629,7 @@ namespace Maple.CatQuest3
         ///   System.Void .ctor()
         /// </summary>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute(".ctor", Search = typeof(Search_SpellConfig))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute(".ctor", Search = typeof(Search_SpellLevelConfig))]
         ///  extern void .CTOR_01 ();
 
 
@@ -532,7 +637,7 @@ namespace Maple.CatQuest3
         ///   System.Void .ctor()
         /// </summary>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute(".ctor", Search = typeof(Search_SpellConfig))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute(".ctor", Search = typeof(Search_SpellLevelConfig))]
         ///  extern void .CTOR_02 ();
 
 
@@ -540,7 +645,7 @@ namespace Maple.CatQuest3
         ///   System.Void .ctor()
         /// </summary>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute(".ctor", Search = typeof(Search_SpellConfig))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute(".ctor", Search = typeof(Search_SpellLevelConfig))]
         ///  extern void .CTOR_03 ();
 
 
@@ -548,8 +653,28 @@ namespace Maple.CatQuest3
         ///   System.Void .ctor()
         /// </summary>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute(".ctor", Search = typeof(Search_SpellConfig))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute(".ctor", Search = typeof(Search_SpellLevelConfig))]
         ///  extern void .CTOR_04 ();
+
+
+        /// <summary>
+        ///   System.Void CastSpell(GameEntity entity, AttackEventInfo attackEventInfo)
+        /// </summary>
+        /// <param name="entity">class GameEntity</param>
+        /// <param name="attackEventInfo">class AttackEventInfo</param>
+        /// <returns>struct System.Void</returns>
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("CastSpell", Search = typeof(Search_SpellLevelConfig))]
+        ///  extern void CAST_SPELL_00 (nint entity, nint attackEventInfo);
+
+
+        /// <summary>
+        ///  abstract System.Void CastSpell(GameEntity entity, AttackEventInfo attackEventInfo)
+        /// </summary>
+        /// <param name="entity">class GameEntity</param>
+        /// <param name="attackEventInfo">class AttackEventInfo</param>
+        /// <returns>struct System.Void</returns>
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("CastSpell", Search = typeof(Search_SpellLevelConfig))]
+        ///  extern void CAST_SPELL_01 (nint entity, nint attackEventInfo);
 
 
         /// <summary>
@@ -557,7 +682,7 @@ namespace Maple.CatQuest3
         /// </summary>
         /// <param name="className">class System.String</param>
         /// <returns>class UnityEngine.ScriptableObject</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("CreateInstance", Search = typeof(Search_SpellConfig))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("CreateInstance", Search = typeof(Search_SpellLevelConfig))]
         /// static extern nint CREATE_INSTANCE_00 (nint className);
 
 
@@ -566,7 +691,7 @@ namespace Maple.CatQuest3
         /// </summary>
         /// <param name="type">abstract class System.Type</param>
         /// <returns>class UnityEngine.ScriptableObject</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("CreateInstance", Search = typeof(Search_SpellConfig))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("CreateInstance", Search = typeof(Search_SpellLevelConfig))]
         /// static extern nint CREATE_INSTANCE_01 (nint type);
 
 
@@ -574,7 +699,7 @@ namespace Maple.CatQuest3
         /// static  T CreateInstance()
         /// </summary>
         /// <returns>class T</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("CreateInstance", Search = typeof(Search_SpellConfig))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("CreateInstance", Search = typeof(Search_SpellLevelConfig))]
         /// static extern nint CREATE_INSTANCE_02 ();
 
 
@@ -584,7 +709,7 @@ namespace Maple.CatQuest3
         /// <param name="type">abstract class System.Type</param>
         /// <param name="initialize">class System.Action<UnityEngine.ScriptableObject></param>
         /// <returns>class UnityEngine.ScriptableObject</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("CreateInstance", Search = typeof(Search_SpellConfig))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("CreateInstance", Search = typeof(Search_SpellLevelConfig))]
         /// static extern nint CREATE_INSTANCE_03 (nint type, nint initialize);
 
 
@@ -594,7 +719,7 @@ namespace Maple.CatQuest3
         /// <param name="obj">class UnityEngine.Object</param>
         /// <param name="t">struct System.Single</param>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Destroy", Search = typeof(Search_SpellConfig))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Destroy", Search = typeof(Search_SpellLevelConfig))]
         /// static extern void DESTROY_00 (nint obj, System.Single t);
 
 
@@ -603,7 +728,7 @@ namespace Maple.CatQuest3
         /// </summary>
         /// <param name="obj">class UnityEngine.Object</param>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Destroy", Search = typeof(Search_SpellConfig))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Destroy", Search = typeof(Search_SpellLevelConfig))]
         /// static extern void DESTROY_01 (nint obj);
 
 
@@ -613,7 +738,7 @@ namespace Maple.CatQuest3
         /// <param name="obj">class UnityEngine.Object</param>
         /// <param name="allowDestroyingAssets">struct System.Boolean</param>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("DestroyImmediate", Search = typeof(Search_SpellConfig))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("DestroyImmediate", Search = typeof(Search_SpellLevelConfig))]
         /// static extern void DESTROY_IMMEDIATE_00 (nint obj, System.Boolean allowDestroyingAssets);
 
 
@@ -622,7 +747,7 @@ namespace Maple.CatQuest3
         /// </summary>
         /// <param name="obj">class UnityEngine.Object</param>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("DestroyImmediate", Search = typeof(Search_SpellConfig))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("DestroyImmediate", Search = typeof(Search_SpellLevelConfig))]
         /// static extern void DESTROY_IMMEDIATE_01 (nint obj);
 
 
@@ -632,7 +757,7 @@ namespace Maple.CatQuest3
         /// <param name="obj">class UnityEngine.Object</param>
         /// <param name="t">struct System.Single</param>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("DestroyObject", Search = typeof(Search_SpellConfig))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("DestroyObject", Search = typeof(Search_SpellLevelConfig))]
         /// static extern void DESTROY_OBJECT_00 (nint obj, System.Single t);
 
 
@@ -641,7 +766,7 @@ namespace Maple.CatQuest3
         /// </summary>
         /// <param name="obj">class UnityEngine.Object</param>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("DestroyObject", Search = typeof(Search_SpellConfig))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("DestroyObject", Search = typeof(Search_SpellLevelConfig))]
         /// static extern void DESTROY_OBJECT_01 (nint obj);
 
 
@@ -649,7 +774,7 @@ namespace Maple.CatQuest3
         /// static  T FindAnyObjectByType()
         /// </summary>
         /// <returns>class T</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindAnyObjectByType", Search = typeof(Search_SpellConfig))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindAnyObjectByType", Search = typeof(Search_SpellLevelConfig))]
         /// static extern nint FIND_ANY_OBJECT_BY_TYPE_00 ();
 
 
@@ -658,7 +783,7 @@ namespace Maple.CatQuest3
         /// </summary>
         /// <param name="findObjectsInactive">enum UnityEngine.FindObjectsInactive</param>
         /// <returns>class T</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindAnyObjectByType", Search = typeof(Search_SpellConfig))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindAnyObjectByType", Search = typeof(Search_SpellLevelConfig))]
         /// static extern nint FIND_ANY_OBJECT_BY_TYPE_01 (UnityEngine.FindObjectsInactive findObjectsInactive);
 
 
@@ -667,7 +792,7 @@ namespace Maple.CatQuest3
         /// </summary>
         /// <param name="type">abstract class System.Type</param>
         /// <returns>class UnityEngine.Object</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindAnyObjectByType", Search = typeof(Search_SpellConfig))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindAnyObjectByType", Search = typeof(Search_SpellLevelConfig))]
         /// static extern nint FIND_ANY_OBJECT_BY_TYPE_02 (nint type);
 
 
@@ -677,7 +802,7 @@ namespace Maple.CatQuest3
         /// <param name="type">abstract class System.Type</param>
         /// <param name="findObjectsInactive">enum UnityEngine.FindObjectsInactive</param>
         /// <returns>class UnityEngine.Object</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindAnyObjectByType", Search = typeof(Search_SpellConfig))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindAnyObjectByType", Search = typeof(Search_SpellLevelConfig))]
         /// static extern nint FIND_ANY_OBJECT_BY_TYPE_03 (nint type, UnityEngine.FindObjectsInactive findObjectsInactive);
 
 
@@ -685,7 +810,7 @@ namespace Maple.CatQuest3
         /// static  T FindFirstObjectByType()
         /// </summary>
         /// <returns>class T</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindFirstObjectByType", Search = typeof(Search_SpellConfig))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindFirstObjectByType", Search = typeof(Search_SpellLevelConfig))]
         /// static extern nint FIND_FIRST_OBJECT_BY_TYPE_00 ();
 
 
@@ -694,7 +819,7 @@ namespace Maple.CatQuest3
         /// </summary>
         /// <param name="findObjectsInactive">enum UnityEngine.FindObjectsInactive</param>
         /// <returns>class T</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindFirstObjectByType", Search = typeof(Search_SpellConfig))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindFirstObjectByType", Search = typeof(Search_SpellLevelConfig))]
         /// static extern nint FIND_FIRST_OBJECT_BY_TYPE_01 (UnityEngine.FindObjectsInactive findObjectsInactive);
 
 
@@ -703,7 +828,7 @@ namespace Maple.CatQuest3
         /// </summary>
         /// <param name="type">abstract class System.Type</param>
         /// <returns>class UnityEngine.Object</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindFirstObjectByType", Search = typeof(Search_SpellConfig))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindFirstObjectByType", Search = typeof(Search_SpellLevelConfig))]
         /// static extern nint FIND_FIRST_OBJECT_BY_TYPE_02 (nint type);
 
 
@@ -713,7 +838,7 @@ namespace Maple.CatQuest3
         /// <param name="type">abstract class System.Type</param>
         /// <param name="findObjectsInactive">enum UnityEngine.FindObjectsInactive</param>
         /// <returns>class UnityEngine.Object</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindFirstObjectByType", Search = typeof(Search_SpellConfig))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindFirstObjectByType", Search = typeof(Search_SpellLevelConfig))]
         /// static extern nint FIND_FIRST_OBJECT_BY_TYPE_03 (nint type, UnityEngine.FindObjectsInactive findObjectsInactive);
 
 
@@ -721,7 +846,7 @@ namespace Maple.CatQuest3
         /// static  T FindObjectOfType()
         /// </summary>
         /// <returns>class T</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectOfType", Search = typeof(Search_SpellConfig))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectOfType", Search = typeof(Search_SpellLevelConfig))]
         /// static extern nint FIND_OBJECT_OF_TYPE_00 ();
 
 
@@ -730,7 +855,7 @@ namespace Maple.CatQuest3
         /// </summary>
         /// <param name="includeInactive">struct System.Boolean</param>
         /// <returns>class T</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectOfType", Search = typeof(Search_SpellConfig))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectOfType", Search = typeof(Search_SpellLevelConfig))]
         /// static extern nint FIND_OBJECT_OF_TYPE_01 (System.Boolean includeInactive);
 
 
@@ -739,7 +864,7 @@ namespace Maple.CatQuest3
         /// </summary>
         /// <param name="type">abstract class System.Type</param>
         /// <returns>class UnityEngine.Object</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectOfType", Search = typeof(Search_SpellConfig))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectOfType", Search = typeof(Search_SpellLevelConfig))]
         /// static extern nint FIND_OBJECT_OF_TYPE_02 (nint type);
 
 
@@ -749,7 +874,7 @@ namespace Maple.CatQuest3
         /// <param name="type">abstract class System.Type</param>
         /// <param name="includeInactive">struct System.Boolean</param>
         /// <returns>class UnityEngine.Object</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectOfType", Search = typeof(Search_SpellConfig))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectOfType", Search = typeof(Search_SpellLevelConfig))]
         /// static extern nint FIND_OBJECT_OF_TYPE_03 (nint type, System.Boolean includeInactive);
 
 
@@ -759,7 +884,7 @@ namespace Maple.CatQuest3
         /// <param name="type">abstract class System.Type</param>
         /// <param name="sortMode">enum UnityEngine.FindObjectsSortMode</param>
         /// <returns>class UnityEngine.Object[]</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsByType", Search = typeof(Search_SpellConfig))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsByType", Search = typeof(Search_SpellLevelConfig))]
         /// static extern nint FIND_OBJECTS_BY_TYPE_00 (nint type, UnityEngine.FindObjectsSortMode sortMode);
 
 
@@ -770,7 +895,7 @@ namespace Maple.CatQuest3
         /// <param name="findObjectsInactive">enum UnityEngine.FindObjectsInactive</param>
         /// <param name="sortMode">enum UnityEngine.FindObjectsSortMode</param>
         /// <returns>class UnityEngine.Object[]</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsByType", Search = typeof(Search_SpellConfig))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsByType", Search = typeof(Search_SpellLevelConfig))]
         /// static extern nint FIND_OBJECTS_BY_TYPE_01 (nint type, UnityEngine.FindObjectsInactive findObjectsInactive, UnityEngine.FindObjectsSortMode sortMode);
 
 
@@ -779,7 +904,7 @@ namespace Maple.CatQuest3
         /// </summary>
         /// <param name="sortMode">enum UnityEngine.FindObjectsSortMode</param>
         /// <returns>class T[]</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsByType", Search = typeof(Search_SpellConfig))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsByType", Search = typeof(Search_SpellLevelConfig))]
         /// static extern nint FIND_OBJECTS_BY_TYPE_02 (UnityEngine.FindObjectsSortMode sortMode);
 
 
@@ -789,7 +914,7 @@ namespace Maple.CatQuest3
         /// <param name="findObjectsInactive">enum UnityEngine.FindObjectsInactive</param>
         /// <param name="sortMode">enum UnityEngine.FindObjectsSortMode</param>
         /// <returns>class T[]</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsByType", Search = typeof(Search_SpellConfig))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsByType", Search = typeof(Search_SpellLevelConfig))]
         /// static extern nint FIND_OBJECTS_BY_TYPE_03 (UnityEngine.FindObjectsInactive findObjectsInactive, UnityEngine.FindObjectsSortMode sortMode);
 
 
@@ -798,7 +923,7 @@ namespace Maple.CatQuest3
         /// </summary>
         /// <param name="type">abstract class System.Type</param>
         /// <returns>class UnityEngine.Object[]</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsOfType", Search = typeof(Search_SpellConfig))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsOfType", Search = typeof(Search_SpellLevelConfig))]
         /// static extern nint FIND_OBJECTS_OF_TYPE_00 (nint type);
 
 
@@ -808,7 +933,7 @@ namespace Maple.CatQuest3
         /// <param name="type">abstract class System.Type</param>
         /// <param name="includeInactive">struct System.Boolean</param>
         /// <returns>class UnityEngine.Object[]</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsOfType", Search = typeof(Search_SpellConfig))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsOfType", Search = typeof(Search_SpellLevelConfig))]
         /// static extern nint FIND_OBJECTS_OF_TYPE_01 (nint type, System.Boolean includeInactive);
 
 
@@ -816,7 +941,7 @@ namespace Maple.CatQuest3
         /// static  T[] FindObjectsOfType()
         /// </summary>
         /// <returns>class T[]</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsOfType", Search = typeof(Search_SpellConfig))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsOfType", Search = typeof(Search_SpellLevelConfig))]
         /// static extern nint FIND_OBJECTS_OF_TYPE_02 ();
 
 
@@ -825,41 +950,24 @@ namespace Maple.CatQuest3
         /// </summary>
         /// <param name="includeInactive">struct System.Boolean</param>
         /// <returns>class T[]</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsOfType", Search = typeof(Search_SpellConfig))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsOfType", Search = typeof(Search_SpellLevelConfig))]
         /// static extern nint FIND_OBJECTS_OF_TYPE_03 (System.Boolean includeInactive);
 
 
         /// <summary>
-        ///   System.Int32 GetMaxLevel()
+        ///   System.Int32 GetUsageCost()
         /// </summary>
         /// <returns>struct System.Int32</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetMaxLevel", Search = typeof(Search_SpellConfig))]
-        ///  extern System.Int32 GET_MAX_LEVEL_00 ();
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetUsageCost", Search = typeof(Search_SpellLevelConfig))]
+        ///  extern System.Int32 GET_USAGE_COST_00 ();
 
 
         /// <summary>
-        ///   System.Int32 GetMaxLevel(SpellLevelConfigBase& spellLevelConfig)
+        ///  abstract System.Int32 GetUsageCost()
         /// </summary>
-        /// <param name="spellLevelConfig">abstract class SpellLevelConfigBase&</param>
         /// <returns>struct System.Int32</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetMaxLevel", Search = typeof(Search_SpellConfig))]
-        ///  extern System.Int32 GET_MAX_LEVEL_01 (nint spellLevelConfig);
-
-
-        /// <summary>
-        ///   System.Collections.Generic.List<SpellLevelConfigBase> GetSpellLevels()
-        /// </summary>
-        /// <returns>class System.Collections.Generic.List<SpellLevelConfigBase></returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetSpellLevels", Search = typeof(Search_SpellConfig))]
-        ///  extern nint GET_SPELL_LEVELS_00 ();
-
-
-        /// <summary>
-        ///  abstract System.Collections.Generic.List<SpellLevelConfigBase> GetSpellLevels()
-        /// </summary>
-        /// <returns>class System.Collections.Generic.List<SpellLevelConfigBase></returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetSpellLevels", Search = typeof(Search_SpellConfig))]
-        ///  extern nint GET_SPELL_LEVELS_01 ();
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetUsageCost", Search = typeof(Search_SpellLevelConfig))]
+        ///  extern System.Int32 GET_USAGE_COST_01 ();
 
 
         /// <summary>
@@ -869,7 +977,7 @@ namespace Maple.CatQuest3
         /// <param name="position">struct UnityEngine.Vector3</param>
         /// <param name="rotation">struct UnityEngine.Quaternion</param>
         /// <returns>class UnityEngine.Object</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_SpellConfig))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_SpellLevelConfig))]
         /// static extern nint INSTANTIATE_00 (nint original, UnityEngine.Vector3 position, UnityEngine.Quaternion rotation);
 
 
@@ -881,7 +989,7 @@ namespace Maple.CatQuest3
         /// <param name="rotation">struct UnityEngine.Quaternion</param>
         /// <param name="parent">class UnityEngine.Transform</param>
         /// <returns>class UnityEngine.Object</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_SpellConfig))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_SpellLevelConfig))]
         /// static extern nint INSTANTIATE_01 (nint original, UnityEngine.Vector3 position, UnityEngine.Quaternion rotation, nint parent);
 
 
@@ -890,7 +998,7 @@ namespace Maple.CatQuest3
         /// </summary>
         /// <param name="original">class UnityEngine.Object</param>
         /// <returns>class UnityEngine.Object</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_SpellConfig))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_SpellLevelConfig))]
         /// static extern nint INSTANTIATE_02 (nint original);
 
 
@@ -900,7 +1008,7 @@ namespace Maple.CatQuest3
         /// <param name="original">class UnityEngine.Object</param>
         /// <param name="parent">class UnityEngine.Transform</param>
         /// <returns>class UnityEngine.Object</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_SpellConfig))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_SpellLevelConfig))]
         /// static extern nint INSTANTIATE_03 (nint original, nint parent);
 
 
@@ -911,7 +1019,7 @@ namespace Maple.CatQuest3
         /// <param name="parent">class UnityEngine.Transform</param>
         /// <param name="instantiateInWorldSpace">struct System.Boolean</param>
         /// <returns>class UnityEngine.Object</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_SpellConfig))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_SpellLevelConfig))]
         /// static extern nint INSTANTIATE_04 (nint original, nint parent, System.Boolean instantiateInWorldSpace);
 
 
@@ -920,7 +1028,7 @@ namespace Maple.CatQuest3
         /// </summary>
         /// <param name="original">class T</param>
         /// <returns>class T</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_SpellConfig))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_SpellLevelConfig))]
         /// static extern nint INSTANTIATE_05 (nint original);
 
 
@@ -931,7 +1039,7 @@ namespace Maple.CatQuest3
         /// <param name="position">struct UnityEngine.Vector3</param>
         /// <param name="rotation">struct UnityEngine.Quaternion</param>
         /// <returns>class T</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_SpellConfig))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_SpellLevelConfig))]
         /// static extern nint INSTANTIATE_06 (nint original, UnityEngine.Vector3 position, UnityEngine.Quaternion rotation);
 
 
@@ -943,7 +1051,7 @@ namespace Maple.CatQuest3
         /// <param name="rotation">struct UnityEngine.Quaternion</param>
         /// <param name="parent">class UnityEngine.Transform</param>
         /// <returns>class T</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_SpellConfig))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_SpellLevelConfig))]
         /// static extern nint INSTANTIATE_07 (nint original, UnityEngine.Vector3 position, UnityEngine.Quaternion rotation, nint parent);
 
 
@@ -953,7 +1061,7 @@ namespace Maple.CatQuest3
         /// <param name="original">class T</param>
         /// <param name="parent">class UnityEngine.Transform</param>
         /// <returns>class T</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_SpellConfig))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_SpellLevelConfig))]
         /// static extern nint INSTANTIATE_08 (nint original, nint parent);
 
 
@@ -964,7 +1072,7 @@ namespace Maple.CatQuest3
         /// <param name="parent">class UnityEngine.Transform</param>
         /// <param name="worldPositionStays">struct System.Boolean</param>
         /// <returns>class T</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_SpellConfig))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_SpellLevelConfig))]
         /// static extern nint INSTANTIATE_09 (nint original, nint parent, System.Boolean worldPositionStays);
 
 
@@ -972,7 +1080,7 @@ namespace Maple.CatQuest3
         ///   System.String ToString()
         /// </summary>
         /// <returns>class System.String</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("ToString", Search = typeof(Search_SpellConfig))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("ToString", Search = typeof(Search_SpellLevelConfig))]
         ///  extern nint TO_STRING_00 ();
 
 
@@ -981,11 +1089,11 @@ namespace Maple.CatQuest3
         /// </summary>
         /// <param name="obj">class UnityEngine.Object</param>
         /// <returns>class System.String</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("ToString", Search = typeof(Search_SpellConfig))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("ToString", Search = typeof(Search_SpellLevelConfig))]
         /// static extern nint TO_STRING_01 (nint obj);
 
 
-        /// public static partial class Search_SpellConfig
+        /// public static partial class Search_SpellLevelConfig
         /// {
         /// 
         ///     
@@ -1035,6 +1143,26 @@ namespace Maple.CatQuest3
         /// </summary>
         /// public static bool .CTOR_04 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
         ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, ".ctor");
+        ///     
+        ///  
+        /// 
+
+
+        /// <summary>
+        ///   System.Void CastSpell(GameEntity entity, AttackEventInfo attackEventInfo)
+        /// </summary>
+        /// public static bool CAST_SPELL_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "CastSpell", "GameEntity", "AttackEventInfo");
+        ///     
+        ///  
+        /// 
+
+
+        /// <summary>
+        ///  abstract System.Void CastSpell(GameEntity entity, AttackEventInfo attackEventInfo)
+        /// </summary>
+        /// public static bool CAST_SPELL_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "CastSpell", "GameEntity", "AttackEventInfo");
         ///     
         ///  
         /// 
@@ -1341,40 +1469,20 @@ namespace Maple.CatQuest3
 
 
         /// <summary>
-        ///   System.Int32 GetMaxLevel()
+        ///   System.Int32 GetUsageCost()
         /// </summary>
-        /// public static bool GET_MAX_LEVEL_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetMaxLevel");
+        /// public static bool GET_USAGE_COST_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetUsageCost");
         ///     
         ///  
         /// 
 
 
         /// <summary>
-        ///   System.Int32 GetMaxLevel(SpellLevelConfigBase& spellLevelConfig)
+        ///  abstract System.Int32 GetUsageCost()
         /// </summary>
-        /// public static bool GET_MAX_LEVEL_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetMaxLevel", "SpellLevelConfigBase&");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   System.Collections.Generic.List<SpellLevelConfigBase> GetSpellLevels()
-        /// </summary>
-        /// public static bool GET_SPELL_LEVELS_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetSpellLevels");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///  abstract System.Collections.Generic.List<SpellLevelConfigBase> GetSpellLevels()
-        /// </summary>
-        /// public static bool GET_SPELL_LEVELS_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetSpellLevels");
+        /// public static bool GET_USAGE_COST_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetUsageCost");
         ///     
         ///  
         /// 

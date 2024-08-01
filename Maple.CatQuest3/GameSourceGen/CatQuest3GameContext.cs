@@ -34,12 +34,21 @@ typeof(MonoCollectorClassInfo)
 
     [MonoCollectorType(typeof(SpellConfigDatabase))]
     [MonoCollectorType(typeof(SpellConfigBase))]
+
     [MonoCollectorType(typeof(SpellConfig))]
+    [MonoCollectorType(typeof(SpellLevelConfig))]
+
     [MonoCollectorType(typeof(ShipSpellConfig))]
+    [MonoCollectorType(typeof(ShipCannonAttackConfig))]
+
+
     [MonoCollectorType(typeof(UnlockedShipSpellTableComponent))]
     [MonoCollectorType(typeof(ShipSpellCollection))]
+    [MonoCollectorType(typeof(ShipSpell))]
+
     [MonoCollectorType(typeof(UnlockedSpellTableComponent))]
     [MonoCollectorType(typeof(SpellCollection))]
+    [MonoCollectorType(typeof(Spell))]
 
 
     [MonoCollectorType(typeof(EquipmentDatabase))]
@@ -51,6 +60,7 @@ typeof(MonoCollectorClassInfo)
 
 
 
+    [MonoCollectorType(typeof(GameContextExtensions))]
     [MonoCollectorType(typeof(LocalizationTools))]
     internal partial class CatQuest3GameContext
     {

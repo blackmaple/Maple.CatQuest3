@@ -21,7 +21,7 @@ namespace Maple.CatQuest3
     
                 
     // class 0x8 ShipSpellCollection value
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"value", "VALUE")]
+      [MonoCollectorSearchFieldAttribute(typeof(ShipSpellCollection.Ptr_ShipSpellCollection),"value", "VALUE")]
     public partial class UnlockedShipSpellTableComponent
     { 
         //public const string Const_ImageName = "ProjectStar";

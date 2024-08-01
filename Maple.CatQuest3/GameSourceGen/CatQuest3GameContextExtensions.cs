@@ -16,11 +16,36 @@ namespace Maple.CatQuest3.GameSourceGen
         #region Test
         public static void Output(this CatQuest3GameContext @this)
         {
-            var database = @this.SpellConfigDatabase._INSTANCE;
-            foreach (var item in database.CONTENT_TABLE.Values)
+            var database = @this.SpellConfigDatabase._INSTANCE.CONTENT_TABLE.Values;
+            foreach (var item in database)
             {
-               var classInfo= @this.RuntimeContext.GetMonoClassInfoDTO(item.MonoClass);
-                @this.Logger.LogInformation("classinfo:{class}", classInfo.FullName);
+                var spellConfig = @this.SpellConfig.IsFrom(item);
+                if (spellConfig)
+                {
+
+                    foreach (var level in spellConfig.SPELL_LEVELS)
+                    {
+                        var name = GetLocalName(level.SPELL_NAME_TERM, level.SPELL_NAME);
+                        var desc = GetLocalName(level.SPELL_DESCRIPTION_TERM, level.SPELL_DESCRIPTION);
+
+                        @this.Logger.LogInformation("spellConfig=>{name}:{desc}", name.ToString(), desc.ToString());
+                    }
+                }
+
+                var shipSpellConfig = @this.ShipSpellConfig.IsFrom(item);
+                if (shipSpellConfig)
+                {
+                    foreach (var level in shipSpellConfig.ATTACK_CONFIG_LEVELS)
+                    {
+                        var name = GetLocalName(level.SPELL_NAME_TERM, level.SPELL_NAME);
+                        var desc = GetLocalName(level.SPELL_DESCRIPTION_TERM, level.SPELL_DESCRIPTION);
+
+                        @this.Logger.LogInformation("ShipSpellConfig=>{name}:{desc}", name.ToString(), desc.ToString());
+
+                    }
+                }
+
+
             }
             //var database = @this.EquipmentDatabase._INSTANCE;
             //if (database)
@@ -222,26 +247,73 @@ namespace Maple.CatQuest3.GameSourceGen
                 }
 
             }
+
+            var database = gameEnvironment.Ptr_SpellConfigDatabase.CONTENT_TABLE;
+            foreach (var item in database.Values)
+            {
+                var spellConfig = @this.SpellConfig.IsFrom(item);
+                if (spellConfig)
+                {
+                    var guid = spellConfig.GUID.ToString();
+                    if (string.IsNullOrEmpty(guid) == false)
+                    {
+                        foreach (var level in spellConfig.SPELL_LEVELS)
+                        {
+
+                            var name = GetLocalName(level.SPELL_NAME_TERM, level.SPELL_NAME);
+                            var desc = GetLocalName(level.SPELL_DESCRIPTION_TERM, level.SPELL_DESCRIPTION);
+
+                            yield return new GameInventoryDisplayDTO() { ObjectId = guid, DisplayName = name.ToString(), DisplayDesc = desc.ToString(), DisplayCategory = EnumGameInventoryType.Spell.ToString(), };
+                            break;
+                        }
+                    }
+
+                }
+                else
+                {
+                    var shipSpellConfig = @this.ShipSpellConfig.IsFrom(item);
+                    if (shipSpellConfig)
+                    {
+                        var guid = shipSpellConfig.GUID.ToString();
+                        if (string.IsNullOrEmpty(guid) == false)
+                        {
+                            foreach (var level in shipSpellConfig.ATTACK_CONFIG_LEVELS)
+                            {
+                                var name = GetLocalName(level.SPELL_NAME_TERM, level.SPELL_NAME);
+                                var desc = GetLocalName(level.SPELL_DESCRIPTION_TERM, level.SPELL_DESCRIPTION);
+
+                                yield return new GameInventoryDisplayDTO() { ObjectId = guid, DisplayName = name.ToString(), DisplayDesc = desc.ToString(), DisplayCategory = EnumGameInventoryType.ShipSpell.ToString(), };
+                                break;
+                            }
+                        }
+
+                    }
+
+                }
+
+
+            }
+
         }
 
-        public static bool FindEquipmentByUnlocked(this CatQuest3GameEnvironment gameEnvironment, ReadOnlySpan<char> guid, out EquipmentItemData.Ptr_EquipmentItemData itemData, out int level)
+        private static bool FindEquipmentByUnlocked(this CatQuest3GameEnvironment gameEnvironment, ReadOnlySpan<char> guid, out EquipmentItemData.Ptr_EquipmentItemData itemData, out int level)
         {
             Unsafe.SkipInit(out level);
             Unsafe.SkipInit(out itemData);
 
-            var lockedData = gameEnvironment.Ptr_UnlockedEquipmentListComponent.VALUE;
-            foreach (var locked in lockedData)
+            var unlockedData = gameEnvironment.Ptr_UnlockedEquipmentListComponent.VALUE;
+            foreach (var unlocked in unlockedData)
             {
-                itemData = locked.ITEM_DATA;
+                itemData = unlocked.ITEM_DATA;
                 if (itemData.GUID.AsReadOnlySpan().SequenceEqual(guid))
                 {
-                    level = locked.LEVEL._CURR_VALUE;
+                    level = unlocked.LEVEL._CURR_VALUE;
                     return true;
                 }
             }
             return default;
         }
-        public static bool FindEquipmentByTable(this CatQuest3GameEnvironment gameEnvironment, ReadOnlySpan<char> guid, out EquipmentItemData.Ptr_EquipmentItemData itemData)
+        private static bool FindEquipmentByTable(this CatQuest3GameEnvironment gameEnvironment, ReadOnlySpan<char> guid, out EquipmentItemData.Ptr_EquipmentItemData itemData)
         {
             Unsafe.SkipInit(out itemData);
             var itemTable = gameEnvironment.Ptr_EquipmentDatabase.CONTENT_TABLE;
@@ -259,24 +331,24 @@ namespace Maple.CatQuest3.GameSourceGen
 
         }
 
-        public static bool FindShipBlueprintByUnlocked(this CatQuest3GameEnvironment gameEnvironment, ReadOnlySpan<char> guid, out ShipBlueprintItemData.Ptr_ShipBlueprintItemData itemData, out int level)
+        private static bool FindShipBlueprintByUnlocked(this CatQuest3GameEnvironment gameEnvironment, ReadOnlySpan<char> guid, out ShipBlueprintItemData.Ptr_ShipBlueprintItemData itemData, out int level)
         {
             Unsafe.SkipInit(out level);
             Unsafe.SkipInit(out itemData);
 
-            var lockedData = gameEnvironment.Ptr_UnlockedShipBlueprintsComponent.VALUE;
-            foreach (var locked in lockedData.COLLECTION)
+            var unlockedData = gameEnvironment.Ptr_UnlockedShipBlueprintsComponent.VALUE;
+            foreach (var unlocked in unlockedData.COLLECTION)
             {
-                itemData = locked.ITEM_DATA;
+                itemData = unlocked.ITEM_DATA;
                 if (itemData.GUID.AsReadOnlySpan().SequenceEqual(guid))
                 {
-                    level = locked.LEVEL._CURR_VALUE;
+                    level = unlocked.LEVEL._CURR_VALUE;
                     return true;
                 }
             }
             return default;
         }
-        public static bool FindShipBlueprintByTable(this CatQuest3GameEnvironment gameEnvironment, ReadOnlySpan<char> guid, out ShipBlueprintItemData.Ptr_ShipBlueprintItemData itemData)
+        private static bool FindShipBlueprintByTable(this CatQuest3GameEnvironment gameEnvironment, ReadOnlySpan<char> guid, out ShipBlueprintItemData.Ptr_ShipBlueprintItemData itemData)
         {
             Unsafe.SkipInit(out itemData);
             var itemTable = gameEnvironment.Ptr_ShipBlueprintDatabase.CONTENT_TABLE;
@@ -294,35 +366,181 @@ namespace Maple.CatQuest3.GameSourceGen
 
         }
 
+
+        private static bool FindShipSpellByUnlocked(this CatQuest3GameContext @this, CatQuest3GameEnvironment gameEnvironment, ReadOnlySpan<char> guid, out ShipSpellConfig.Ptr_ShipSpellConfig itemData, out int level)
+        {
+            Unsafe.SkipInit(out level);
+            Unsafe.SkipInit(out itemData);
+            var unlockedData = gameEnvironment.Ptr_UnlockedShipSpellTableComponent;
+            foreach (var item in unlockedData.VALUE.DICT.AsRefArray())
+            {
+                var config = item.Value;
+                itemData = @this.ShipSpellConfig.IsFrom(config.SPELL_CONFIG);
+                if (itemData)
+                {
+                    if (itemData.GUID.AsReadOnlySpan().SequenceEqual(guid))
+                    {
+                        level = config.LEVEL._CURR_VALUE;
+                        return true;
+                    }
+                }
+            }
+            return default;
+        }
+        private static bool FindShipSpellByTable(this CatQuest3GameContext @this, CatQuest3GameEnvironment gameEnvironment, ReadOnlySpan<char> guid, out ShipSpellConfig.Ptr_ShipSpellConfig itemData)
+        {
+            Unsafe.SkipInit(out itemData);
+            var database = gameEnvironment.Ptr_SpellConfigDatabase.CONTENT_TABLE;
+            foreach (var item in database.Values)
+            {
+                var shipSpellConfig = @this.ShipSpellConfig.IsFrom(item);
+                if (shipSpellConfig)
+                {
+                    if (shipSpellConfig.GUID.AsReadOnlySpan().SequenceEqual(guid))
+                    {
+                        itemData = shipSpellConfig;
+                        return true;
+                    }
+                }
+            }
+            return default;
+        }
+
+        private static bool FindSpellByUnlocked(this CatQuest3GameContext @this, CatQuest3GameEnvironment gameEnvironment, ReadOnlySpan<char> guid, out SpellConfig.Ptr_SpellConfig itemData, out int level)
+        {
+            Unsafe.SkipInit(out level);
+            Unsafe.SkipInit(out itemData);
+            var unlockedData = gameEnvironment.Ptr_UnlockedSpellTableComponent;
+            foreach (var item in unlockedData.VALUE.DICT.AsRefArray())
+            {
+                var config = item.Value;
+                itemData = @this.SpellConfig.IsFrom(config.SPELL_CONFIG);
+                if (itemData)
+                {
+                    if (itemData.GUID.AsReadOnlySpan().SequenceEqual(guid))
+                    {
+                        level = config.LEVEL._CURR_VALUE;
+                        return true;
+                    }
+                }
+            }
+            return default;
+        }
+        private static bool FindSpellByTable(this CatQuest3GameContext @this, CatQuest3GameEnvironment gameEnvironment, ReadOnlySpan<char> guid, out SpellConfig.Ptr_SpellConfig itemData)
+        {
+            Unsafe.SkipInit(out itemData);
+            var database = gameEnvironment.Ptr_SpellConfigDatabase.CONTENT_TABLE;
+            foreach (var item in database.Values)
+            {
+                var spellConfig = @this.SpellConfig.IsFrom(item);
+                if (spellConfig)
+                {
+                    if (spellConfig.GUID.AsReadOnlySpan().SequenceEqual(guid))
+                    {
+                        itemData = spellConfig;
+                        return true;
+                    }
+                }
+            }
+            return default;
+        }
+
         public static GameInventoryInfoDTO GetGameInventoryInfo(this CatQuest3GameContext @this, CatQuest3GameEnvironment gameEnvironment, GameInventoryObjectDTO inventoryObjectDTO)
         {
             if (false == Enum.TryParse<EnumGameInventoryType>(inventoryObjectDTO.InventoryCategory, out var inventoryCategory))
             {
                 return GameInventoryObjectDTO.ThrowNotFound<GameInventoryInfoDTO>(inventoryObjectDTO.InventoryCategory);
             }
+            int level;
             if (inventoryCategory == EnumGameInventoryType.Equipment)
             {
-                if (gameEnvironment.FindEquipmentByUnlocked(inventoryObjectDTO.InventoryObject, out var _, out var level))
-                {
-                    return new GameInventoryInfoDTO() { ObjectId = inventoryObjectDTO.InventoryObject, InventoryCount = level, };
-                }
+                _ = gameEnvironment.FindEquipmentByUnlocked(inventoryObjectDTO.InventoryObject, out var _, out level);
             }
             else if (inventoryCategory == EnumGameInventoryType.ShipBlueprint)
             {
-                if (gameEnvironment.FindShipBlueprintByUnlocked(inventoryObjectDTO.InventoryObject, out var _, out var level))
-                {
-                    return new GameInventoryInfoDTO() { ObjectId = inventoryObjectDTO.InventoryObject, InventoryCount = level, };
-                }
+                _ = gameEnvironment.FindShipBlueprintByUnlocked(inventoryObjectDTO.InventoryObject, out var _, out level);
             }
             else if (inventoryCategory == EnumGameInventoryType.ShipSpell)
             {
+                _ = @this.FindShipSpellByUnlocked(gameEnvironment, inventoryObjectDTO.InventoryObject, out var _, out level);
+            }
+            else if (inventoryCategory == EnumGameInventoryType.Spell)
+            {
+                _ = @this.FindSpellByUnlocked(gameEnvironment, inventoryObjectDTO.InventoryObject, out var _, out level);
+            }
+            else
+            {
+                level = 0;
+            }
+            return new GameInventoryInfoDTO() { ObjectId = inventoryObjectDTO.InventoryObject, DisplayValue = level.ToString() };
+
+        }
+
+
+        public static GameInventoryInfoDTO UpdateGameInventoryInfo(this CatQuest3GameContext @this, CatQuest3GameEnvironment gameEnvironment, GameInventoryModifyDTO inventoryModifyDTO)
+        {
+            if (false == Enum.TryParse<EnumGameInventoryType>(inventoryModifyDTO.InventoryCategory, out var inventoryCategory))
+            {
+                return GameInventoryModifyDTO.ThrowNotFound<GameInventoryInfoDTO>(inventoryModifyDTO.InventoryCategory);
+            }
+            int level;
+            var guid = inventoryModifyDTO.InventoryObject;
+            if (inventoryCategory == EnumGameInventoryType.Equipment)
+            {
+                if (false == gameEnvironment.FindEquipmentByTable(guid, out var itemData))
+                {
+                    return GameInventoryModifyDTO.ThrowNotFound<GameInventoryInfoDTO>(inventoryModifyDTO.InventoryCategory);
+                }
+                if (gameEnvironment.FindEquipmentByUnlocked(guid, out var _, out level))
+                {
+                    level = inventoryModifyDTO.ThrowIfRemove(level);
+                }
+                gameEnvironment.CreateAddEquipmentCommand(itemData, level, out _, out _);
+                //level;
+            }
+            else if (inventoryCategory == EnumGameInventoryType.ShipBlueprint)
+            {
+                if (false == gameEnvironment.FindShipBlueprintByTable(guid, out var itemData))
+                {
+                    return GameInventoryModifyDTO.ThrowNotFound<GameInventoryInfoDTO>(inventoryModifyDTO.InventoryCategory);
+                }
+                if (gameEnvironment.FindShipBlueprintByUnlocked(guid, out var _, out level))
+                {
+                    level = inventoryModifyDTO.ThrowIfRemove(level);
+                }
+                gameEnvironment.CreateAddShipBlueprintCommand(itemData, out var success);
+            }
+            else if (inventoryCategory == EnumGameInventoryType.ShipSpell)
+            {
+                if (false == @this.FindShipSpellByTable(gameEnvironment, guid, out var itemData))
+                {
+                    return GameInventoryModifyDTO.ThrowNotFound<GameInventoryInfoDTO>(inventoryModifyDTO.InventoryCategory);
+                }
+                if (@this.FindShipSpellByUnlocked(gameEnvironment, inventoryModifyDTO.InventoryObject, out var _, out level))
+                {
+                    level = inventoryModifyDTO.ThrowIfRemove(level);
+                }
+                gameEnvironment.CreateAddNewShipSpellCommand(itemData, out _, out _, out _, out var success);
 
             }
             else if (inventoryCategory == EnumGameInventoryType.Spell)
             {
-
+                if (false == @this.FindSpellByTable(gameEnvironment, guid, out var itemData))
+                {
+                    return GameInventoryModifyDTO.ThrowNotFound<GameInventoryInfoDTO>(inventoryModifyDTO.InventoryCategory);
+                }
+                if (@this.FindSpellByUnlocked(gameEnvironment, inventoryModifyDTO.InventoryObject, out var _, out level))
+                {
+                    level = inventoryModifyDTO.ThrowIfRemove(level);
+                }
+                gameEnvironment.CreateAddNewSpellCommand(itemData, out _, out var success);
             }
-            return new GameInventoryInfoDTO() { ObjectId = inventoryObjectDTO.InventoryObject };
+            else
+            {
+                level = 0;
+            }
+            return new GameInventoryInfoDTO() { ObjectId = inventoryModifyDTO.InventoryObject, DisplayValue = level.ToString() };
+
 
         }
         #endregion

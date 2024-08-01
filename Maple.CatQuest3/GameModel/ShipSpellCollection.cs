@@ -27,7 +27,7 @@ namespace Maple.CatQuest3
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"comparer", "COMPARER")]
             
     // class 0x10 System.Collections.Generic.Dictionary<System.String,ShipSpell> dict
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"dict", "DICT")]
+      [MonoCollectorSearchFieldAttribute(typeof(PMonoDictionary_x86<PMonoString, ShipSpell.Ptr_ShipSpell>),"dict", "DICT")]
             
     // struct 0x14 System.Int32 keyCount
     // [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"keyCount", "KEY_COUNT")]
