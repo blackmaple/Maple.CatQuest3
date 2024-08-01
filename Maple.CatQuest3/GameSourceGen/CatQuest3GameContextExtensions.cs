@@ -16,49 +16,55 @@ namespace Maple.CatQuest3.GameSourceGen
         #region Test
         public static void Output(this CatQuest3GameContext @this)
         {
-            var database = @this.EquipmentDatabase._INSTANCE;
-            if (database)
+            var database = @this.SpellConfigDatabase._INSTANCE;
+            foreach (var item in database.CONTENT_TABLE.Values)
             {
-                if (database.CONTENT_TABLE)
-                {
-                    @this.Logger.LogInformation("keyData");
-                    var keydata = database.CONTENT_TABLE.Keys;
-                    @this.Logger.LogInformation("keyData1");
-                    foreach (var item in keydata)
-                    {
-                        @this.Logger.LogInformation("keyData:{k}", item.ToString());
-                    }
-
-                    @this.Logger.LogInformation("valueData");
-                    var valData = database.CONTENT_TABLE.Values;
-                    foreach (var item in valData)
-                    {
-
-
-                        item.GET_DESCRIPTION(out var desc, 1, out var num);
-                        var descfmt = LocalizationTools.Ptr_LocalizationTools.TRANSLATE_OR_DEFAULT_00(desc.Item1, desc.Item2);
-                        var itemDesc = string.Format(descfmt.ToString()!, num.ToString());
-                        var itemName = LocalizationTools.Ptr_LocalizationTools.TRANSLATE_OR_DEFAULT_00(item.ITEM_NAME_TERM, item.ITEM_NAME);
-                        @this.Logger.LogInformation("valueData:{valueData}|{guid}|{name}|{desc}",
-                            item.ToString(),
-                            item.GUID.ToString(),
-                             itemDesc,
-                             itemName.ToString());
-                    }
-
-                    @this.Logger.LogInformation("_dict");
-                    var dicVal = database.CONTENT_TABLE.Dict.AsRefArray();
-                    foreach (var dic in dicVal)
-                    {
-                        var item = dic.Value;
-                        @this.Logger.LogInformation("_dict:{_dict}|{guid}|{name}|{desc}",
-                        item.ToString(),
-                        item.GUID.ToString(),
-                        item.ITEM_NAME.ToString(),
-                        item.ITEM_DESCRIPTION_TERM.ToString());
-                    }
-                }
+               var classInfo= @this.RuntimeContext.GetMonoClassInfoDTO(item.MonoClass);
+                @this.Logger.LogInformation("classinfo:{class}", classInfo.FullName);
             }
+            //var database = @this.EquipmentDatabase._INSTANCE;
+            //if (database)
+            //{
+            //    if (database.CONTENT_TABLE)
+            //    {
+            //        @this.Logger.LogInformation("keyData");
+            //        var keydata = database.CONTENT_TABLE.Keys;
+            //        @this.Logger.LogInformation("keyData1");
+            //        foreach (var item in keydata)
+            //        {
+            //            @this.Logger.LogInformation("keyData:{k}", item.ToString());
+            //        }
+
+            //        @this.Logger.LogInformation("valueData");
+            //        var valData = database.CONTENT_TABLE.Values;
+            //        foreach (var item in valData)
+            //        {
+
+
+            //            item.GET_DESCRIPTION(out var desc, 1, out var num);
+            //            var descfmt = LocalizationTools.Ptr_LocalizationTools.TRANSLATE_OR_DEFAULT_00(desc.Item1, desc.Item2);
+            //            var itemDesc = string.Format(descfmt.ToString()!, num.ToString());
+            //            var itemName = LocalizationTools.Ptr_LocalizationTools.TRANSLATE_OR_DEFAULT_00(item.ITEM_NAME_TERM, item.ITEM_NAME);
+            //            @this.Logger.LogInformation("valueData:{valueData}|{guid}|{name}|{desc}",
+            //                item.ToString(),
+            //                item.GUID.ToString(),
+            //                 itemDesc,
+            //                 itemName.ToString());
+            //        }
+
+            //        @this.Logger.LogInformation("_dict");
+            //        var dicVal = database.CONTENT_TABLE.Dict.AsRefArray();
+            //        foreach (var dic in dicVal)
+            //        {
+            //            var item = dic.Value;
+            //            @this.Logger.LogInformation("_dict:{_dict}|{guid}|{name}|{desc}",
+            //            item.ToString(),
+            //            item.GUID.ToString(),
+            //            item.ITEM_NAME.ToString(),
+            //            item.ITEM_DESCRIPTION_TERM.ToString());
+            //        }
+            //    }
+            //}
         }
         #endregion
 
