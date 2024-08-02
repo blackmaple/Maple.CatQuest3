@@ -17,7 +17,7 @@ typeof(MonoCollectorClassInfo)
     [MonoCollectorType(typeof(Contexts))]
     [MonoCollectorType(typeof(GameContext))]
     [MonoCollectorType(typeof(GameStateContext))]
-
+    [MonoCollectorType(typeof(GameMatcher))]
 
     [MonoCollectorType(typeof(GoldComponent))]
     [MonoCollectorType(typeof(ExperienceComponent))]

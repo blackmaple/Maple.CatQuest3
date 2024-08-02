@@ -16,37 +16,50 @@ namespace Maple.CatQuest3.GameSourceGen
         #region Test
         public static void Output(this CatQuest3GameContext @this)
         {
-            var database = @this.SpellConfigDatabase._INSTANCE.CONTENT_TABLE.Values;
-            foreach (var item in database)
-            {
-                var spellConfig = @this.SpellConfig.IsFrom(item);
-                if (spellConfig)
-                {
+            var gameEnvironment = @this.GetGameEnvironment();
+            var matcher = GameMatcher.Ptr_GameMatcher.GET_COMBAT_AGENT();
+            var groupObject = gameEnvironment.Ptr_GameContext.GET_GROUP(matcher);
 
-                    foreach (var level in spellConfig.SPELL_LEVELS)
-                    {
-                        var name = GetLocalName(level.SPELL_NAME_TERM, level.SPELL_NAME);
-                        var desc = GetLocalName(level.SPELL_DESCRIPTION_TERM, level.SPELL_DESCRIPTION);
+            var classInfo = @this.RuntimeContext.GetMonoCollectorClassInfo(groupObject.MonoClass);
+            var groupGeneric = new GroupGeneric(@this, classInfo);
+            var ptrGroup = groupGeneric.IsFrom(groupObject);
+            var content = ptrGroup.TO_STRING().ToString();
+            @this.Logger.LogInformation("c:{c}", content);
 
-                        @this.Logger.LogInformation("spellConfig=>{name}:{desc}", name.ToString(), desc.ToString());
-                    }
-                }
+            //var database = @this.SpellConfigDatabase._INSTANCE.CONTENT_TABLE.Values;
+            //foreach (var item in database)
+            //{
+            //    var spellConfig = @this.SpellConfig.IsFrom(item);
+            //    if (spellConfig)
+            //    {
 
-                var shipSpellConfig = @this.ShipSpellConfig.IsFrom(item);
-                if (shipSpellConfig)
-                {
-                    foreach (var level in shipSpellConfig.ATTACK_CONFIG_LEVELS)
-                    {
-                        var name = GetLocalName(level.SPELL_NAME_TERM, level.SPELL_NAME);
-                        var desc = GetLocalName(level.SPELL_DESCRIPTION_TERM, level.SPELL_DESCRIPTION);
+            //        foreach (var level in spellConfig.SPELL_LEVELS)
+            //        {
+            //            var name = GetLocalName(level.SPELL_NAME_TERM, level.SPELL_NAME);
+            //            var desc = GetLocalName(level.SPELL_DESCRIPTION_TERM, level.SPELL_DESCRIPTION);
 
-                        @this.Logger.LogInformation("ShipSpellConfig=>{name}:{desc}", name.ToString(), desc.ToString());
+            //            @this.Logger.LogInformation("spellConfig=>{name}:{desc}", name.ToString(), desc.ToString());
+            //        }
+            //    }
 
-                    }
-                }
+            //    var shipSpellConfig = @this.ShipSpellConfig.IsFrom(item);
+            //    if (shipSpellConfig)
+            //    {
+            //        foreach (var level in shipSpellConfig.ATTACK_CONFIG_LEVELS)
+            //        {
+            //            var name = GetLocalName(level.SPELL_NAME_TERM, level.SPELL_NAME);
+            //            var desc = GetLocalName(level.SPELL_DESCRIPTION_TERM, level.SPELL_DESCRIPTION);
+
+            //            @this.Logger.LogInformation("ShipSpellConfig=>{name}:{desc}", name.ToString(), desc.ToString());
+
+            //        }
+            //    }
 
 
-            }
+            //}
+
+
+
             //var database = @this.EquipmentDatabase._INSTANCE;
             //if (database)
             //{
@@ -483,7 +496,8 @@ namespace Maple.CatQuest3.GameSourceGen
             {
                 return GameInventoryModifyDTO.ThrowNotFound<GameInventoryInfoDTO>(inventoryModifyDTO.InventoryCategory);
             }
-            int level;
+            int level = 0;
+            int newLevel = 0;
             var guid = inventoryModifyDTO.InventoryObject;
             if (inventoryCategory == EnumGameInventoryType.Equipment)
             {
@@ -491,12 +505,11 @@ namespace Maple.CatQuest3.GameSourceGen
                 {
                     return GameInventoryModifyDTO.ThrowNotFound<GameInventoryInfoDTO>(inventoryModifyDTO.InventoryCategory);
                 }
-                if (gameEnvironment.FindEquipmentByUnlocked(guid, out var _, out level))
+                if (gameEnvironment.FindEquipmentByUnlocked(guid, out var _, out var oldlevel))
                 {
-                    level = inventoryModifyDTO.ThrowIfRemove(level);
+                    level = inventoryModifyDTO.ThrowIfRemove(oldlevel);
                 }
-                gameEnvironment.CreateAddEquipmentCommand(itemData, level, out _, out _);
-                //level;
+                gameEnvironment.CreateAddEquipmentCommand(itemData, level, out var _, out newLevel);
             }
             else if (inventoryCategory == EnumGameInventoryType.ShipBlueprint)
             {
@@ -504,11 +517,13 @@ namespace Maple.CatQuest3.GameSourceGen
                 {
                     return GameInventoryModifyDTO.ThrowNotFound<GameInventoryInfoDTO>(inventoryModifyDTO.InventoryCategory);
                 }
-                if (gameEnvironment.FindShipBlueprintByUnlocked(guid, out var _, out level))
+                if (gameEnvironment.FindShipBlueprintByUnlocked(guid, out var _, out var oldlevel))
                 {
-                    level = inventoryModifyDTO.ThrowIfRemove(level);
+                    inventoryModifyDTO.ThrowIfRemove(oldlevel);
                 }
                 gameEnvironment.CreateAddShipBlueprintCommand(itemData, out var success);
+                newLevel = success ? (oldlevel + 1) : oldlevel;
+
             }
             else if (inventoryCategory == EnumGameInventoryType.ShipSpell)
             {
@@ -516,11 +531,15 @@ namespace Maple.CatQuest3.GameSourceGen
                 {
                     return GameInventoryModifyDTO.ThrowNotFound<GameInventoryInfoDTO>(inventoryModifyDTO.InventoryCategory);
                 }
-                if (@this.FindShipSpellByUnlocked(gameEnvironment, inventoryModifyDTO.InventoryObject, out var _, out level))
+                if (@this.FindShipSpellByUnlocked(gameEnvironment, inventoryModifyDTO.InventoryObject, out _, out var oldlevel))
                 {
-                    level = inventoryModifyDTO.ThrowIfRemove(level);
+                    inventoryModifyDTO.ThrowIfRemove(oldlevel);
                 }
-                gameEnvironment.CreateAddNewShipSpellCommand(itemData, out _, out _, out _, out var success);
+                gameEnvironment.CreateAddNewShipSpellCommand(itemData, out _, out _, out newLevel, out var success);
+                if (success == false)
+                {
+                    newLevel = oldlevel;
+                }
 
             }
             else if (inventoryCategory == EnumGameInventoryType.Spell)
@@ -529,17 +548,16 @@ namespace Maple.CatQuest3.GameSourceGen
                 {
                     return GameInventoryModifyDTO.ThrowNotFound<GameInventoryInfoDTO>(inventoryModifyDTO.InventoryCategory);
                 }
-                if (@this.FindSpellByUnlocked(gameEnvironment, inventoryModifyDTO.InventoryObject, out var _, out level))
+                if (@this.FindSpellByUnlocked(gameEnvironment, inventoryModifyDTO.InventoryObject, out var _, out var oldlevel))
                 {
-                    level = inventoryModifyDTO.ThrowIfRemove(level);
+                    inventoryModifyDTO.ThrowIfRemove(oldlevel);
                 }
                 gameEnvironment.CreateAddNewSpellCommand(itemData, out _, out var success);
+                newLevel = success ? (oldlevel + 1) : oldlevel;
+
             }
-            else
-            {
-                level = 0;
-            }
-            return new GameInventoryInfoDTO() { ObjectId = inventoryModifyDTO.InventoryObject, DisplayValue = level.ToString() };
+
+            return new GameInventoryInfoDTO() { ObjectId = inventoryModifyDTO.InventoryObject, DisplayValue = newLevel.ToString() };
 
 
         }

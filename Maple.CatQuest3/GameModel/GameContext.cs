@@ -1348,7 +1348,7 @@ namespace Maple.CatQuest3
         ///   UnlockedShipSpellTableComponent get_unlockedShipSpellTable()
         /// </summary>
         /// <returns>class UnlockedShipSpellTableComponent</returns>
-        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_unlockedShipSpellTable",CallConvs = [typeof(CallConvCdecl)])]
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_unlockedShipSpellTable", CallConvs = [typeof(CallConvCdecl)])]
         extern nint GET_UNLOCKED_SHIP_SPELL_TABLE();
 
 
@@ -1398,8 +1398,8 @@ namespace Maple.CatQuest3
         /// </summary>
         /// <param name="matcher">interface Entitas.IMatcher<GameEntity></param>
         /// <returns>interface Entitas.IGroup<GameEntity></returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetGroup")]
-        ///  extern nint GET_GROUP (nint matcher);
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetGroup", CallConvs = [typeof(CallConvCdecl)])]
+        extern PMonoObject GET_GROUP(nint matcher);
 
 
         /// <summary>
