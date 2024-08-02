@@ -7,6 +7,7 @@ using System;
 using System.Text;
 using System.Runtime.CompilerServices;
 using System.Reflection.Emit;
+using System.Threading.Tasks.Dataflow;
 
 
 namespace Maple.CatQuest3.GameSourceGen
@@ -23,8 +24,36 @@ namespace Maple.CatQuest3.GameSourceGen
             var classInfo = @this.RuntimeContext.GetMonoCollectorClassInfo(groupObject.MonoClass);
             var groupGeneric = new GroupGeneric(@this, classInfo);
             var ptrGroup = groupGeneric.IsFrom(groupObject);
-            var content = ptrGroup.TO_STRING().ToString();
-            @this.Logger.LogInformation("c:{c}", content);
+            //      var content = ptrGroup.TO_STRING().ToString();
+            // @this.Logger.LogInformation("c:{c}", content);
+
+            //    var size = ptrGroup._ENTITIES.Size;
+            //       var arr = ptrGroup._ENTITIES.AsRefArray().Length;
+            //   @this.Logger.LogInformation("size:{c}/arr:{a}", size, arr);
+
+            foreach (var obj in ptrGroup._ENTITIES.AsRefArray())
+            {
+                var combat = obj.Value;
+                var character = combat.GET_IS_PLAYER_CHARACTER();
+                var playership = combat.GET_IS_PLAYER_SHIP();
+                var monster = combat.GET_IS_MONSTER();
+                var ship = combat.GET_IS_SHIP();
+                @this.Logger.LogInformation("charctert=>{charctert}/playership=>{playership}/=>monster=>{monster}/ship=>{ship}",
+                    character, playership, monster, ship);
+
+                if (!character && !playership && (monster || ship))
+                {
+                    combat.GET_COMBAT_AGENT().VALUE.TAKE_DAMAGE_01(999999);
+                   combat.SET_IS_KILLED(true);
+                    //
+                  combat.GET_ANIMATOR().VALUE.SET_TRIGGER_01(@this.AnimatorHash.IS_DEAD);
+                }
+                //if (combat.GET_IS_IN_COMBAT_MODE())
+                //{
+                //    combat.GET_COMBAT_AGENT().VALUE.TAKE_DAMAGE_01(int.MaxValue);
+                //    combat.SET_IS_KILLED(true);
+                //}
+            }
 
             //var database = @this.SpellConfigDatabase._INSTANCE.CONTENT_TABLE.Values;
             //foreach (var item in database)

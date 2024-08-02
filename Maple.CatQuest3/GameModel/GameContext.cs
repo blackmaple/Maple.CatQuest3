@@ -876,8 +876,8 @@ namespace Maple.CatQuest3
         ///   System.Boolean get_isPlayerShip()
         /// </summary>
         /// <returns>struct System.Boolean</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_isPlayerShip")]
-        ///  extern System.Boolean GET_IS_PLAYER_SHIP ();
+        ///[Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_isPlayerShip", CallConvs = [typeof(CallConvCdecl)])]
+        ///extern System.Boolean GET_IS_PLAYER_SHIP();
 
 
         /// <summary>

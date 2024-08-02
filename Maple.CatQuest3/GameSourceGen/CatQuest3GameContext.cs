@@ -18,7 +18,15 @@ typeof(MonoCollectorClassInfo)
     [MonoCollectorType(typeof(GameContext))]
     [MonoCollectorType(typeof(GameStateContext))]
     [MonoCollectorType(typeof(GameMatcher))]
+    [MonoCollectorType(typeof(GameEntity))]
+    [MonoCollectorType(typeof(CombatAgentComponent))]
+    [MonoCollectorType(typeof(CombatAgent))]
+    [MonoCollectorType(typeof(AnimatorComponent))]
+    [MonoCollectorType(typeof(Animator))]
+    [MonoCollectorType(typeof(AnimatorHash))]
 
+
+    
     [MonoCollectorType(typeof(GoldComponent))]
     [MonoCollectorType(typeof(ExperienceComponent))]
     [MonoCollectorType(typeof(CrystalComponent))]
