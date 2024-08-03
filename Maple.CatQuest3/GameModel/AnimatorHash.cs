@@ -44,7 +44,7 @@ namespace Maple.CatQuest3
     //  [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"IsAttacking", "IS_ATTACKING", true)]
 
     //  struct static System.Int32 IsDead
-       [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"IsDead", "IS_DEAD", true)]
+    [MonoCollectorSearchFieldAttribute(typeof(System.Int32), "IsDead", "IS_DEAD", true)]
 
     //  struct static System.Int32 DieTrigger
     [MonoCollectorSearchFieldAttribute(typeof(System.Int32), "DieTrigger", "DIE_TRIGGER", true)]
@@ -98,7 +98,7 @@ namespace Maple.CatQuest3
     //  [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"Hit_2", "HIT_2", true)]
 
     //  struct static System.Int32 DieState
-    //  [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"DieState", "DIE_STATE", true)]
+    [MonoCollectorSearchFieldAttribute(typeof(System.Int32), "DieState", "DIE_STATE", true)]
 
     //  struct static System.Int32 WakeTrigger
     //  [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"WakeTrigger", "WAKE_TRIGGER", true)]

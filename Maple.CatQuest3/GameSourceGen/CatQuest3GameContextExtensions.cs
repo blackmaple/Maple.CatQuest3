@@ -44,9 +44,9 @@ namespace Maple.CatQuest3.GameSourceGen
                 if (!character && !playership && (monster || ship))
                 {
                     combat.GET_COMBAT_AGENT().VALUE.TAKE_DAMAGE_01(999999);
-                   combat.SET_IS_KILLED(true);
+                    combat.SET_IS_KILLED(true);
                     //
-                  combat.GET_ANIMATOR().VALUE.SET_TRIGGER_01(@this.AnimatorHash.IS_DEAD);
+                    combat.GET_ANIMATOR().VALUE.PLAY_03(@this.AnimatorHash.DIE_STATE, 0, 0f);
                 }
                 //if (combat.GET_IS_IN_COMBAT_MODE())
                 //{
