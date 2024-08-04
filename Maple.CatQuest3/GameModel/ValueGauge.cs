@@ -30,7 +30,7 @@ namespace Maple.CatQuest3
     [MonoCollectorSearchFieldAttribute(typeof(System.Int32), "_currValue", "_CURR_VALUE", IsReadOnly = false)]
 
     // struct 0x14 System.Int32 _maxValue
-    // [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"_maxValue", "_MAX_VALUE")]
+    [MonoCollectorSearchFieldAttribute(typeof(System.Int32), "_maxValue", "_MAX_VALUE")]
 
     // struct 0x18 System.Boolean <autoCapMaxValue>k__BackingField
     // [MonoCollectorSearchFieldAttribute(typeof(System.Boolean),"<autoCapMaxValue>k__BackingField", "AUTO_CAP_MAX_VALUE")]

@@ -1,6 +1,7 @@
 
 using Maple.MonoGameAssistant.Core;
 using Maple.MonoGameAssistant.MonoCollectorDataV2;
+using Maple.MonoGameAssistant.RawDotNet;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -273,8 +274,8 @@ namespace Maple.CatQuest3
         /// <param name="text">class System.String</param>
         /// <param name="animation">abstract class CombatTextAnimation</param>
         /// <returns>class GameEntity</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("CreateSpawnTextEvent")]
-        /// static extern nint CREATE_SPAWN_TEXT_EVENT (nint context, UnityEngine.Vector3 position, nint text, nint animation);
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("CreateSpawnTextEvent", CallConvs = [typeof(CallConvCdecl)])]
+        static extern nint CREATE_SPAWN_TEXT_EVENT(GameContext.Ptr_GameContext context, REF_MONO_VECTOR3 position, PMonoString text, nint animation);
 
 
         /// <summary>

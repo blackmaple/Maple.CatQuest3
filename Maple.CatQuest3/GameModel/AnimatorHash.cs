@@ -200,13 +200,13 @@ namespace Maple.CatQuest3
     //  [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"RunStart", "RUN_START", true)]
 
     //  struct static System.Int32 Sleep
-    //  [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"Sleep", "SLEEP", true)]
+    [MonoCollectorSearchFieldAttribute(typeof(System.Int32), "Sleep", "SLEEP", true)]
 
     //  struct static System.Int32 SleepExit
     //  [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"SleepExit", "SLEEP_EXIT", true)]
 
     //  struct static System.Int32 JustSpawned
-    //  [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"JustSpawned", "JUST_SPAWNED", true)]
+    [MonoCollectorSearchFieldAttribute(typeof(System.Int32), "JustSpawned", "JUST_SPAWNED", true)]
 
     //  struct static System.Int32 Spawn
     //  [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"Spawn", "SPAWN", true)]

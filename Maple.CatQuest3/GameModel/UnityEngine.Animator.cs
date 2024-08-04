@@ -4642,8 +4642,8 @@ namespace Maple.CatQuest3
         /// </summary>
         /// <param name="id">struct System.Int32</param>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("ResetTrigger", Search = typeof(Search_Animator))]
-        ///  extern void RESET_TRIGGER_01 (System.Int32 id);
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("ResetTrigger", CallConvs = [typeof(CallConvCdecl)], Search = typeof(Search_Animator))]
+        extern void RESET_TRIGGER_01(System.Int32 id);
 
 
         /// <summary>
@@ -5197,8 +5197,8 @@ namespace Maple.CatQuest3
             /// <summary>
             ///   System.Void ResetTrigger(System.Int32 id)
             /// </summary>
-            /// public static bool RESET_TRIGGER_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "ResetTrigger", "System.Int32");
+            public static bool RESET_TRIGGER_01(Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+                => Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "ResetTrigger", "System.Int32");
             ///     
             ///  
             /// 

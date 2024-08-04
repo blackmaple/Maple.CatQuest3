@@ -44,10 +44,10 @@ namespace Maple.CatQuest3
      [MonoCollectorSearchFieldAttribute(typeof(GameStateContext.Ptr_GameStateContext),"<gameState>k__BackingField", "GAME_STATE")]
             
     // class 0x24 GUIContext <gUI>k__BackingField
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"<gUI>k__BackingField", "G_UI")]
+      [MonoCollectorSearchFieldAttribute(typeof(GUIContext.Ptr_GUIContext),"<gUI>k__BackingField", "G_UI")]
             
     // class 0x28 InputContext <input>k__BackingField
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"<input>k__BackingField", "INPUT")]
+      [MonoCollectorSearchFieldAttribute(typeof(InputContext.Ptr_InputContext),"<input>k__BackingField", "INPUT")]
             
     // class 0x2C ViewContext <view>k__BackingField
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"<view>k__BackingField", "VIEW")]

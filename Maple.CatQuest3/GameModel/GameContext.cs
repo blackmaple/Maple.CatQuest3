@@ -1028,8 +1028,8 @@ namespace Maple.CatQuest3
         ///   GameEntity get_playerShipEntity()
         /// </summary>
         /// <returns>class GameEntity</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_playerShipEntity")]
-        ///  extern nint GET_PLAYER_SHIP_ENTITY ();
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_playerShipEntity", CallConvs = [typeof(CallConvCdecl)])]
+        extern GameEntity.Ptr_GameEntity GET_PLAYER_SHIP_ENTITY();
 
 
         /// <summary>

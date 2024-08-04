@@ -22,7 +22,7 @@ namespace Maple.CatQuest3
 
 
     // class 0x8 ValueGauge health
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"health", "HEALTH")]
+    [MonoCollectorSearchFieldAttribute(typeof(ValueGauge.Ptr_ValueGauge), "health", "HEALTH")]
 
     // class 0xC CombatAgent.CombatStats stats
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"stats", "STATS")]
@@ -99,8 +99,8 @@ namespace Maple.CatQuest3
         ///   GameEntity CreateCombatAgentHealthUpdatedEvent()
         /// </summary>
         /// <returns>class GameEntity</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("CreateCombatAgentHealthUpdatedEvent")]
-        ///  extern nint CREATE_COMBAT_AGENT_HEALTH_UPDATED_EVENT ();
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("CreateCombatAgentHealthUpdatedEvent", CallConvs = [typeof(CallConvCdecl)])]
+        extern nint CREATE_COMBAT_AGENT_HEALTH_UPDATED_EVENT();
 
 
         /// <summary>
@@ -139,8 +139,8 @@ namespace Maple.CatQuest3
         /// </summary>
         /// <param name="healAmount">struct System.Int32</param>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Heal", Search = typeof(Search_CombatAgent))]
-        ///  extern void HEAL_01 (System.Int32 healAmount);
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Heal", CallConvs = [typeof(CallConvCdecl)], Search = typeof(Search_CombatAgent))]
+        extern void HEAL_01(System.Int32 healAmount);
 
 
         /// <summary>
@@ -179,8 +179,8 @@ namespace Maple.CatQuest3
             /// <summary>
             ///   System.Void Heal(System.Int32 healAmount)
             /// </summary>
-            /// public static bool HEAL_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "Heal", "System.Int32");
+            public static bool HEAL_01(Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+                => Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "Heal", "System.Int32");
             ///     
             ///  
             /// 

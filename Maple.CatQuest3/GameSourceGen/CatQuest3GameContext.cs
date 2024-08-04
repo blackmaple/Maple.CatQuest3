@@ -18,6 +18,16 @@ typeof(MonoCollectorClassInfo)
     [MonoCollectorType(typeof(GameContext))]
     [MonoCollectorType(typeof(GameStateContext))]
     [MonoCollectorType(typeof(GameMatcher))]
+
+    [MonoCollectorType(typeof(GUIContext))]
+    [MonoCollectorType(typeof(MessagePanelComponent))]
+    [MonoCollectorType(typeof(MessagePanel))]
+    [MonoCollectorType(typeof(MessageUIInfo))]
+    [MonoCollectorType(typeof(Line))]
+
+    [MonoCollectorType(typeof(GUIEntity))]
+    [MonoCollectorType(typeof(UIPanelDisplayStatusComponent))]
+
     [MonoCollectorType(typeof(GameEntity))]
     [MonoCollectorType(typeof(CombatAgentComponent))]
     [MonoCollectorType(typeof(CombatAgent))]
@@ -26,7 +36,7 @@ typeof(MonoCollectorClassInfo)
     [MonoCollectorType(typeof(AnimatorHash))]
 
 
-    
+
     [MonoCollectorType(typeof(GoldComponent))]
     [MonoCollectorType(typeof(ExperienceComponent))]
     [MonoCollectorType(typeof(CrystalComponent))]
@@ -70,6 +80,23 @@ typeof(MonoCollectorClassInfo)
 
     [MonoCollectorType(typeof(GameContextExtensions))]
     [MonoCollectorType(typeof(LocalizationTools))]
+
+
+    [MonoCollectorType(typeof(ContextsExtensions))]
+    [MonoCollectorType(typeof(ControllerManager))]
+
+    [MonoCollectorType(typeof(InputContext))]
+    [MonoCollectorType(typeof(InputContextExtensions))]
+
+    [MonoCollectorType(typeof(RestTriggeredEventHandler))]
+
+    [MonoCollectorType(typeof(GameplayHelper))]
+    [MonoCollectorType(typeof(GunReloadHandler))]
+
+    [MonoCollectorType(typeof(TransformComponent))]
+    [MonoCollectorType(typeof(Transform))]
+    [MonoCollectorType(typeof(CombatTextDatabase))]
+    
     internal partial class CatQuest3GameContext
     {
         //public CatQuest3GameContext(MonoRuntimeContext monoRuntimeContext, ILogger logger) : base(monoRuntimeContext, EnumMonoCollectorTypeVersion.APP, logger, "20")

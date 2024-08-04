@@ -1,6 +1,7 @@
 
 using Maple.MonoGameAssistant.Core;
 using Maple.MonoGameAssistant.MonoCollectorDataV2;
+using Maple.MonoGameAssistant.RawDotNet;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -4225,8 +4226,8 @@ namespace Maple.CatQuest3
         ///   GunAmmoComponent get_gunAmmo()
         /// </summary>
         /// <returns>class GunAmmoComponent</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_gunAmmo")]
-        ///  extern nint GET_GUN_AMMO ();
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_gunAmmo", CallConvs = [typeof(CallConvCdecl)])]
+        extern GunAmmoComponent.Ptr_GunAmmoComponent GET_GUN_AMMO();
 
 
         /// <summary>
@@ -4929,8 +4930,8 @@ namespace Maple.CatQuest3
         ///   System.Boolean get_hasGunAmmo()
         /// </summary>
         /// <returns>struct System.Boolean</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_hasGunAmmo")]
-        ///  extern System.Boolean GET_HAS_GUN_AMMO ();
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_hasGunAmmo", CallConvs = [typeof(CallConvCdecl)])]
+        extern System.Boolean GET_HAS_GUN_AMMO();
 
 
         /// <summary>
@@ -5431,8 +5432,8 @@ namespace Maple.CatQuest3
         ///   System.Boolean get_hasMana()
         /// </summary>
         /// <returns>struct System.Boolean</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_hasMana")]
-        ///  extern System.Boolean GET_HAS_MANA ();
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_hasMana", CallConvs = [typeof(CallConvCdecl)])]
+        extern System.Boolean GET_HAS_MANA();
 
 
         /// <summary>
@@ -5663,8 +5664,8 @@ namespace Maple.CatQuest3
         ///   System.Boolean get_hasPlayerId()
         /// </summary>
         /// <returns>struct System.Boolean</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_hasPlayerId")]
-        ///  extern System.Boolean GET_HAS_PLAYER_ID ();
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_hasPlayerId", CallConvs = [typeof(CallConvCdecl)])]
+        extern System.Boolean GET_HAS_PLAYER_ID();
 
 
         /// <summary>
@@ -7319,8 +7320,8 @@ namespace Maple.CatQuest3
         ///   System.Boolean get_isNPC()
         /// </summary>
         /// <returns>struct System.Boolean</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_isNPC")]
-        ///  extern System.Boolean GET_IS_NPC ();
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_isNPC", CallConvs = [typeof(CallConvCdecl)])]
+        extern System.Boolean GET_IS_NPC();
 
 
 
@@ -7890,8 +7891,8 @@ namespace Maple.CatQuest3
         ///   ManaComponent get_mana()
         /// </summary>
         /// <returns>class ManaComponent</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_mana")]
-        ///  extern nint GET_MANA ();
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_mana", CallConvs = [typeof(CallConvCdecl)])]
+        extern ManaComponent.Ptr_ManaComponent GET_MANA();
 
 
         /// <summary>
@@ -8914,8 +8915,8 @@ namespace Maple.CatQuest3
         ///   TransformComponent get_transform()
         /// </summary>
         /// <returns>class TransformComponent</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_transform")]
-        ///  extern nint GET_TRANSFORM ();
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_transform", CallConvs = [typeof(CallConvCdecl)])]
+        extern TransformComponent.Ptr_TransformComponent GET_TRANSFORM();
 
 
         /// <summary>
@@ -14347,8 +14348,8 @@ namespace Maple.CatQuest3
         /// <param name="newColor">struct UnityEngine.Color</param>
         /// <param name="newDuration">struct System.Single</param>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("ReplaceTint")]
-        ///  extern void REPLACE_TINT (TintType newTintType, UnityEngine.Color newColor, System.Single newDuration);
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("ReplaceTint", CallConvs = [typeof(CallConvCdecl)])]
+        extern void REPLACE_TINT(TintType newTintType, REF_UNITY_COLOR newColor, System.Single newDuration);
 
 
         /// <summary>
@@ -15006,8 +15007,8 @@ namespace Maple.CatQuest3
         /// </summary>
         /// <param name="value">struct System.Boolean</param>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("set_isJustSpawned")]
-        ///  extern void SET_IS_JUST_SPAWNED (System.Boolean value);
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("set_isJustSpawned", CallConvs = [typeof(CallConvCdecl)])]
+        extern void SET_IS_JUST_SPAWNED(System.Boolean value);
 
 
         /// <summary>

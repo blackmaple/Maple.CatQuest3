@@ -1,13 +1,8 @@
-﻿using Maple.MonoGameAssistant.GameDTO;
-using Maple.MonoGameAssistant.Common;
-using Maple.MonoGameAssistant.Logger;
+﻿using Maple.MonoGameAssistant.Core;
+using Maple.MonoGameAssistant.GameDTO;
 using Microsoft.Extensions.Logging;
-using Maple.MonoGameAssistant.Core;
-using System;
-using System.Text;
+using System.Numerics;
 using System.Runtime.CompilerServices;
-using System.Reflection.Emit;
-using System.Threading.Tasks.Dataflow;
 
 
 namespace Maple.CatQuest3.GameSourceGen
@@ -18,42 +13,133 @@ namespace Maple.CatQuest3.GameSourceGen
         public static void Output(this CatQuest3GameContext @this)
         {
             var gameEnvironment = @this.GetGameEnvironment();
-            var matcher = GameMatcher.Ptr_GameMatcher.GET_COMBAT_AGENT();
-            var groupObject = gameEnvironment.Ptr_GameContext.GET_GROUP(matcher);
 
-            var classInfo = @this.RuntimeContext.GetMonoCollectorClassInfo(groupObject.MonoClass);
-            var groupGeneric = new GroupGeneric(@this, classInfo);
-            var ptrGroup = groupGeneric.IsFrom(groupObject);
-            //      var content = ptrGroup.TO_STRING().ToString();
-            // @this.Logger.LogInformation("c:{c}", content);
-
-            //    var size = ptrGroup._ENTITIES.Size;
-            //       var arr = ptrGroup._ENTITIES.AsRefArray().Length;
-            //   @this.Logger.LogInformation("size:{c}/arr:{a}", size, arr);
-
-            foreach (var obj in ptrGroup._ENTITIES.AsRefArray())
+            //var state = gameEnvironment.GetInputState();
+            //@this.Logger.LogInformation("state:{state}", state);
+            var playerShip = gameEnvironment.Ptr_GameContext.GET_PLAYER_SHIP_ENTITY();
+            if (playerShip)
             {
-                var combat = obj.Value;
-                var character = combat.GET_IS_PLAYER_CHARACTER();
-                var playership = combat.GET_IS_PLAYER_SHIP();
-                var monster = combat.GET_IS_MONSTER();
-                var ship = combat.GET_IS_SHIP();
-                @this.Logger.LogInformation("charctert=>{charctert}/playership=>{playership}/=>monster=>{monster}/ship=>{ship}",
-                    character, playership, monster, ship);
+                GameplayHelper.Ptr_GameplayHelper.HEAL_AND_REVIVE_PLAYER_SHIP();
+                GameplayHelper.Ptr_GameplayHelper.REPLENISH_PLAYER_SHIP_AMMO_CLIP_00();
 
-                if (!character && !playership && (monster || ship))
-                {
-                    combat.GET_COMBAT_AGENT().VALUE.TAKE_DAMAGE_01(999999);
-                    combat.SET_IS_KILLED(true);
-                    //
-                    combat.GET_ANIMATOR().VALUE.PLAY_03(@this.AnimatorHash.DIE_STATE, 0, 0f);
-                }
-                //if (combat.GET_IS_IN_COMBAT_MODE())
+                //var combatInfo = playerShip.GET_COMBAT_AGENT().VALUE;
+                //var heathInfo = combatInfo.HEALTH;
+                //heathInfo._CURR_VALUE = heathInfo._MAX_VALUE;
+                //if (playerShip.GET_HAS_GUN_AMMO())
                 //{
-                //    combat.GET_COMBAT_AGENT().VALUE.TAKE_DAMAGE_01(int.MaxValue);
-                //    combat.SET_IS_KILLED(true);
+                //    var gun = playerShip.GET_GUN_AMMO().VALUE;
+                //    gun._CURR_VALUE = gun._MAX_VALUE;
                 //}
+
             }
+
+            var num = gameEnvironment.Ptr_ControllerManager.PLAYER_NUM;
+            for (int i = 0; i < num; ++i)
+            {
+                var player = gameEnvironment.GetEntityWithPlayerId(i);
+                if (player)
+                {
+
+                    
+
+                    //var id = player.GET_HAS_PLAYER_ID();
+                    //@this.Logger.LogInformation("id=>{id}", id.ToString());
+
+                    //var combatInfo = player.GET_COMBAT_AGENT().VALUE;
+                    //var heathInfo = combatInfo.HEALTH;
+                    //heathInfo._CURR_VALUE = heathInfo._MAX_VALUE;
+                    //if (player.GET_HAS_MANA())
+                    //{
+                    //    var mana = player.GET_MANA().VALUE;
+                    //    mana._CURR_VALUE = mana._MAX_VALUE;
+                    //}
+                    //if (player.GET_HAS_GUN_AMMO())
+                    //{
+                    //    var gun = player.GET_GUN_AMMO().VALUE;
+                    //    gun._CURR_VALUE = gun._MAX_VALUE;
+                    //}
+
+                    GunReloadHandler.Ptr_GunReloadHandler.FORCE_RELOAD(player);
+                    //player.GET_ANIMATOR().VALUE.RESET_TRIGGER_01(@this.AnimatorHash.JUST_SPAWNED);
+                    //player.SET_IS_JUST_SPAWNED(false);
+
+                    RestTriggeredEventHandler.Ptr_RestTriggeredEventHandler.HEAL_PLAYER_TO_MAX(player, gameEnvironment.Ptr_GameContext, true, false);
+
+
+                    player.GET_TRANSFORM().VALUE.GET_POSITION(out var local);
+                    gameEnvironment.CreateSpawnTextEvent(local, "dotnet9 cool");
+                }
+            }
+
+            //var matcher = GameMatcher.Ptr_GameMatcher.GET_COMBAT_AGENT();
+            //var groupObject = gameEnvironment.Ptr_GameContext.GET_GROUP(matcher);
+
+            //var classInfo = @this.RuntimeContext.GetMonoCollectorClassInfo(groupObject.MonoClass);
+            //var groupGeneric = new GroupGeneric(@this, classInfo);
+            //var ptrGroup = groupGeneric.IsFrom(groupObject);
+            ////    var content = ptrGroup.TO_STRING().ToString();
+            ////    @this.Logger.LogInformation("c:{c}", content);
+
+            ////        var size = ptrGroup._ENTITIES.Size;
+            ////        var arr = ptrGroup._ENTITIES.AsRefArray().Length;
+            ////     @this.Logger.LogInformation("size:{c}/arr:{a}", size, arr);
+            ////      var count = 0;
+            //foreach (var obj in ptrGroup._ENTITIES.AsRefArray())
+            //{
+            //    var combat = obj.Value;
+            //    var character = combat.GET_IS_PLAYER_CHARACTER();
+            //    var playership = combat.GET_IS_PLAYER_SHIP();
+            //    var monster = combat.GET_IS_MONSTER();
+            //    var ship = combat.GET_IS_SHIP();
+            //    var ncp = combat.GET_IS_NPC();
+            //    @this.Logger.LogInformation("charctert=>{charctert}/playership=>{playership}/=>monster=>{monster}/ship=>{ship}/ncp=>{ncp}",
+            //        character, playership, monster, ship, ncp);
+
+            //    if (!character && !playership && !ncp && (monster || ship))
+            //    {
+            //        //         combat.GET_COMBAT_AGENT().VALUE.TAKE_DAMAGE_01(int.MaxValue);
+            //        //         combat.SET_IS_KILLED(true);
+            //        //
+            //        //         combat.GET_ANIMATOR().VALUE.PLAY_03(@this.AnimatorHash.DIE_STATE, 0, 0f);
+
+            //        //         count++;
+            //    }
+            //    else if (character || playership)
+            //    {
+
+
+                  
+            //    //    RestTriggeredEventHandler.Ptr_RestTriggeredEventHandler.HEAL_PLAYER_TO_MAX(combat, gameEnvironment.Ptr_GameContext, true, true);
+
+            //        //var combatInfo = combat.GET_COMBAT_AGENT().VALUE;
+            //        //var maxValue = combatInfo.HEALTH._MAX_VALUE;
+            //        //combatInfo.HEAL_01(maxValue);
+
+
+            //        //    combatInfo.CREATE_COMBAT_AGENT_HEALTH_UPDATED_EVENT();
+            //        //combat.REPLACE_TINT(TintType.FLASH, new MonoGameAssistant.RawDotNet.REF_UNITY_COLOR()
+            //        //{
+            //        //    r = 1F,
+            //        //    g = 0.9F,
+            //        //    b = 0.9F,
+            //        //    a = 1f,
+            //        //}, 0.5f);
+            //        ////  combat.SET_IS_JUST_SPAWNED(false);
+
+            //        //     RestTriggeredEventHandler.Ptr_RestTriggeredEventHandler.HEAL_PLAYER_TO_MAX(combat, gameEnvironment.Ptr_GameContext, false, false);
+            //        //   combat.GET_ANIMATOR().VALUE.SET_TRIGGER_01(@this.AnimatorHash.SLEEP);
+
+
+
+            //    }
+
+            //    //if (combat.GET_IS_IN_COMBAT_MODE())
+            //    //{
+            //    //    combat.GET_COMBAT_AGENT().VALUE.TAKE_DAMAGE_01(int.MaxValue);
+            //    //    combat.SET_IS_KILLED(true);
+            //    //}
+            //}
+            ////  gameEnvironment.TryShowMessage($"最强技能C#:帮猫咪秒杀了{count}个倒霉的小可爱");
 
             //var database = @this.SpellConfigDatabase._INSTANCE.CONTENT_TABLE.Values;
             //foreach (var item in database)
@@ -133,6 +219,9 @@ namespace Maple.CatQuest3.GameSourceGen
             //    }
             //}
         }
+
+
+
         #endregion
 
         #region language
