@@ -17,8 +17,17 @@ namespace Maple.CatQuest3.GameSourceGen
                 this.Ptr_GameContext = contexts.GAME;
                 this.Ptr_GameStateContext = contexts.GAME_STATE;
                 this.Ptr_GUIContext = contexts.G_UI;
-                this.Ptr_Contexts = contexts;
                 this.Ptr_InputContext = contexts.INPUT;
+                this.Ptr_FrameworkContext = contexts.FRAMEWORK;
+
+
+
+
+
+
+                //last set
+                this.Ptr_Contexts = contexts;
+
             }
             this.Ptr_EquipmentDatabase = @this.EquipmentDatabase._INSTANCE;
             this.Ptr_ShipBlueprintDatabase = @this.ShipBlueprintDatabase._INSTANCE;
@@ -31,6 +40,8 @@ namespace Maple.CatQuest3.GameSourceGen
         public GameContext.Ptr_GameContext Ptr_GameContext { get; }
         public GameStateContext.Ptr_GameStateContext Ptr_GameStateContext { get; }
         public GUIContext.Ptr_GUIContext Ptr_GUIContext { get; }
+        public FrameworkContext.Ptr_FrameworkContext Ptr_FrameworkContext { get; }
+
         public InputContext.Ptr_InputContext Ptr_InputContext { get; }
         public CombatTextDatabase.Ptr_CombatTextDatabase  Ptr_CombatTextDatabase { get; }    
 
@@ -50,10 +61,21 @@ namespace Maple.CatQuest3.GameSourceGen
         #endregion
 
 
-        public InputState GetInputState()
-        {
-            return InputContextExtensions.Ptr_InputContextExtensions.GET_CURRENT_INPUT_STATE(this.Ptr_InputContext);
-        }
+        //public SceneType GetSceneType()
+        //{
+        //    if (this.Ptr_FrameworkContext)
+        //    {
+        //        var sceneTypeEntity = this.Ptr_FrameworkContext.GET_SCENE_TYPE_ENTITY();
+        //        if (sceneTypeEntity)
+        //        {
+        //            var sceneTypeComponent = sceneTypeEntity.GET_SCENE_TYPE();
+        //            return sceneTypeComponent.VALUE;
+        //        }
+        //    }
+
+        //    return default;
+          
+        //}
 
         public bool IsLoaded()
         {
@@ -96,6 +118,12 @@ namespace Maple.CatQuest3.GameSourceGen
         {
             using var gc_msg = this.CatQuest3GameContext.T2(msg);
             var saveStoneHealText = this.Ptr_CombatTextDatabase.SAVE_STONE_HEAL_TEXT;
+            GameContextExtensions.Ptr_GameContextExtensions.CREATE_SPAWN_TEXT_EVENT(this.Ptr_GameContext, position, gc_msg, saveStoneHealText);
+        }
+        public void CreateSpawnTextEvent_Kill(in REF_MONO_VECTOR3 position, string msg)
+        {
+            using var gc_msg = this.CatQuest3GameContext.T2(msg);
+            var saveStoneHealText = this.Ptr_CombatTextDatabase.DAMAGE_TAKEN_TEXT_ANIMATION;
             GameContextExtensions.Ptr_GameContextExtensions.CREATE_SPAWN_TEXT_EVENT(this.Ptr_GameContext, position, gc_msg, saveStoneHealText);
         }
 

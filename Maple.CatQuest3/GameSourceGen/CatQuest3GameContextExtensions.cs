@@ -9,6 +9,21 @@ namespace Maple.CatQuest3.GameSourceGen
 {
     internal static class CatQuest3GameContextExtensions
     {
+        static GroupGeneric? GroupGeneric { set; get; }
+
+        public static GroupGeneric.Ptr_GroupGeneric GetCombatGroup(this CatQuest3GameContext @this, CatQuest3GameEnvironment gameEnvironment)
+        {
+
+            var matcher = GameMatcher.Ptr_GameMatcher.GET_COMBAT_AGENT();
+            var groupObject = gameEnvironment.Ptr_GameContext.GET_GROUP(matcher);
+            if (GroupGeneric is null)
+            {
+                var classInfo = @this.RuntimeContext.GetMonoCollectorClassInfo(groupObject.MonoClass);
+                GroupGeneric = new GroupGeneric(@this, classInfo);
+            }
+            return GroupGeneric.IsFrom(groupObject);
+        }
+
         #region Test
         public static void Output(this CatQuest3GameContext @this)
         {
@@ -40,7 +55,7 @@ namespace Maple.CatQuest3.GameSourceGen
                 if (player)
                 {
 
-                    
+
 
                     //var id = player.GET_HAS_PLAYER_ID();
                     //@this.Logger.LogInformation("id=>{id}", id.ToString());
@@ -108,7 +123,7 @@ namespace Maple.CatQuest3.GameSourceGen
             //    {
 
 
-                  
+
             //    //    RestTriggeredEventHandler.Ptr_RestTriggeredEventHandler.HEAL_PLAYER_TO_MAX(combat, gameEnvironment.Ptr_GameContext, true, true);
 
             //        //var combatInfo = combat.GET_COMBAT_AGENT().VALUE;
@@ -680,6 +695,94 @@ namespace Maple.CatQuest3.GameSourceGen
 
         }
         #endregion
+
+
+        #region Switch
+        public static GameSwitchDisplayDTO[] GetListGameSwitchDisplay(this CatQuest3GameContext @this)
+        {
+            return [
+                    new GameSwitchDisplayDTO(){ObjectId = EnumGameSwitchDisplay.Kill_All.ToString(), DisplayName="全图秒杀(F11)" ,DisplayDesc="范围:当前地图的怪物//注意:可能卡剧情?",UIType = (int)EnumGameSwitchUIType.Button ,},
+                    new GameSwitchDisplayDTO(){ObjectId = EnumGameSwitchDisplay.Kill_Combat.ToString() ,DisplayName="战斗秒杀(F12)",DisplayDesc="范围:当前战斗的怪物",UIType = (int)EnumGameSwitchUIType.Button },
+                    new GameSwitchDisplayDTO(){ObjectId = EnumGameSwitchDisplay.Heal.ToString() ,DisplayName="状态恢复(F9)",DisplayDesc="回复HP/MP/弹药",UIType = (int)EnumGameSwitchUIType.Button },
+
+                ];
+        }
+
+        public static void GameKillMonster(this CatQuest3GameContext @this, CatQuest3GameEnvironment gameEnvironment, bool combatMode = false)
+        {
+            @this.Logger.LogInformation("s=>{s}", gameEnvironment.GetSceneType());
+
+            var combatGroup = @this.GetCombatGroup(gameEnvironment);
+            var entities = combatGroup._ENTITIES.AsRefArray();
+            foreach (var entityObj in entities)
+            {
+                var entity = entityObj.Value;
+                var character = entity.GET_IS_PLAYER_CHARACTER();
+                var playership = entity.GET_IS_PLAYER_SHIP();
+                var monster = entity.GET_IS_MONSTER();
+                var ship = entity.GET_IS_SHIP();
+                var ncp = entity.GET_IS_NPC();
+
+                if (!character && !playership && !ncp && (monster || ship))
+                {
+                    if (combatMode)
+                    {
+                        if (entity.GET_IS_IN_COMBAT_MODE() == false)
+                        {
+                            break;
+                        }
+                    }
+
+                    entity.GET_TRANSFORM().VALUE.GET_POSITION(out var position);
+                    gameEnvironment.CreateSpawnTextEvent_Kill(position, "Kill");
+                    entity.GET_COMBAT_AGENT().VALUE.TAKE_DAMAGE_01(int.MaxValue);
+                    entity.SET_IS_KILLED(true);
+                    entity.GET_ANIMATOR().VALUE.PLAY_03(@this.AnimatorHash.DIE_STATE, 0, 0f);
+                }
+            }
+        }
+        public static void GameHealPlayer(this CatQuest3GameContext @this, CatQuest3GameEnvironment gameEnvironment)
+        {
+            var playerShip = gameEnvironment.Ptr_GameContext.GET_PLAYER_SHIP_ENTITY();
+            if (playerShip)
+            {
+                GameplayHelper.Ptr_GameplayHelper.HEAL_AND_REVIVE_PLAYER_SHIP();
+                GameplayHelper.Ptr_GameplayHelper.REPLENISH_PLAYER_SHIP_AMMO_CLIP_00();
+            }
+
+            var num = gameEnvironment.Ptr_ControllerManager.PLAYER_NUM;
+            for (int i = 0; i < num; ++i)
+            {
+                var player = gameEnvironment.GetEntityWithPlayerId(i);
+                if (player)
+                {
+                    GunReloadHandler.Ptr_GunReloadHandler.FORCE_RELOAD(player);
+                    RestTriggeredEventHandler.Ptr_RestTriggeredEventHandler.HEAL_PLAYER_TO_MAX(player, gameEnvironment.Ptr_GameContext, true, false);
+                }
+            }
+
+        }
+        public static GameSwitchDisplayDTO UpdateGameSwitchDisplay(this CatQuest3GameContext @this, CatQuest3GameEnvironment gameEnvironment, GameSwitchModifyDTO switchModifyDTO)
+        {
+            if (false == Enum.TryParse<EnumGameSwitchDisplay>(switchModifyDTO.SwitchObjectId, out var result))
+            {
+                return GameException.Throw<GameSwitchDisplayDTO>($"NOT FOUND {switchModifyDTO.SwitchObjectId}");
+            }
+            if (result == EnumGameSwitchDisplay.Kill_All)
+            {
+                @this.GameKillMonster(gameEnvironment, false);
+            }
+            else if (result == EnumGameSwitchDisplay.Kill_Combat)
+            {
+                @this.GameKillMonster(gameEnvironment, true);
+            }
+            else if (result == EnumGameSwitchDisplay.Heal)
+            {
+                @this.GameHealPlayer(gameEnvironment);
+            }
+            return new GameSwitchDisplayDTO() { ObjectId = switchModifyDTO.SwitchObjectId };
+        }
+        #endregion
     }
 
     public enum EnumGameCurrencyType
@@ -698,4 +801,11 @@ namespace Maple.CatQuest3.GameSourceGen
         Spell,
     }
 
+    public enum EnumGameSwitchDisplay
+    {
+        Kill_Combat,
+        Kill_All,
+        Heal,
+
+    }
 }

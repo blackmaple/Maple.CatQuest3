@@ -46,21 +46,24 @@ namespace Maple.CatQuest3.GameService
         #endregion
 
         #region WebApi
+        public sealed override ValueTask<GameSessionInfoDTO> LoadResourceAsync()
+        {
+            return base.LoadResourceAsync();
+        }
+
         public sealed override ValueTask<GameCurrencyDisplayDTO[]> GetListCurrencyDisplayAsync()
         {
             return ValueTask.FromResult(this.GameContext.GetListGameCurrencyDisplay());
         }
-
         public sealed override async ValueTask<GameCurrencyInfoDTO> GetCurrencyInfoAsync(GameCurrencyObjectDTO currencyObjectDTO)
         {
             var gameEnvironment = await this.GetGameEnvironmentThrowIfErrorAsync().ConfigureAwait(false);
-            return await this.MonoTaskAsync((p, args) => p.GetGameCurrencyInfo(gameEnvironment, args), currencyObjectDTO).ConfigureAwait(false);
+            return await this.MonoTaskAsync((p, args) => p.GetGameCurrencyInfo(args.gameEnvironment, args.currencyObjectDTO), (gameEnvironment, currencyObjectDTO)).ConfigureAwait(false);
         }
-
         public sealed override async ValueTask<GameCurrencyInfoDTO> UpdateCurrencyInfoAsync(GameCurrencyModifyDTO currencyModifyDTO)
         {
             var gameEnvironment = await this.GetGameEnvironmentThrowIfErrorAsync().ConfigureAwait(false);
-            return await this.MonoTaskAsync((p, args) => p.UpdateGameCurrencyInfo(gameEnvironment, args), currencyModifyDTO).ConfigureAwait(false);
+            return await this.MonoTaskAsync((p, args) => p.UpdateGameCurrencyInfo(args.gameEnvironment, args.currencyModifyDTO), (gameEnvironment, currencyModifyDTO)).ConfigureAwait(false);
         }
 
 
@@ -74,11 +77,22 @@ namespace Maple.CatQuest3.GameService
             var gameEnvironment = await this.GetGameEnvironmentThrowIfErrorAsync().ConfigureAwait(false);
             return await this.MonoTaskAsync((p, args) => p.GetGameInventoryInfo(args.gameEnvironment, args.inventoryObjectDTO), (gameEnvironment, inventoryObjectDTO)).ConfigureAwait(false);
         }
-
         public sealed override async ValueTask<GameInventoryInfoDTO> UpdateInventoryInfoAsync(GameInventoryModifyDTO inventoryObjectDTO)
         {
             var gameEnvironment = await this.GetGameEnvironmentThrowIfErrorAsync().ConfigureAwait(false);
             return await this.MonoTaskAsync((p, args) => p.UpdateGameInventoryInfo(args.gameEnvironment, args.inventoryObjectDTO), (gameEnvironment, inventoryObjectDTO)).ConfigureAwait(false);
+
+        }
+
+
+        public sealed override ValueTask<GameSwitchDisplayDTO[]> GetListSwitchDisplayAsync()
+        {
+            return ValueTask.FromResult(this.GameContext.GetListGameSwitchDisplay());
+        }
+        public sealed override async ValueTask<GameSwitchDisplayDTO> UpdateSwitchDisplayAsync(GameSwitchModifyDTO switchModifyDTO)
+        {
+            var gameEnvironment = await this.GetGameEnvironmentThrowIfErrorAsync().ConfigureAwait(false);
+            return await this.MonoTaskAsync((p, args) => p.UpdateGameSwitchDisplay(gameEnvironment, args), switchModifyDTO).ConfigureAwait(false);
 
         }
         #endregion

@@ -96,7 +96,12 @@ typeof(MonoCollectorClassInfo)
     [MonoCollectorType(typeof(TransformComponent))]
     [MonoCollectorType(typeof(Transform))]
     [MonoCollectorType(typeof(CombatTextDatabase))]
-    
+
+    [MonoCollectorType(typeof(FrameworkContext))]
+    //[MonoCollectorType(typeof(FrameworkEntity))]
+    //[MonoCollectorType(typeof(SceneTypeComponent))]
+
+
     internal partial class CatQuest3GameContext
     {
         //public CatQuest3GameContext(MonoRuntimeContext monoRuntimeContext, ILogger logger) : base(monoRuntimeContext, EnumMonoCollectorTypeVersion.APP, logger, "20")

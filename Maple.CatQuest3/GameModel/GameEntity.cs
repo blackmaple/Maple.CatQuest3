@@ -7256,8 +7256,8 @@ namespace Maple.CatQuest3
         ///   System.Boolean get_isJustSpawned()
         /// </summary>
         /// <returns>struct System.Boolean</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_isJustSpawned")]
-        ///  extern System.Boolean GET_IS_JUST_SPAWNED ();
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_isJustSpawned", CallConvs = [typeof(CallConvCdecl)])]
+        extern System.Boolean GET_IS_JUST_SPAWNED();
 
 
         /// <summary>
