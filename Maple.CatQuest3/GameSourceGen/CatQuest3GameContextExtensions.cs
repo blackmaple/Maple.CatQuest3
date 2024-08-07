@@ -1,6 +1,9 @@
 ﻿using Maple.MonoGameAssistant.Core;
 using Maple.MonoGameAssistant.GameDTO;
+using Maple.MonoGameAssistant.UnityCore;
+using Maple.MonoGameAssistant.UnityCore.UnityEngine;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 
@@ -9,8 +12,8 @@ namespace Maple.CatQuest3.GameSourceGen
 {
     internal static class CatQuest3GameContextExtensions
     {
+        #region Init Game data
         static GroupGeneric? GroupGeneric { set; get; }
-
         public static GroupGeneric.Ptr_GroupGeneric GetCombatGroup(this CatQuest3GameContext @this, CatQuest3GameEnvironment gameEnvironment)
         {
 
@@ -23,6 +26,151 @@ namespace Maple.CatQuest3.GameSourceGen
             }
             return GroupGeneric.IsFrom(groupObject);
         }
+
+
+        public static IEnumerable<GameImageData> LoadGameImageData(this CatQuest3GameContext @this)
+        {
+            var skillInfo = @this.SkinInfoData._INSTANCE;
+            var goldInfo = skillInfo.GOLD_SKIN_INFO;
+            var expInfo = skillInfo.EXP_SKIN_INFO;
+            var magic = skillInfo.MAGIC_CRYSTAL_SKIN_INFO;
+
+            if (goldInfo)
+            {
+                yield return new GameImageData()
+                {
+                    ObjectId = EnumGameCurrencyType.Gold.ToString(),
+                    Category = EnumGameCurrencyType.Gold.ToString(),
+                    Ptr_Sprite = goldInfo.MAIN
+                };
+            }
+            if (expInfo)
+            {
+                yield return new GameImageData()
+                {
+                    ObjectId = EnumGameCurrencyType.Exp.ToString(),
+                    Category = EnumGameCurrencyType.Exp.ToString(),
+                    Ptr_Sprite = expInfo.MAIN
+                };
+            }
+            if (magic)
+            {
+                yield return new GameImageData()
+                {
+                    ObjectId = EnumGameCurrencyType.Crystal.ToString(),
+                    Category = EnumGameCurrencyType.Crystal.ToString(),
+                    Ptr_Sprite = magic.MAIN
+                };
+            }
+
+
+            var equipmentTable = @this.EquipmentDatabase._INSTANCE.CONTENT_TABLE;
+            foreach (var item in equipmentTable.Values)
+            {
+                var guid = item.GUID.ToString();
+                if (false == string.IsNullOrEmpty(guid))
+                {
+                    yield return new GameImageData()
+                    {
+                        Category = EnumGameInventoryType.Equipment.ToString(),
+                        ObjectId = guid,
+                        Ptr_Sprite = item.ICON
+                    };
+
+                }
+
+            }
+
+
+            var shipBulepriteTable = @this.ShipBlueprintDatabase._INSTANCE.CONTENT_TABLE;
+            foreach (var item in shipBulepriteTable.Values)
+            {
+                var guid = item.GUID.ToString();
+                if (false == string.IsNullOrEmpty(guid))
+                {
+                    yield return new GameImageData()
+                    {
+                        Category = EnumGameInventoryType.ShipBlueprint.ToString(),
+                        ObjectId = guid,
+                        Ptr_Sprite = item.ICON
+                    };
+
+                }
+
+            }
+
+            var database = @this.SpellConfigDatabase._INSTANCE.CONTENT_TABLE;
+            foreach (var item in database.Values)
+            {
+                var spellConfig = @this.SpellConfig.IsFrom(item);
+                if (spellConfig)
+                {
+                    var guid = spellConfig.GUID.ToString();
+                    if (string.IsNullOrEmpty(guid) == false)
+                    {
+                        foreach (var level in spellConfig.SPELL_LEVELS)
+                        {
+                            yield return new GameImageData()
+                            {
+                                Category = EnumGameInventoryType.Spell.ToString(),
+                                ObjectId = guid,
+                                Ptr_Sprite = level.UI_SPRITE
+                            };
+                            break;
+                        }
+                    }
+
+                }
+                else
+                {
+                    var shipSpellConfig = @this.ShipSpellConfig.IsFrom(item);
+                    if (shipSpellConfig)
+                    {
+                        var guid = shipSpellConfig.GUID.ToString();
+                        if (string.IsNullOrEmpty(guid) == false)
+                        {
+                            foreach (var level in shipSpellConfig.ATTACK_CONFIG_LEVELS)
+                            {
+                                yield return new GameImageData()
+                                {
+                                    Category = EnumGameInventoryType.ShipSpell.ToString(),
+                                    ObjectId = guid,
+                                    Ptr_Sprite = level.UI_SPRITE
+                                };
+                                break;
+                            }
+                        }
+
+                    }
+
+                }
+            }
+
+        }
+        public static IEnumerable<UnitySpriteImageData> GetListUnitySpriteImageData(this CatQuest3GameContext @this, UnityEngineContext unityEngine, GameImageData[] spriteDatas)
+        {
+            foreach (var spriteData in spriteDatas)
+            {
+                if (false == spriteData.Ptr_Sprite.Valid())
+                {
+                    continue;
+                }
+
+
+                var pIconData = unityEngine.ReadSprite2Png2(spriteData.Ptr_Sprite);
+                if (pIconData.Valid())
+                {
+
+                    yield return new UnitySpriteImageData()
+                    {
+                        Category = spriteData.Category,
+                        Name = spriteData.ObjectId,
+                        ImageData = pIconData,
+                    };
+                }
+            }
+        }
+        #endregion
 
         #region Test
         public static void Output(this CatQuest3GameContext @this)
@@ -266,7 +414,7 @@ namespace Maple.CatQuest3.GameSourceGen
             return [
                  new GameCurrencyDisplayDTO(){ ObjectId = EnumGameCurrencyType.Gold.ToString(), DisplayName=EnumGameCurrencyType.Gold.ToString(), DisplayCategory = EnumGameCurrencyType.Gold.ToString(), DisplayDesc = EnumGameCurrencyType.Gold.ToString()},
                  new GameCurrencyDisplayDTO(){ ObjectId = EnumGameCurrencyType.Crystal.ToString(), DisplayName=EnumGameCurrencyType.Crystal.ToString(), DisplayCategory = EnumGameCurrencyType.Crystal.ToString(), DisplayDesc = EnumGameCurrencyType.Crystal.ToString()},
-                 new GameCurrencyDisplayDTO(){ ObjectId = EnumGameCurrencyType.Experience.ToString(), DisplayName=EnumGameCurrencyType.Experience.ToString(), DisplayCategory = EnumGameCurrencyType.Experience.ToString(), DisplayDesc = EnumGameCurrencyType.Experience.ToString()}
+                 new GameCurrencyDisplayDTO(){ ObjectId = EnumGameCurrencyType.Exp.ToString(), DisplayName=EnumGameCurrencyType.Exp.ToString(), DisplayCategory = EnumGameCurrencyType.Exp.ToString(), DisplayDesc = EnumGameCurrencyType.Exp.ToString()}
                 ];
         }
 
@@ -316,7 +464,7 @@ namespace Maple.CatQuest3.GameSourceGen
             {
                 (true, EnumGameCurrencyType.Gold) => new GameCurrencyInfoDTO() { ObjectId = gameCurrency.CurrencyObject, DisplayValue = gameEnvironment.GetGold().ToString(), },
                 (true, EnumGameCurrencyType.Crystal) => new GameCurrencyInfoDTO() { ObjectId = gameCurrency.CurrencyObject, DisplayValue = gameEnvironment.GetCrystal().ToString(), },
-                (true, EnumGameCurrencyType.Experience) => new GameCurrencyInfoDTO() { ObjectId = gameCurrency.CurrencyObject, DisplayValue = gameEnvironment.GetExperience().ToString() },
+                (true, EnumGameCurrencyType.Exp) => new GameCurrencyInfoDTO() { ObjectId = gameCurrency.CurrencyObject, DisplayValue = gameEnvironment.GetExperience().ToString() },
                 _ => GameException.Throw<GameCurrencyInfoDTO>($"NOT FOUND {gameCurrency.CurrencyObject}")
             };
         }
@@ -326,7 +474,7 @@ namespace Maple.CatQuest3.GameSourceGen
             {
                 (true, EnumGameCurrencyType.Gold) => gameEnvironment.SetGold(gameCurrency.IntValue),
                 (true, EnumGameCurrencyType.Crystal) => gameEnvironment.SetCrystal(gameCurrency.IntValue),
-                (true, EnumGameCurrencyType.Experience) => gameEnvironment.SetExperience(gameCurrency.IntValue),
+                (true, EnumGameCurrencyType.Exp) => gameEnvironment.SetExperience(gameCurrency.IntValue),
                 _ => GameException.Throw<int>($"NOT FOUND {gameCurrency.CurrencyObject}")
             };
             return new GameCurrencyInfoDTO() { ObjectId = gameCurrency.CurrencyObject, DisplayValue = count.ToString() };
@@ -723,8 +871,12 @@ namespace Maple.CatQuest3.GameSourceGen
                 var monster = entity.GET_IS_MONSTER();
                 var ship = entity.GET_IS_SHIP();
                 var ncp = entity.GET_IS_NPC();
-
-                if (!character && !playership && !ncp && (monster || ship))
+                if (character || playership)
+                {
+                    entity.GET_TRANSFORM().VALUE.GET_POSITION(out var position);
+                    gameEnvironment.CreateSpawnTextEvent(position, "c# coooooooool");
+                }
+                else if (!ncp && (monster || ship))
                 {
                     if (combatMode)
                     {
@@ -735,11 +887,12 @@ namespace Maple.CatQuest3.GameSourceGen
                     }
 
                     entity.GET_TRANSFORM().VALUE.GET_POSITION(out var position);
-                    gameEnvironment.CreateSpawnTextEvent_Kill(position, "Kill");
+                    gameEnvironment.CreateSpawnTextEvent_Kill(position, "kill");
                     entity.GET_COMBAT_AGENT().VALUE.TAKE_DAMAGE_01(int.MaxValue);
                     entity.SET_IS_KILLED(true);
                     entity.GET_ANIMATOR().VALUE.PLAY_03(@this.AnimatorHash.DIE_STATE, 0, 0f);
                 }
+
             }
         }
         public static void GameHealPlayer(this CatQuest3GameContext @this, CatQuest3GameEnvironment gameEnvironment)
@@ -757,6 +910,10 @@ namespace Maple.CatQuest3.GameSourceGen
                 var player = gameEnvironment.GetEntityWithPlayerId(i);
                 if (player)
                 {
+                    player.GET_TRANSFORM().VALUE.GET_POSITION(out var position);
+                    gameEnvironment.CreateSpawnTextEvent_Heal(position, "c# gives you power");
+
+
                     GunReloadHandler.Ptr_GunReloadHandler.FORCE_RELOAD(player);
                     RestTriggeredEventHandler.Ptr_RestTriggeredEventHandler.HEAL_PLAYER_TO_MAX(player, gameEnvironment.Ptr_GameContext, true, false);
                 }
@@ -791,7 +948,7 @@ namespace Maple.CatQuest3.GameSourceGen
         None = 0,
         Gold = 1,
         Crystal = 2,
-        Experience = 3,
+        Exp = 3,
     }
 
     public enum EnumGameInventoryType
@@ -807,6 +964,15 @@ namespace Maple.CatQuest3.GameSourceGen
         Kill_Combat,
         Kill_All,
         Heal,
+
+    }
+
+    public class GameImageData
+    {
+        public required string Category { set; get; }
+        public required string ObjectId { set; get; }
+        public Sprite.Ptr_Sprite Ptr_Sprite { set; get; }
+
 
     }
 }

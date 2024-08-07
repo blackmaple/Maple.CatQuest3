@@ -103,6 +103,11 @@ typeof(MonoCollectorClassInfo)
     [MonoCollectorType(typeof(WorldEntity))]
     [MonoCollectorType(typeof(CurrentZoneComponent))]
 
+    //image
+    [MonoCollectorType(typeof(SkinInfoData))]
+    [MonoCollectorType(typeof(ExpSkinInfo))]
+    [MonoCollectorType(typeof(GoldSkinInfo))]
+    [MonoCollectorType(typeof(MagicCrystalSkinInfo))]
 
     internal partial class CatQuest3GameContext
     {

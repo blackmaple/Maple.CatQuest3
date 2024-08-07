@@ -2,6 +2,7 @@
 using Maple.MonoGameAssistant.Core;
 using Maple.MonoGameAssistant.MonoCollectorDataV2;
 using Maple.MonoGameAssistant.RawDotNet;
+using Maple.MonoGameAssistant.UnityCore.UnityEngine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,7 +32,7 @@ namespace Maple.CatQuest3
     [MonoCollectorSearchFieldAttribute(typeof(PMonoString), "Guid", "GUID")]
 
     // class 0x10 UnityEngine.Sprite icon
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"icon", "ICON")]
+    [MonoCollectorSearchFieldAttribute(typeof(Sprite.Ptr_Sprite), "icon", "ICON")]
 
     // class 0x14 System.String setName
     [MonoCollectorSearchFieldAttribute(typeof(PMonoString), "setName", "SET_NAME")]
@@ -76,7 +77,7 @@ namespace Maple.CatQuest3
     [MonoCollectorSearchFieldAttribute(typeof(PMonoString), "itemDescriptionTerm", "ITEM_DESCRIPTION_TERM")]
 
     // enum 0x4C ProjectStar.Data.EquipmentPartType partType
-     [MonoCollectorSearchFieldAttribute(typeof(EquipmentPartType),"partType", "PART_TYPE")]
+    [MonoCollectorSearchFieldAttribute(typeof(EquipmentPartType), "partType", "PART_TYPE")]
 
     // enum 0x50 WeaponType weaponType
     // [MonoCollectorSearchFieldAttribute(typeof(WeaponType),"weaponType", "WEAPON_TYPE")]

@@ -2,6 +2,7 @@
 using Maple.MonoGameAssistant.Core;
 using Maple.MonoGameAssistant.MonoCollectorDataV2;
 using Maple.MonoGameAssistant.RawDotNet;
+using Maple.MonoGameAssistant.UnityCore.UnityEngine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,7 +32,7 @@ namespace Maple.CatQuest3
       [MonoCollectorSearchFieldAttribute(typeof(PMonoString),"Guid", "GUID")]
             
     // class 0x10 UnityEngine.Sprite icon
-      [MonoCollectorSearchFieldAttribute(typeof(nint),"icon", "ICON")]
+      [MonoCollectorSearchFieldAttribute(typeof(Sprite.Ptr_Sprite),"icon", "ICON")]
             
     // class 0x14 System.String setName
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"setName", "SET_NAME")]

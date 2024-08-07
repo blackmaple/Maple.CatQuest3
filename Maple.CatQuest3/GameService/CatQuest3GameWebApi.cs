@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Maple.CatQuest3.GameService
 {
-    internal class CatQuest3GameWebApi() : GameWebApi<CatQuest3GameWebApi, CatQuest3GameService, CatQuest3GameContext>("Cat Quest 3//QQ群:136107898")
+    internal class CatQuest3GameWebApi() : GameWebApi<CatQuest3GameWebApi, CatQuest3GameService, CatQuest3GameContext>("Cat Quest 3//QQ Group:41426227", "https://qm.qq.com/q/oamayysmNa")
     {
 
         [ModuleInitializer]
@@ -43,6 +43,6 @@ namespace Maple.CatQuest3.GameService
             return true;
         }
 
-    
+
     }
 }

@@ -1,6 +1,7 @@
 
 using Maple.MonoGameAssistant.Core;
 using Maple.MonoGameAssistant.MonoCollectorDataV2;
+using Maple.MonoGameAssistant.UnityCore.UnityEngine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,7 +36,7 @@ namespace Maple.CatQuest3
     [MonoCollectorSearchFieldAttribute(typeof(nint), "spellDescription", "SPELL_DESCRIPTION")]
 
     // class 0x18 UnityEngine.Sprite UISprite
-    [MonoCollectorSearchFieldAttribute(typeof(nint), "UISprite", "UI_SPRITE")]
+    [MonoCollectorSearchFieldAttribute(typeof(Sprite.Ptr_Sprite), "UISprite", "UI_SPRITE")]
 
     // abstract class 0x1C SpawningEffectConfigBase spellFirer
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"spellFirer", "SPELL_FIRER")]

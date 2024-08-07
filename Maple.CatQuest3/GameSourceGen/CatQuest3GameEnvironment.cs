@@ -126,6 +126,13 @@ namespace Maple.CatQuest3.GameSourceGen
             var saveStoneHealText = this.Ptr_CombatTextDatabase.SAVE_STONE_HEAL_TEXT;
             GameContextExtensions.Ptr_GameContextExtensions.CREATE_SPAWN_TEXT_EVENT(this.Ptr_GameContext, position, gc_msg, saveStoneHealText);
         }
+        public void CreateSpawnTextEvent_Heal(in REF_MONO_VECTOR3 position, string msg)
+        {
+            using var gc_msg = this.CatQuest3GameContext.T2(msg);
+            var saveStoneHealText = this.Ptr_CombatTextDatabase.SAVE_STONE_HEAL_TEXT;
+            GameContextExtensions.Ptr_GameContextExtensions.CREATE_SPAWN_TEXT_EVENT(this.Ptr_GameContext, position, gc_msg, saveStoneHealText);
+        }
+
         public void CreateSpawnTextEvent_Kill(in REF_MONO_VECTOR3 position, string msg)
         {
             using var gc_msg = this.CatQuest3GameContext.T2(msg);
