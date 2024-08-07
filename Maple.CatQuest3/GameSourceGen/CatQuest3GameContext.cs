@@ -109,6 +109,14 @@ typeof(MonoCollectorClassInfo)
     [MonoCollectorType(typeof(GoldSkinInfo))]
     [MonoCollectorType(typeof(MagicCrystalSkinInfo))]
 
+    [MonoCollectorType(typeof(MapIconDisplayLinkComponent))]
+    [MonoCollectorType(typeof(ChestComponent))]
+    [MonoCollectorType(typeof(ChestBehaviour))]
+    [MonoCollectorType(typeof(GUIMatcher))]
+    [MonoCollectorType(typeof(MapIconComponent))]
+
+    
+
     internal partial class CatQuest3GameContext
     {
         //public CatQuest3GameContext(MonoRuntimeContext monoRuntimeContext, ILogger logger) : base(monoRuntimeContext, EnumMonoCollectorTypeVersion.APP, logger, "20")

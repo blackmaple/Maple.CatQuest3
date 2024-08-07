@@ -3010,8 +3010,8 @@ namespace Maple.CatQuest3
         ///   MapIconComponent get_mapIcon()
         /// </summary>
         /// <returns>class MapIconComponent</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_mapIcon")]
-        ///  extern nint GET_MAP_ICON ();
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_mapIcon", CallConvs = [typeof(CallConvCdecl)])]
+        extern MapIconComponent.Ptr_MapIconComponent GET_MAP_ICON();
 
 
         /// <summary>

@@ -3826,8 +3826,8 @@ namespace Maple.CatQuest3
         ///   ChestComponent get_chest()
         /// </summary>
         /// <returns>class ChestComponent</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_chest")]
-        ///  extern nint GET_CHEST ();
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_chest", CallConvs = [typeof(CallConvCdecl)])]
+        extern ChestComponent.Ptr_ChestComponent GET_CHEST();
 
 
         /// <summary>
@@ -4554,8 +4554,8 @@ namespace Maple.CatQuest3
         ///   System.Boolean get_hasChest()
         /// </summary>
         /// <returns>struct System.Boolean</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_hasChest")]
-        ///  extern System.Boolean GET_HAS_CHEST ();
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_hasChest", CallConvs = [typeof(CallConvCdecl)])]
+        extern System.Boolean GET_HAS_CHEST();
 
 
         /// <summary>
@@ -7907,8 +7907,8 @@ namespace Maple.CatQuest3
         ///   MapIconDisplayLinkComponent get_mapIconDisplayLink()
         /// </summary>
         /// <returns>class MapIconDisplayLinkComponent</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_mapIconDisplayLink")]
-        ///  extern nint GET_MAP_ICON_DISPLAY_LINK ();
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_mapIconDisplayLink", CallConvs = [typeof(CallConvCdecl)])]
+        extern MapIconDisplayLinkComponent.Ptr_MapIconDisplayLinkComponent GET_MAP_ICON_DISPLAY_LINK();
 
 
         /// <summary>

@@ -34,7 +34,8 @@ namespace Maple.CatQuest3
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"_matcher", "_MATCHER")]
 
     // class 0x18 System.Collections.Generic.HashSet<TEntity> _entities
-      [MonoCollectorSearchFieldAttribute(typeof(PMonoHashSet_x86<GameEntity.Ptr_GameEntity>),"_entities", "_ENTITIES")]
+    [MonoCollectorSearchFieldAttribute(typeof(PMonoHashSet_x86<GameEntity.Ptr_GameEntity>), "_entities", "GameEntity")]
+    [MonoCollectorSearchFieldAttribute(typeof(PMonoHashSet_x86<GUIEntity.Ptr_GUIEntity>), "_entities", "GUIEntity")]
 
     // class 0x1C TEntity[] _entitiesCache
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"_entitiesCache", "_ENTITIES_CACHE")]

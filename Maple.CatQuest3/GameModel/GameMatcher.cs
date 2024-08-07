@@ -1644,8 +1644,8 @@ namespace Maple.CatQuest3
         /// static  Entitas.IMatcher<GameEntity> get_Chest()
         /// </summary>
         /// <returns>interface Entitas.IMatcher<GameEntity></returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_Chest")]
-        /// static extern nint GET_CHEST ();
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_Chest", CallConvs = [typeof(CallConvCdecl)])]
+        static extern nint GET_CHEST();
 
 
         /// <summary>
@@ -2756,8 +2756,8 @@ namespace Maple.CatQuest3
         /// static  Entitas.IMatcher<GameEntity> get_MapIconDisplayLink()
         /// </summary>
         /// <returns>interface Entitas.IMatcher<GameEntity></returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_MapIconDisplayLink")]
-        /// static extern nint GET_MAP_ICON_DISPLAY_LINK ();
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_MapIconDisplayLink", CallConvs = [typeof(CallConvCdecl)])]
+        static extern nint GET_MAP_ICON_DISPLAY_LINK();
 
 
         /// <summary>

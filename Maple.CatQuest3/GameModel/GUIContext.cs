@@ -1910,8 +1910,8 @@ namespace Maple.CatQuest3
         /// </summary>
         /// <param name="matcher">interface Entitas.IMatcher<GUIEntity></param>
         /// <returns>interface Entitas.IGroup<GUIEntity></returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetGroup")]
-        ///  extern nint GET_GROUP (nint matcher);
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetGroup", CallConvs = [typeof(CallConvCdecl)])]
+        extern PMonoObject GET_GROUP(nint matcher);
 
 
         /// <summary>
