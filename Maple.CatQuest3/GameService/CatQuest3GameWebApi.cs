@@ -19,7 +19,7 @@ namespace Maple.CatQuest3.GameService
         public static void Initializer()
         {
             Maple.MonoGameAssistant.DllExportTmp.DllExport.LoadApis();
-            Initializer(8000);
+            Initializer(12000);
         }
 
         [UnmanagedCallersOnly(CallConvs = [typeof(CallConvStdcall)], EntryPoint = nameof(DllMain))]

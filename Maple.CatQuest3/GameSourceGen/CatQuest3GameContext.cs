@@ -98,8 +98,10 @@ typeof(MonoCollectorClassInfo)
     [MonoCollectorType(typeof(CombatTextDatabase))]
 
     [MonoCollectorType(typeof(FrameworkContext))]
-    //[MonoCollectorType(typeof(FrameworkEntity))]
-    //[MonoCollectorType(typeof(SceneTypeComponent))]
+
+    [MonoCollectorType(typeof(WorldContext))]
+    [MonoCollectorType(typeof(WorldEntity))]
+    [MonoCollectorType(typeof(CurrentZoneComponent))]
 
 
     internal partial class CatQuest3GameContext

@@ -710,7 +710,8 @@ namespace Maple.CatQuest3.GameSourceGen
 
         public static void GameKillMonster(this CatQuest3GameContext @this, CatQuest3GameEnvironment gameEnvironment, bool combatMode = false)
         {
-            @this.Logger.LogInformation("s=>{s}", gameEnvironment.GetSceneType());
+            //var b = gameEnvironment.TryGetZoneType(out var zoneType);
+            //@this.Logger.LogInformation("get:{get}/s=>{s}", b, zoneType);
 
             var combatGroup = @this.GetCombatGroup(gameEnvironment);
             var entities = combatGroup._ENTITIES.AsRefArray();

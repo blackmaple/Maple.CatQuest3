@@ -1,5 +1,6 @@
 ﻿using Maple.CatQuest3.GameSourceGen;
 using Maple.GameContext;
+using Maple.MonoGameAssistant.Common;
 using Maple.MonoGameAssistant.Core;
 using Maple.MonoGameAssistant.GameDTO;
 using Maple.MonoGameAssistant.Model;
@@ -24,11 +25,65 @@ namespace Maple.CatQuest3.GameService
 
 
 
-        protected override ValueTask F5_KeyDown()
+        protected sealed override ValueTask F5_KeyDown()
         {
             return new(this.MonoTaskAsync(p => p.Output()));
         }
 
+        protected sealed override async ValueTask F9_KeyDown()
+        {
+            var gameEnvironment = await this.GetGameEnvironmentAsync().ConfigureAwait(false);
+
+            try
+            {
+                _ = gameEnvironment.ThrowIfNotLoaded();
+                await this.MonoTaskAsync((p, args) => p.GameHealPlayer(args), (gameEnvironment)).ConfigureAwait(false);
+            }
+            catch (GameException ex)
+            {
+                await this.ShowMessageAsync(gameEnvironment, ex.Message).ConfigureAwait(false);
+            }
+            catch (Exception ex)
+            {
+                this.Logger.Error(ex);
+            }
+        }
+        protected sealed override async ValueTask F11_KeyDown()
+        {
+            var gameEnvironment = await this.GetGameEnvironmentAsync().ConfigureAwait(false);
+
+            try
+            {
+                _ = gameEnvironment.ThrowIfNotLoaded();
+                await this.MonoTaskAsync((p, args) => p.GameKillMonster(args, false), (gameEnvironment)).ConfigureAwait(false);
+            }
+            catch (GameException ex)
+            {
+                await this.ShowMessageAsync(gameEnvironment, ex.Message).ConfigureAwait(false);
+            }
+            catch (Exception ex)
+            {
+                this.Logger.Error(ex);
+            }
+        }
+        protected sealed override async ValueTask F12_KeyDown()
+        {
+            var gameEnvironment = await this.GetGameEnvironmentAsync().ConfigureAwait(false);
+
+            try
+            {
+                _ = gameEnvironment.ThrowIfNotLoaded();
+                await this.MonoTaskAsync((p, args) => p.GameKillMonster(args, true), (gameEnvironment)).ConfigureAwait(false);
+            }
+            catch (GameException ex)
+            {
+                await this.ShowMessageAsync(gameEnvironment, ex.Message).ConfigureAwait(false);
+            }
+            catch (Exception ex)
+            {
+                this.Logger.Error(ex);
+            }
+        }
         #region GameEnvironment
         private Task<CatQuest3GameEnvironment> GetGameEnvironmentAsync()
         {
@@ -42,6 +97,10 @@ namespace Maple.CatQuest3.GameService
                 return gameEnvironment;
             }
             return GameException.ThrowIfNotLoaded<CatQuest3GameEnvironment>();
+        }
+        private async ValueTask ShowMessageAsync(CatQuest3GameEnvironment gameEnvironment, string? msg)
+        {
+            await this.MonoTaskAsync((p, args) => args.gameEnvironment.TryShowMessage(args.msg), (gameEnvironment, msg)).ConfigureAwait(false);
         }
         #endregion
 
@@ -69,7 +128,7 @@ namespace Maple.CatQuest3.GameService
 
         public sealed override async ValueTask<GameInventoryDisplayDTO[]> GetListInventoryDisplayAsync()
         {
-            var gameEnvironment = await this.GetGameEnvironmentThrowIfErrorAsync().ConfigureAwait(false);
+            var gameEnvironment = await this.GetGameEnvironmentAsync().ConfigureAwait(false);
             return await this.MonoTaskAsync((p, args) => p.GetListGameInventoryDisplay(args).ToArray(), gameEnvironment).ConfigureAwait(false);
         }
         public sealed override async ValueTask<GameInventoryInfoDTO> GetInventoryInfoAsync(GameInventoryObjectDTO inventoryObjectDTO)

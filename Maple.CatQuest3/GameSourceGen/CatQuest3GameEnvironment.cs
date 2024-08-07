@@ -3,6 +3,7 @@ using Maple.MonoGameAssistant.Core;
 using Maple.MonoGameAssistant.GameDTO;
 using Maple.MonoGameAssistant.RawDotNet;
 using System.Reflection.Emit;
+using System.Runtime.CompilerServices;
 
 namespace Maple.CatQuest3.GameSourceGen
 {
@@ -19,7 +20,7 @@ namespace Maple.CatQuest3.GameSourceGen
                 this.Ptr_GUIContext = contexts.G_UI;
                 this.Ptr_InputContext = contexts.INPUT;
                 this.Ptr_FrameworkContext = contexts.FRAMEWORK;
-
+                this.Ptr_WorldContext = contexts.WORLD;
 
 
 
@@ -36,18 +37,23 @@ namespace Maple.CatQuest3.GameSourceGen
             this.Ptr_CombatTextDatabase = @this.CombatTextDatabase._INSTANCE;
         }
         public CatQuest3GameContext CatQuest3GameContext { get; }
+
+        #region Contexts
+
         public Contexts.Ptr_Contexts Ptr_Contexts { get; }
         public GameContext.Ptr_GameContext Ptr_GameContext { get; }
         public GameStateContext.Ptr_GameStateContext Ptr_GameStateContext { get; }
         public GUIContext.Ptr_GUIContext Ptr_GUIContext { get; }
         public FrameworkContext.Ptr_FrameworkContext Ptr_FrameworkContext { get; }
-
+        public WorldContext.Ptr_WorldContext Ptr_WorldContext { get; }
         public InputContext.Ptr_InputContext Ptr_InputContext { get; }
-        public CombatTextDatabase.Ptr_CombatTextDatabase  Ptr_CombatTextDatabase { get; }    
+        #endregion
+
+        #region Res
+        public CombatTextDatabase.Ptr_CombatTextDatabase Ptr_CombatTextDatabase { get; }
 
         public ControllerManager.Ptr_ControllerManager Ptr_ControllerManager { get; }
 
-        #region Res
 
         public EquipmentDatabase.Ptr_EquipmentDatabase Ptr_EquipmentDatabase { get; }
         public UnlockedEquipmentListComponent.Ptr_UnlockedEquipmentListComponent Ptr_UnlockedEquipmentListComponent => Ptr_GameContext.GET_UNLOCKED_EQUIPMENT_LIST();
@@ -61,25 +67,25 @@ namespace Maple.CatQuest3.GameSourceGen
         #endregion
 
 
-        //public SceneType GetSceneType()
-        //{
-        //    if (this.Ptr_FrameworkContext)
-        //    {
-        //        var sceneTypeEntity = this.Ptr_FrameworkContext.GET_SCENE_TYPE_ENTITY();
-        //        if (sceneTypeEntity)
-        //        {
-        //            var sceneTypeComponent = sceneTypeEntity.GET_SCENE_TYPE();
-        //            return sceneTypeComponent.VALUE;
-        //        }
-        //    }
+        public bool TryGetZoneType(out ZoneType zoneType)
+        {
+            Unsafe.SkipInit(out zoneType);
 
-        //    return default;
-          
-        //}
+            var worldEntity = this.Ptr_WorldContext.GET_CURRENT_ZONE_ENTITY();
+            if (worldEntity)
+            {
+                var currentZoneComponent = worldEntity.GET_CURRENT_ZONE();
+                zoneType = currentZoneComponent.ZONE;
+                return true;
+            }
+
+            return false;
+
+        }
 
         public bool IsLoaded()
         {
-            return this.Ptr_GameContext && false == this.Ptr_GameContext.GET_IS_REMOVE_PLAYER_EVENT();
+            return TryGetZoneType(out _);
         }
         public bool ThrowIfNotLoaded()
         {
@@ -114,7 +120,7 @@ namespace Maple.CatQuest3.GameSourceGen
             return ContextsExtensions.Ptr_ContextsExtensions.GET_ENTITY_WITH_PLAYER_ID(this.Ptr_GameContext, index);
         }
 
-        public void CreateSpawnTextEvent(in REF_MONO_VECTOR3 position,string msg)
+        public void CreateSpawnTextEvent(in REF_MONO_VECTOR3 position, string msg)
         {
             using var gc_msg = this.CatQuest3GameContext.T2(msg);
             var saveStoneHealText = this.Ptr_CombatTextDatabase.SAVE_STONE_HEAL_TEXT;

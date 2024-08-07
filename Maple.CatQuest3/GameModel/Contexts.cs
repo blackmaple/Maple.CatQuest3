@@ -53,7 +53,7 @@ namespace Maple.CatQuest3
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"<view>k__BackingField", "VIEW")]
 
     // class 0x30 WorldContext <world>k__BackingField
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"<world>k__BackingField", "WORLD")]
+    [MonoCollectorSearchFieldAttribute(typeof(WorldContext.Ptr_WorldContext), "<world>k__BackingField", "WORLD")]
     public partial class Contexts
     {
         //public const string Const_ImageName = "ProjectStar";
