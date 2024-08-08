@@ -132,15 +132,17 @@ namespace Maple.CatQuest3.GameSourceGen
                     var guid = spellConfig.GUID.ToString();
                     if (string.IsNullOrEmpty(guid) == false)
                     {
-                        foreach (var level in spellConfig.SPELL_LEVELS)
+                        var skills = spellConfig.SPELL_LEVELS.AsReadOnlySpan();
+                        if (skills.IsEmpty == false)
                         {
+                            var level = skills[^1];
                             yield return new GameImageData()
                             {
                                 Category = EnumGameInventoryType.Spell.ToString(),
                                 ObjectId = guid,
                                 Ptr_Sprite = level.UI_SPRITE
                             };
-                            break;
+
                         }
                     }
 
@@ -153,15 +155,17 @@ namespace Maple.CatQuest3.GameSourceGen
                         var guid = shipSpellConfig.GUID.ToString();
                         if (string.IsNullOrEmpty(guid) == false)
                         {
-                            foreach (var level in shipSpellConfig.ATTACK_CONFIG_LEVELS)
+                            var skills = shipSpellConfig.ATTACK_CONFIG_LEVELS.AsReadOnlySpan();
+                            if (skills.IsEmpty == false)
                             {
+                                var level = skills[^1];
                                 yield return new GameImageData()
                                 {
                                     Category = EnumGameInventoryType.ShipSpell.ToString(),
                                     ObjectId = guid,
                                     Ptr_Sprite = level.UI_SPRITE
                                 };
-                                break;
+
                             }
                         }
 
@@ -199,6 +203,7 @@ namespace Maple.CatQuest3.GameSourceGen
         #region Test
         public static void Output(this CatQuest3GameContext @this)
         {
+            return;
             using (@this.Logger.Running())
             {
                 var gameEnvironment = @this.GetGameEnvironment();
@@ -411,14 +416,16 @@ namespace Maple.CatQuest3.GameSourceGen
                     var guid = spellConfig.GUID.ToString();
                     if (string.IsNullOrEmpty(guid) == false)
                     {
-                        foreach (var level in spellConfig.SPELL_LEVELS)
+                        var skills = spellConfig.SPELL_LEVELS.AsReadOnlySpan();
+                        if (skills.IsEmpty == false)
                         {
-
+                            //获取最后一个
+                            var level = skills[^1];
                             var name = GetLocalName(level.SPELL_NAME_TERM, level.SPELL_NAME);
                             var desc = GetLocalName(level.SPELL_DESCRIPTION_TERM, level.SPELL_DESCRIPTION);
 
                             yield return new GameInventoryDisplayDTO() { ObjectId = guid, DisplayName = name.ToString(), DisplayDesc = desc.ToString(), DisplayCategory = EnumGameInventoryType.Spell.ToString(), };
-                            break;
+
                         }
                     }
 
@@ -431,13 +438,15 @@ namespace Maple.CatQuest3.GameSourceGen
                         var guid = shipSpellConfig.GUID.ToString();
                         if (string.IsNullOrEmpty(guid) == false)
                         {
-                            foreach (var level in shipSpellConfig.ATTACK_CONFIG_LEVELS)
+                            var skills = shipSpellConfig.ATTACK_CONFIG_LEVELS.AsReadOnlySpan();
+                            if (false == skills.IsEmpty)
                             {
+                                //获取最后一个
+                                var level = skills[^1];
                                 var name = GetLocalName(level.SPELL_NAME_TERM, level.SPELL_NAME);
                                 var desc = GetLocalName(level.SPELL_DESCRIPTION_TERM, level.SPELL_DESCRIPTION);
 
                                 yield return new GameInventoryDisplayDTO() { ObjectId = guid, DisplayName = name.ToString(), DisplayDesc = desc.ToString(), DisplayCategory = EnumGameInventoryType.ShipSpell.ToString(), };
-                                break;
                             }
                         }
 
@@ -709,7 +718,7 @@ namespace Maple.CatQuest3.GameSourceGen
         public static GameSwitchDisplayDTO[] GetListGameSwitchDisplay(this CatQuest3GameContext @this)
         {
             return [
-                    new GameSwitchDisplayDTO(){ObjectId = EnumGameSwitchDisplay.Kill_All.ToString(), DisplayName="全图秒杀(F11)" ,DisplayDesc="范围:当前地图的怪物//注意:可能卡剧情?",UIType = (int)EnumGameSwitchUIType.Button ,},
+                    new GameSwitchDisplayDTO(){ObjectId = EnumGameSwitchDisplay.Kill_All.ToString(), DisplayName="全图秒杀(F11)" ,DisplayDesc="范围:当前地图的怪物//注意:可能卡剧情?(禁止大地图使用)",UIType = (int)EnumGameSwitchUIType.Button ,},
                     new GameSwitchDisplayDTO(){ObjectId = EnumGameSwitchDisplay.Kill_Combat.ToString() ,DisplayName="战斗秒杀(F12)",DisplayDesc="范围:当前战斗的怪物",UIType = (int)EnumGameSwitchUIType.Button },
                     new GameSwitchDisplayDTO(){ObjectId = EnumGameSwitchDisplay.Heal.ToString() ,DisplayName="状态恢复(F9)",DisplayDesc="回复HP/MP/弹药",UIType = (int)EnumGameSwitchUIType.Button },
 
@@ -726,10 +735,27 @@ namespace Maple.CatQuest3.GameSourceGen
             foreach (var entityObj in entities)
             {
                 var entity = entityObj.Value;
-                if (combatMode && (entity.GET_IS_IN_COMBAT_MODE() == false))
+
+                //战斗中的秒杀
+                if (combatMode)
                 {
-                    continue;
+                    if (entity.GET_IS_IN_COMBAT_MODE() == false)
+                    {
+                        continue;
+                    }
                 }
+                else
+                {
+                    if (!gameEnvironment.TryGetZoneType(out var zoneType))
+                    {
+                        continue;
+                    }
+                    if (zoneType == ZoneType.Overworld)
+                    {
+                        continue;
+                    }
+                }
+
 
                 var character = entity.GET_IS_PLAYER_CHARACTER();
                 var playership = entity.GET_IS_PLAYER_SHIP();
