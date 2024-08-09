@@ -442,8 +442,8 @@ namespace Maple.CatQuest3
         /// </summary>
         /// <param name="itemLevel">struct System.Int32</param>
         /// <returns>class UnityEngine.Sprite</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetUIIconSprite")]
-        ///  extern nint GET_UI_ICON_SPRITE (System.Int32 itemLevel);
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetUIIconSprite", CallConvs = [typeof(CallConvCdecl)])]
+        extern nint GET_UI_ICON_SPRITE(System.Int32 itemLevel);
 
 
         /// <summary>

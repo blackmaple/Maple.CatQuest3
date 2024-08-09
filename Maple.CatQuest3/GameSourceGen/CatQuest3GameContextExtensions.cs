@@ -98,7 +98,7 @@ namespace Maple.CatQuest3.GameSourceGen
                     {
                         Category = EnumGameInventoryType.Equipment.ToString(),
                         ObjectId = guid,
-                        Ptr_Sprite = item.ICON
+                        Ptr_Sprite = item.GET_UI_ICON_SPRITE(int.MaxValue)
                     };
 
                 }
@@ -116,7 +116,7 @@ namespace Maple.CatQuest3.GameSourceGen
                     {
                         Category = EnumGameInventoryType.ShipBlueprint.ToString(),
                         ObjectId = guid,
-                        Ptr_Sprite = item.ICON
+                        Ptr_Sprite = item.GET_UI_ICON_SPRITE(int.MaxValue)
                     };
 
                 }

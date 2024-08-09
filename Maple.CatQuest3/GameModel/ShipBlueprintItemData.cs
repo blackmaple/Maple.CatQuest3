@@ -12,8 +12,8 @@ using System.Threading.Tasks;
 
 namespace Maple.CatQuest3
 {
-    
-    
+
+
     /// <summary>
     /// class ["ProjectStar".""."ShipBlueprintItemData"]
     /// [ProjectStar.Data.EquipmentItemData]=>[GenericDatabaseEntry]=>[UnityEngine.ScriptableObject]=>[UnityEngine.Object]=>[System.Object]
@@ -21,104 +21,104 @@ namespace Maple.CatQuest3
     /// </summary>
     //[Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorSettingsAttribute([80, 114, 111, 106, 101, 99, 116, 83, 116, 97, 114], 0x020001B7U)]
     [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorSettingsAttribute([80, 114, 111, 106, 101, 99, 116, 83, 116, 97, 114], [], [83, 104, 105, 112, 66, 108, 117, 101, 112, 114, 105, 110, 116, 73, 116, 101, 109, 68, 97, 116, 97])]
-                
+
     //  struct static System.Int32 OffsetOfInstanceIDInCPlusPlusObject
     //  [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"OffsetOfInstanceIDInCPlusPlusObject", "OFFSET_OF_INSTANCE_ID_IN_C_PLUS_PLUS_OBJECT", true)]
-                
+
     // struct 0x8 System.IntPtr m_CachedPtr
     // [MonoCollectorSearchFieldAttribute(typeof(System.IntPtr),"m_CachedPtr", "M_CACHED_PTR")]
-            
+
     // class 0xC System.String Guid
-      [MonoCollectorSearchFieldAttribute(typeof(PMonoString),"Guid", "GUID")]
-            
+    [MonoCollectorSearchFieldAttribute(typeof(PMonoString), "Guid", "GUID")]
+
     // class 0x10 UnityEngine.Sprite icon
-      [MonoCollectorSearchFieldAttribute(typeof(Sprite.Ptr_Sprite),"icon", "ICON")]
-            
+    [MonoCollectorSearchFieldAttribute(typeof(Sprite.Ptr_Sprite), "icon", "ICON")]
+
     // class 0x14 System.String setName
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"setName", "SET_NAME")]
-            
+
     // class 0x18 System.String itemName
-      [MonoCollectorSearchFieldAttribute(typeof(nint),"itemName", "ITEM_NAME")]
-            
+    [MonoCollectorSearchFieldAttribute(typeof(nint), "itemName", "ITEM_NAME")]
+
     // class 0x1C ProjectStar.Data.EquipmentSkinData skinData
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"skinData", "SKIN_DATA")]
-            
+
     // class 0x20 System.Collections.Generic.List<ProjectStar.Data.EquipmentItemData.ItemLevelSkinOverrideInfo> itemLevelSkinDataOverrideTable
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"itemLevelSkinDataOverrideTable", "ITEM_LEVEL_SKIN_DATA_OVERRIDE_TABLE")]
-            
+
     // class 0x24 WeaponConfig weaponConfig
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"weaponConfig", "WEAPON_CONFIG")]
-            
+
     // class 0x28 EquipmentWeaponDamageStatGrowthInfo _damage
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"_damage", "_DAMAGE")]
-            
+
     // class 0x2C EquipmentHealthStatGrowthInfo health
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"health", "HEALTH")]
-            
+
     // class 0x30 EquipmentAttackStatGrowthInfo attack
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"attack", "ATTACK")]
-            
+
     // class 0x34 EquipmentMagicStatGrowthInfo magic
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"magic", "MAGIC")]
-            
+
     // class 0x38 EquipmentDefStatGrowthInfo defence
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"defence", "DEFENCE")]
-            
+
     // class 0x3C System.String passiveAbilityDescription
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"passiveAbilityDescription", "PASSIVE_ABILITY_DESCRIPTION")]
-            
+
     // class 0x40 EquipmentAbilities abilities
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"abilities", "ABILITIES")]
-            
+
     // class 0x44 System.String itemNameTerm
-      [MonoCollectorSearchFieldAttribute(typeof(nint),"itemNameTerm", "ITEM_NAME_TERM")]
-            
+    [MonoCollectorSearchFieldAttribute(typeof(nint), "itemNameTerm", "ITEM_NAME_TERM")]
+
     // class 0x48 System.String itemDescriptionTerm
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"itemDescriptionTerm", "ITEM_DESCRIPTION_TERM")]
-            
+
     // enum 0x4C ProjectStar.Data.EquipmentPartType partType
-      [MonoCollectorSearchFieldAttribute(typeof( EquipmentPartType),"partType", "PART_TYPE")]
-            
+    [MonoCollectorSearchFieldAttribute(typeof(EquipmentPartType), "partType", "PART_TYPE")]
+
     // enum 0x50 WeaponType weaponType
     // [MonoCollectorSearchFieldAttribute(typeof(WeaponType),"weaponType", "WEAPON_TYPE")]
-            
+
     // struct 0x54 System.Boolean isLongWeapon
     // [MonoCollectorSearchFieldAttribute(typeof(System.Boolean),"isLongWeapon", "IS_LONG_WEAPON")]
-            
+
     // enum 0x58 ElementalType elementalDmgType
     // [MonoCollectorSearchFieldAttribute(typeof(ElementalType),"elementalDmgType", "ELEMENTAL_DMG_TYPE")]
-            
+
     // struct 0x5C System.Int32 baseUpgradeCost
     // [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"baseUpgradeCost", "BASE_UPGRADE_COST")]
-            
+
     // struct 0x60 System.Single incrementBaseUpgradeCostMultiplier
     // [MonoCollectorSearchFieldAttribute(typeof(System.Single),"incrementBaseUpgradeCostMultiplier", "INCREMENT_BASE_UPGRADE_COST_MULTIPLIER")]
-            
+
     // struct 0x64 System.Int32 gunAmmoCapacity
     // [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"gunAmmoCapacity", "GUN_AMMO_CAPACITY")]
-            
+
     // struct 0x68 System.Single gunReloadBulletDuration
     // [MonoCollectorSearchFieldAttribute(typeof(System.Single),"gunReloadBulletDuration", "GUN_RELOAD_BULLET_DURATION")]
-            
+
     // struct 0x6C System.Single gunReloadClipDuration
     // [MonoCollectorSearchFieldAttribute(typeof(System.Single),"gunReloadClipDuration", "GUN_RELOAD_CLIP_DURATION")]
-            
+
     // struct 0x70 System.Int32 gunMaxAmmoBoost
     // [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"gunMaxAmmoBoost", "GUN_MAX_AMMO_BOOST")]
-            
+
     // struct 0x74 System.Int32 specialGunAmmoBoost
     // [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"specialGunAmmoBoost", "SPECIAL_GUN_AMMO_BOOST")]
-            
+
     // class 0x78 UnityEngine.Sprite UIIcon
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"UIIcon", "UI_ICON")]
-            
+
     // class 0x7C System.Collections.Generic.List<ShipBlueprintAbility> shipBlueprintAbilities
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"shipBlueprintAbilities", "SHIP_BLUEPRINT_ABILITIES")]
-            
+
     // struct 0x80 System.Boolean showStatsValueDividedBy100
     // [MonoCollectorSearchFieldAttribute(typeof(System.Boolean),"showStatsValueDividedBy100", "SHOW_STATS_VALUE_DIVIDED_BY100")]
     public partial class ShipBlueprintItemData
-    { 
+    {
         //public const string Const_ImageName = "ProjectStar";
         //public static byte[] Static_ImageName { get; } = [80, 114, 111, 106, 101, 99, 116, 83, 116, 97, 114];
 
@@ -132,20 +132,20 @@ namespace Maple.CatQuest3
 
 
 
-                    
+
         /// <summary>
         /// class System.String objectIsNullMessage "The Object you want to instantiate is null."
         /// </summary>
         /// public const nint OBJECT_IS_NULL_MESSAGE=>"The Object you want to instantiate is null.";
-            
+
         /// <summary>
         /// class System.String cloneDestroyedMessage "Instantiate failed because the clone was destroyed during creati"
         /// </summary>
         /// public const nint CLONE_DESTROYED_MESSAGE=>"Instantiate failed because the clone was destroyed during creati";
-            
-        
 
-        
+
+
+
         [System.Runtime.InteropServices.StructLayoutAttribute(System.Runtime.InteropServices.LayoutKind.Sequential)]
         public readonly unsafe partial struct Ptr_ShipBlueprintItemData(nint ptr)
         {
@@ -154,8 +154,8 @@ namespace Maple.CatQuest3
             readonly nint _ptr = ptr;
             public static implicit operator Ptr_ShipBlueprintItemData(nint ptr) => new(ptr);
             public static implicit operator nint(Ptr_ShipBlueprintItemData obj) => obj._ptr;
-            public static implicit operator bool(Ptr_ShipBlueprintItemData obj)=> obj.Valid();
- 
+            public static implicit operator bool(Ptr_ShipBlueprintItemData obj) => obj.Valid();
+
             public override string ToString()
             {
                 return _ptr.ToString("X8");
@@ -170,11 +170,11 @@ namespace Maple.CatQuest3
 
     }
 
-        /// <summary>
-        /// ["ProjectStar".""."ShipBlueprintItemData"]
-        /// </summary>
-        public partial class ShipBlueprintItemData
-        {
+    /// <summary>
+    /// ["ProjectStar".""."ShipBlueprintItemData"]
+    /// </summary>
+    public partial class ShipBlueprintItemData
+    {
 
 
 
@@ -441,8 +441,8 @@ namespace Maple.CatQuest3
         /// </summary>
         /// <param name="itemLevel">struct System.Int32</param>
         /// <returns>class UnityEngine.Sprite</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetUIIconSprite")]
-        ///  extern nint GET_UI_ICON_SPRITE (System.Int32 itemLevel);
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetUIIconSprite", CallConvs = [typeof(CallConvCdecl)])]
+        extern nint GET_UI_ICON_SPRITE(System.Int32 itemLevel);
 
 
         /// <summary>
