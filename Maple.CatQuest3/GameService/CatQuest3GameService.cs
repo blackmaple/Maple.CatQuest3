@@ -89,9 +89,9 @@ namespace Maple.CatQuest3.GameService
             }
         }
         #region GameEnvironment
-        private Task<CatQuest3GameEnvironment> GetGameEnvironmentAsync()
+        private ValueTask<CatQuest3GameEnvironment> GetGameEnvironmentAsync()
         {
-            return this.MonoTaskAsync(p => p.GetGameEnvironment());
+            return this.UITaskAsync(p => p.GetGameEnvironment());
         }
         private async ValueTask<CatQuest3GameEnvironment> GetGameEnvironmentThrowIfErrorAsync()
         {
