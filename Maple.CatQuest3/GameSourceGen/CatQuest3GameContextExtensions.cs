@@ -185,7 +185,7 @@ namespace Maple.CatQuest3.GameSourceGen
                 }
 
 
-                var pIconData = unityEngine.ReadSprite2Png2(spriteData.Ptr_Sprite);
+                var pIconData = unityEngine.ReadSprite2Png(spriteData.Ptr_Sprite);
                 if (pIconData.Valid())
                 {
 

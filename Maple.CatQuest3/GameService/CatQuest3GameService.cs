@@ -1,25 +1,19 @@
 ﻿using Maple.CatQuest3.GameSourceGen;
-using Maple.GameContext;
 using Maple.MonoGameAssistant.Common;
 using Maple.MonoGameAssistant.Core;
+using Maple.MonoGameAssistant.GameContext;
 using Maple.MonoGameAssistant.GameDTO;
+using Maple.MonoGameAssistant.HotKey;
 using Maple.MonoGameAssistant.Model;
-using Maple.MonoGameAssistant.UnityCore;
+using Maple.MonoGameAssistant.UITask;
 using Maple.MonoGameAssistant.UnityCore.UnityEngine;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Maple.CatQuest3.GameService
 {
-    internal class CatQuest3GameService(
-        ILogger<CatQuest3GameService> logger,
-        MonoRuntimeContext runtimeContext,
-        MonoGameSettings gameSettings)
-        : GameService<CatQuest3GameContext>(logger, runtimeContext, gameSettings)
+
+        internal sealed partial class CatQuest3GameService(ILogger<CatQuest3GameService> logger, MonoRuntimeContext runtimeContext, MonoTaskScheduler monoTaskScheduler, HookWinMsgFactory hookWinMsgFactory, MonoGameSettings gameSettings)
+        : GameContextService<CatQuest3GameContext>(logger, runtimeContext, monoTaskScheduler, gameSettings, hookWinMsgFactory)
     {
         protected override CatQuest3GameContext LoadGameContext()
             => CatQuest3GameContext.LoadGameContext(this.RuntimeContext, MonoGameAssistant.MonoCollectorDataV2.EnumMonoCollectorTypeVersion.APP, Logger);
@@ -116,7 +110,7 @@ namespace Maple.CatQuest3.GameService
                 return GameException.Throw<GameSessionInfoDTO>($"{nameof(UnityEngineContext)} Is Null");
             }
             var datas = await this.MonoTaskAsync(p => p.LoadGameImageData().ToArray()).ConfigureAwait(false);
-            var imageDatas = await this.UnityTaskAsync((p, args) => p.GetListUnitySpriteImageData(args.UnityEngineContext, args.datas).ToArray(), (UnityEngineContext, datas)).ConfigureAwait(false);
+            var imageDatas = await this.UITaskAsync((p, args) => p.GetListUnitySpriteImageData(args.UnityEngineContext, args.datas).ToArray(), (UnityEngineContext, datas)).ConfigureAwait(false);
             foreach (var image in imageDatas)
             {
                 this.GameSettings.WriteImageFile(image.ImageData.AsReadOnlySpan(), image.Category, $"{image.Name}.png");
@@ -127,7 +121,7 @@ namespace Maple.CatQuest3.GameService
 
         public sealed override ValueTask<GameCurrencyDisplayDTO[]> GetListCurrencyDisplayAsync()
         {
-            var datas = this.GameContext.GetListGameCurrencyDisplay();
+            var datas = this.Context.GetListGameCurrencyDisplay();
             this.UpdateListGameImage(datas);
             return ValueTask.FromResult(datas);
         }
@@ -165,7 +159,7 @@ namespace Maple.CatQuest3.GameService
 
         public sealed override ValueTask<GameSwitchDisplayDTO[]> GetListSwitchDisplayAsync()
         {
-            return ValueTask.FromResult(this.GameContext.GetListGameSwitchDisplay());
+            return ValueTask.FromResult(this.Context.GetListGameSwitchDisplay());
         }
         public sealed override async ValueTask<GameSwitchDisplayDTO> UpdateSwitchDisplayAsync(GameSwitchModifyDTO switchModifyDTO)
         {

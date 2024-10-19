@@ -1,8 +1,5 @@
-﻿using Maple.CatQuest3.GameModel.Data;
-using Maple.MonoGameAssistant.Core;
+﻿using Maple.MonoGameAssistant.Core;
 using Maple.MonoGameAssistant.GameDTO;
-using Maple.MonoGameAssistant.RawDotNet;
-using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
 
 namespace Maple.CatQuest3.GameSourceGen
