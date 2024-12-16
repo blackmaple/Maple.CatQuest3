@@ -1,30 +1,28 @@
-﻿using Maple.CatQuest3.GameSourceGen;
-using Maple.GameContext;
+﻿using Maple.CatQuest3.Metadata.GameSourceGen;
 using Maple.MonoGameAssistant.Common;
 using Maple.MonoGameAssistant.Core;
 using Maple.MonoGameAssistant.GameDTO;
 using Maple.MonoGameAssistant.Model;
 using Maple.MonoGameAssistant.UnityCore;
 using Maple.MonoGameAssistant.UnityCore.UnityEngine;
+using Maple.MonoGameAssistant.Windows.HotKey.HookWindowMessage;
+using Maple.MonoGameAssistant.Windows.Service;
+using Maple.MonoGameAssistant.Windows.UITask;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Maple.CatQuest3.GameService
 {
-    internal class CatQuest3GameService(
-        ILogger<CatQuest3GameService> logger,
-        MonoRuntimeContext runtimeContext,
-        MonoGameSettings gameSettings)
-        : GameService<CatQuest3GameContext>(logger, runtimeContext, gameSettings)
+
+
+    internal sealed partial class CatQuest3GameService(ILogger<CatQuest3GameService> logger, MonoRuntimeContext runtimeContext, MonoTaskScheduler monoTaskScheduler, MonoGameSettings gameSettings, HookWinMsgFactory hookWinMsgFactory)
+    : GameContextService<CatQuest3GameContext>(logger, runtimeContext, monoTaskScheduler, gameSettings, hookWinMsgFactory)
+
+
     {
         protected override CatQuest3GameContext LoadGameContext()
             => CatQuest3GameContext.LoadGameContext(this.RuntimeContext, MonoGameAssistant.MonoCollectorDataV2.EnumMonoCollectorTypeVersion.APP, Logger);
         protected override UnityEngineContext? LoadUnityEngineContext()
-            => new UnityEngineContext_CatQuest3(this.RuntimeContext, this.Logger);
+            => UnityEngineContext_CatQuest3.Create(this.RuntimeContext, this.Logger);
 
 
 
@@ -116,7 +114,7 @@ namespace Maple.CatQuest3.GameService
                 return GameException.Throw<GameSessionInfoDTO>($"{nameof(UnityEngineContext)} Is Null");
             }
             var datas = await this.MonoTaskAsync(p => p.LoadGameImageData().ToArray()).ConfigureAwait(false);
-            var imageDatas = await this.UnityTaskAsync((p, args) => p.GetListUnitySpriteImageData(args.UnityEngineContext, args.datas).ToArray(), (UnityEngineContext, datas)).ConfigureAwait(false);
+            var imageDatas = await this.UITaskAsync((p, args) => p.GetListUnitySpriteImageData(args.UnityEngineContext, args.datas).ToArray(), (UnityEngineContext, datas)).ConfigureAwait(false);
             foreach (var image in imageDatas)
             {
                 this.GameSettings.WriteImageFile(image.ImageData.AsReadOnlySpan(), image.Category, $"{image.Name}.png");
@@ -125,9 +123,14 @@ namespace Maple.CatQuest3.GameService
             return await this.GetSessionInfoAsync().ConfigureAwait(false);
         }
 
+        //private async Task<IEnumerable<object>> UnityTaskAsync(Func<object, object, UnitySpriteImageData[]> value1, (UnityEngineContext UnityEngineContext, GameImageData[] datas) value2)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
         public sealed override ValueTask<GameCurrencyDisplayDTO[]> GetListCurrencyDisplayAsync()
         {
-            var datas = this.GameContext.GetListGameCurrencyDisplay();
+            var datas = this.Context.GetListGameCurrencyDisplay();
             this.UpdateListGameImage(datas);
             return ValueTask.FromResult(datas);
         }
@@ -146,7 +149,7 @@ namespace Maple.CatQuest3.GameService
         public sealed override async ValueTask<GameInventoryDisplayDTO[]> GetListInventoryDisplayAsync()
         {
             var gameEnvironment = await this.GetGameEnvironmentAsync().ConfigureAwait(false);
-            var datas= await this.MonoTaskAsync((p, args) => p.GetListGameInventoryDisplay(args).ToArray(), gameEnvironment).ConfigureAwait(false);
+            var datas = await this.MonoTaskAsync((p, args) => p.GetListGameInventoryDisplay(args).ToArray(), gameEnvironment).ConfigureAwait(false);
             this.UpdateListGameImage(datas);
             return datas;
         }
@@ -165,7 +168,7 @@ namespace Maple.CatQuest3.GameService
 
         public sealed override ValueTask<GameSwitchDisplayDTO[]> GetListSwitchDisplayAsync()
         {
-            return ValueTask.FromResult(this.GameContext.GetListGameSwitchDisplay());
+            return ValueTask.FromResult(this.Context.GetListGameSwitchDisplay());
         }
         public sealed override async ValueTask<GameSwitchDisplayDTO> UpdateSwitchDisplayAsync(GameSwitchModifyDTO switchModifyDTO)
         {

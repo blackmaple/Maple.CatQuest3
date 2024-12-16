@@ -1,40 +1,37 @@
-﻿using Maple.CatQuest3.GameModel.Data;
-using Maple.MonoGameAssistant.Core;
+﻿using Maple.MonoGameAssistant.Core;
 using Maple.MonoGameAssistant.GameDTO;
-using Maple.MonoGameAssistant.RawDotNet;
-using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
 
-namespace Maple.CatQuest3.GameSourceGen
+namespace Maple.CatQuest3.Metadata.GameSourceGen
 {
-    internal class CatQuest3GameEnvironment
+    public class CatQuest3GameEnvironment
     {
         public CatQuest3GameEnvironment(CatQuest3GameContext @this)
         {
-            this.CatQuest3GameContext = @this;
+            CatQuest3GameContext = @this;
             var contexts = @this.Contexts.SHARED_INSTANCE;
             if (contexts)
             {
-                this.Ptr_GameContext = contexts.GAME;
-                this.Ptr_GameStateContext = contexts.GAME_STATE;
-                this.Ptr_GUIContext = contexts.G_UI;
-                this.Ptr_InputContext = contexts.INPUT;
-                this.Ptr_FrameworkContext = contexts.FRAMEWORK;
-                this.Ptr_WorldContext = contexts.WORLD;
+                Ptr_GameContext = contexts.GAME;
+                Ptr_GameStateContext = contexts.GAME_STATE;
+                Ptr_GUIContext = contexts.G_UI;
+                Ptr_InputContext = contexts.INPUT;
+                Ptr_FrameworkContext = contexts.FRAMEWORK;
+                Ptr_WorldContext = contexts.WORLD;
 
 
 
 
 
                 //last set
-                this.Ptr_Contexts = contexts;
+                Ptr_Contexts = contexts;
 
             }
-            this.Ptr_EquipmentDatabase = @this.EquipmentDatabase._INSTANCE;
-            this.Ptr_ShipBlueprintDatabase = @this.ShipBlueprintDatabase._INSTANCE;
-            this.Ptr_SpellConfigDatabase = @this.SpellConfigDatabase._INSTANCE;
-            this.Ptr_ControllerManager = @this.ControllerManager._INSTANCE;
-            this.Ptr_CombatTextDatabase = @this.CombatTextDatabase._INSTANCE;
+            Ptr_EquipmentDatabase = @this.EquipmentDatabase._INSTANCE;
+            Ptr_ShipBlueprintDatabase = @this.ShipBlueprintDatabase._INSTANCE;
+            Ptr_SpellConfigDatabase = @this.SpellConfigDatabase._INSTANCE;
+            Ptr_ControllerManager = @this.ControllerManager._INSTANCE;
+            Ptr_CombatTextDatabase = @this.CombatTextDatabase._INSTANCE;
         }
         public CatQuest3GameContext CatQuest3GameContext { get; }
 
@@ -71,7 +68,7 @@ namespace Maple.CatQuest3.GameSourceGen
         {
             Unsafe.SkipInit(out zoneType);
 
-            var worldEntity = this.Ptr_WorldContext.GET_CURRENT_ZONE_ENTITY();
+            var worldEntity = Ptr_WorldContext.GET_CURRENT_ZONE_ENTITY();
             if (worldEntity)
             {
                 var currentZoneComponent = worldEntity.GET_CURRENT_ZONE();
@@ -98,46 +95,46 @@ namespace Maple.CatQuest3.GameSourceGen
         }
 
 
-        public nint CreateAddEquipmentCommand(nint data, System.Int32 level, out System.Int32 prevLevel, out System.Int32 newLevel)
+        public nint CreateAddEquipmentCommand(nint data, int level, out int prevLevel, out int newLevel)
         {
-            return GameContextExtensions.Ptr_GameContextExtensions.CREATE_ADD_EQUIPMENT_COMMAND(this.Ptr_GameContext, data, level, out prevLevel, out newLevel);
+            return GameContextExtensions.Ptr_GameContextExtensions.CREATE_ADD_EQUIPMENT_COMMAND(Ptr_GameContext, data, level, out prevLevel, out newLevel);
         }
-        public nint CreateAddNewShipSpellCommand(nint data, out nint newSpellConfig, out System.Int32 prevLevel, out System.Int32 newLevel, out System.Boolean success)
+        public nint CreateAddNewShipSpellCommand(nint data, out nint newSpellConfig, out int prevLevel, out int newLevel, out bool success)
         {
-            return GameContextExtensions.Ptr_GameContextExtensions.CREATE_ADD_NEW_SHIP_SPELL_COMMAND(this.Ptr_GameContext, data, out newSpellConfig, out prevLevel, out newLevel, out success);
+            return GameContextExtensions.Ptr_GameContextExtensions.CREATE_ADD_NEW_SHIP_SPELL_COMMAND(Ptr_GameContext, data, out newSpellConfig, out prevLevel, out newLevel, out success);
         }
-        public nint CreateAddNewSpellCommand(nint data, out nint newSpellConfig, out System.Boolean success)
+        public nint CreateAddNewSpellCommand(nint data, out nint newSpellConfig, out bool success)
         {
-            return GameContextExtensions.Ptr_GameContextExtensions.CREATE_ADD_NEW_SPELL_COMMAND(this.Ptr_GameContext, data, out newSpellConfig, out success);
+            return GameContextExtensions.Ptr_GameContextExtensions.CREATE_ADD_NEW_SPELL_COMMAND(Ptr_GameContext, data, out newSpellConfig, out success);
         }
-        public nint CreateAddShipBlueprintCommand(nint data, out System.Boolean success)
+        public nint CreateAddShipBlueprintCommand(nint data, out bool success)
         {
-            return GameContextExtensions.Ptr_GameContextExtensions.CREATE_ADD_SHIP_BLUEPRINT_COMMAND(this.Ptr_GameContext, data, out success);
+            return GameContextExtensions.Ptr_GameContextExtensions.CREATE_ADD_SHIP_BLUEPRINT_COMMAND(Ptr_GameContext, data, out success);
         }
 
         public GameEntity.Ptr_GameEntity GetEntityWithPlayerId(int index)
         {
-            return ContextsExtensions.Ptr_ContextsExtensions.GET_ENTITY_WITH_PLAYER_ID(this.Ptr_GameContext, index);
+            return ContextsExtensions.Ptr_ContextsExtensions.GET_ENTITY_WITH_PLAYER_ID(Ptr_GameContext, index);
         }
 
         public void CreateSpawnTextEvent(in REF_MONO_VECTOR3 position, string msg)
         {
-            using var gc_msg = this.CatQuest3GameContext.T2(msg);
-            var saveStoneHealText = this.Ptr_CombatTextDatabase.SAVE_STONE_HEAL_TEXT;
-            GameContextExtensions.Ptr_GameContextExtensions.CREATE_SPAWN_TEXT_EVENT(this.Ptr_GameContext, position, gc_msg, saveStoneHealText);
+            using var gc_msg = CatQuest3GameContext.T2(msg);
+            var saveStoneHealText = Ptr_CombatTextDatabase.SAVE_STONE_HEAL_TEXT;
+            GameContextExtensions.Ptr_GameContextExtensions.CREATE_SPAWN_TEXT_EVENT(Ptr_GameContext, position, gc_msg, saveStoneHealText);
         }
         public void CreateSpawnTextEvent_Heal(in REF_MONO_VECTOR3 position, string msg)
         {
-            using var gc_msg = this.CatQuest3GameContext.T2(msg);
-            var saveStoneHealText = this.Ptr_CombatTextDatabase.SAVE_STONE_HEAL_TEXT;
-            GameContextExtensions.Ptr_GameContextExtensions.CREATE_SPAWN_TEXT_EVENT(this.Ptr_GameContext, position, gc_msg, saveStoneHealText);
+            using var gc_msg = CatQuest3GameContext.T2(msg);
+            var saveStoneHealText = Ptr_CombatTextDatabase.SAVE_STONE_HEAL_TEXT;
+            GameContextExtensions.Ptr_GameContextExtensions.CREATE_SPAWN_TEXT_EVENT(Ptr_GameContext, position, gc_msg, saveStoneHealText);
         }
 
         public void CreateSpawnTextEvent_Kill(in REF_MONO_VECTOR3 position, string msg)
         {
-            using var gc_msg = this.CatQuest3GameContext.T2(msg);
-            var saveStoneHealText = this.Ptr_CombatTextDatabase.DAMAGE_TAKEN_TEXT_ANIMATION;
-            GameContextExtensions.Ptr_GameContextExtensions.CREATE_SPAWN_TEXT_EVENT(this.Ptr_GameContext, position, gc_msg, saveStoneHealText);
+            using var gc_msg = CatQuest3GameContext.T2(msg);
+            var saveStoneHealText = Ptr_CombatTextDatabase.DAMAGE_TAKEN_TEXT_ANIMATION;
+            GameContextExtensions.Ptr_GameContextExtensions.CREATE_SPAWN_TEXT_EVENT(Ptr_GameContext, position, gc_msg, saveStoneHealText);
         }
 
         public bool TryShowMessage(string? str)
@@ -146,24 +143,24 @@ namespace Maple.CatQuest3.GameSourceGen
             {
                 return default;
             }
-            var isShowing = this.Ptr_GUIContext.GET_MESSAGE_PANEL_ENTITY().GET_U_I_PANEL_DISPLAY_STATUS().IS_SHOWING;
+            var isShowing = Ptr_GUIContext.GET_MESSAGE_PANEL_ENTITY().GET_U_I_PANEL_DISPLAY_STATUS().IS_SHOWING;
             if (isShowing)
             {
                 return default; ;
             }
-            var msgPanel = this.Ptr_GUIContext.GET_MESSAGE_PANEL().VALUE;
+            var msgPanel = Ptr_GUIContext.GET_MESSAGE_PANEL().VALUE;
             if (msgPanel.Valid() == false)
             {
                 return default;
             }
-            using var gc_msg = this.CatQuest3GameContext.T2(str);
+            using var gc_msg = CatQuest3GameContext.T2(str);
             var msg = gc_msg.Target;
 
-            using var gc_line = this.CatQuest3GameContext.Line.GCNew<Line.Ptr_Line>(true);
+            using var gc_line = CatQuest3GameContext.Line.GCNew<Line.Ptr_Line>(true);
             var line = gc_line.Target;
             line.CONTENT = msg;
 
-            using var gc_msgUIInfo = this.CatQuest3GameContext.MessageUIInfo.GCNew<MessageUIInfo.Ptr_MessageUIInfo>(true);
+            using var gc_msgUIInfo = CatQuest3GameContext.MessageUIInfo.GCNew<MessageUIInfo.Ptr_MessageUIInfo>(true);
             var msgUIInfo = gc_msgUIInfo.Target;
             msgUIInfo.CONTENT_MESSAGE = line;
 

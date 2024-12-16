@@ -1,9 +1,8 @@
 ﻿using Maple.MonoGameAssistant.Core;
 using Maple.MonoGameAssistant.MonoCollector;
 using Maple.MonoGameAssistant.MonoCollectorDataV2;
-using Microsoft.Extensions.Logging;
 
-namespace Maple.CatQuest3.GameSourceGen
+namespace Maple.CatQuest3.Metadata.GameSourceGen
 {
 
     [MonoCollectorOptions(
@@ -115,9 +114,9 @@ typeof(MonoCollectorClassInfo)
     [MonoCollectorType(typeof(GUIMatcher))]
     [MonoCollectorType(typeof(MapIconComponent))]
 
-    
 
-    internal partial class CatQuest3GameContext
+
+    public partial class CatQuest3GameContext
     {
         //public CatQuest3GameContext(MonoRuntimeContext monoRuntimeContext, ILogger logger) : base(monoRuntimeContext, EnumMonoCollectorTypeVersion.APP, logger, "20")
         //{

@@ -1,26 +1,20 @@
 
 using Maple.MonoGameAssistant.Core;
 using Maple.MonoGameAssistant.MonoCollectorDataV2;
-using Maple.MonoGameAssistant.RawDotNet;
 using Maple.MonoGameAssistant.UnityCore.UnityEngine;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Maple.CatQuest3
 {
 
 
     /// <summary>
-    /// class ["ProjectStar"."ProjectStar.Data"."EquipmentItemData"]
-    /// [GenericDatabaseEntry]=>[UnityEngine.ScriptableObject]=>[UnityEngine.Object]=>[System.Object]
-    /// [ProjectStar.Localization.ILocalizableData]
+    /// class ["ProjectStar".""."ShipBlueprintItemData"]
+    /// [ProjectStar.Data.EquipmentItemData]=>[GenericDatabaseEntry]=>[UnityEngine.ScriptableObject]=>[UnityEngine.Object]=>[System.Object]
+    /// 
     /// </summary>
-    //[Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorSettingsAttribute([80, 114, 111, 106, 101, 99, 116, 83, 116, 97, 114], 0x02000A66U)]
-    [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorSettingsAttribute([80, 114, 111, 106, 101, 99, 116, 83, 116, 97, 114], [80, 114, 111, 106, 101, 99, 116, 83, 116, 97, 114, 46, 68, 97, 116, 97], [69, 113, 117, 105, 112, 109, 101, 110, 116, 73, 116, 101, 109, 68, 97, 116, 97])]
+    //[Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorSettingsAttribute([80, 114, 111, 106, 101, 99, 116, 83, 116, 97, 114], 0x020001B7U)]
+    [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorSettingsAttribute([80, 114, 111, 106, 101, 99, 116, 83, 116, 97, 114], [], [83, 104, 105, 112, 66, 108, 117, 101, 112, 114, 105, 110, 116, 73, 116, 101, 109, 68, 97, 116, 97])]
 
     //  struct static System.Int32 OffsetOfInstanceIDInCPlusPlusObject
     //  [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"OffsetOfInstanceIDInCPlusPlusObject", "OFFSET_OF_INSTANCE_ID_IN_C_PLUS_PLUS_OBJECT", true)]
@@ -35,10 +29,10 @@ namespace Maple.CatQuest3
     [MonoCollectorSearchFieldAttribute(typeof(Sprite.Ptr_Sprite), "icon", "ICON")]
 
     // class 0x14 System.String setName
-    [MonoCollectorSearchFieldAttribute(typeof(PMonoString), "setName", "SET_NAME")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"setName", "SET_NAME")]
 
     // class 0x18 System.String itemName
-    [MonoCollectorSearchFieldAttribute(typeof(PMonoString), "itemName", "ITEM_NAME")]
+    [MonoCollectorSearchFieldAttribute(typeof(nint), "itemName", "ITEM_NAME")]
 
     // class 0x1C ProjectStar.Data.EquipmentSkinData skinData
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"skinData", "SKIN_DATA")]
@@ -71,10 +65,10 @@ namespace Maple.CatQuest3
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"abilities", "ABILITIES")]
 
     // class 0x44 System.String itemNameTerm
-    [MonoCollectorSearchFieldAttribute(typeof(PMonoString), "itemNameTerm", "ITEM_NAME_TERM")]
+    [MonoCollectorSearchFieldAttribute(typeof(nint), "itemNameTerm", "ITEM_NAME_TERM")]
 
     // class 0x48 System.String itemDescriptionTerm
-    [MonoCollectorSearchFieldAttribute(typeof(PMonoString), "itemDescriptionTerm", "ITEM_DESCRIPTION_TERM")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"itemDescriptionTerm", "ITEM_DESCRIPTION_TERM")]
 
     // enum 0x4C ProjectStar.Data.EquipmentPartType partType
     [MonoCollectorSearchFieldAttribute(typeof(EquipmentPartType), "partType", "PART_TYPE")]
@@ -108,18 +102,27 @@ namespace Maple.CatQuest3
 
     // struct 0x74 System.Int32 specialGunAmmoBoost
     // [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"specialGunAmmoBoost", "SPECIAL_GUN_AMMO_BOOST")]
-    public partial class EquipmentItemData
+
+    // class 0x78 UnityEngine.Sprite UIIcon
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"UIIcon", "UI_ICON")]
+
+    // class 0x7C System.Collections.Generic.List<ShipBlueprintAbility> shipBlueprintAbilities
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"shipBlueprintAbilities", "SHIP_BLUEPRINT_ABILITIES")]
+
+    // struct 0x80 System.Boolean showStatsValueDividedBy100
+    // [MonoCollectorSearchFieldAttribute(typeof(System.Boolean),"showStatsValueDividedBy100", "SHOW_STATS_VALUE_DIVIDED_BY100")]
+    public partial class ShipBlueprintItemData
     {
         //public const string Const_ImageName = "ProjectStar";
         //public static byte[] Static_ImageName { get; } = [80, 114, 111, 106, 101, 99, 116, 83, 116, 97, 114];
 
-        //public const string Const_Namespace = "ProjectStar.Data";
-        //public static byte[] Static_Namespace { get; } = [80, 114, 111, 106, 101, 99, 116, 83, 116, 97, 114, 46, 68, 97, 116, 97];
+        //public const string Const_Namespace = "";
+        //public static byte[] Static_Namespace { get; } = [];
 
-        //public const string Const_ClassName = "EquipmentItemData";
-        //public static byte[] Static_ClassName { get; } = [69, 113, 117, 105, 112, 109, 101, 110, 116, 73, 116, 101, 109, 68, 97, 116, 97];
+        //public const string Const_ClassName = "ShipBlueprintItemData";
+        //public static byte[] Static_ClassName { get; } = [83, 104, 105, 112, 66, 108, 117, 101, 112, 114, 105, 110, 116, 73, 116, 101, 109, 68, 97, 116, 97];
 
-        //public const uint Const_TypeToken = 0x02000A66U;
+        //public const uint Const_TypeToken = 0x020001B7U;
 
 
 
@@ -138,14 +141,14 @@ namespace Maple.CatQuest3
 
 
         [System.Runtime.InteropServices.StructLayoutAttribute(System.Runtime.InteropServices.LayoutKind.Sequential)]
-        public readonly unsafe partial struct Ptr_EquipmentItemData(nint ptr)
+        public readonly unsafe partial struct Ptr_ShipBlueprintItemData(nint ptr)
         {
 
             [System.Runtime.InteropServices.MarshalAsAttribute(System.Runtime.InteropServices.UnmanagedType.SysInt)]
             readonly nint _ptr = ptr;
-            public static implicit operator Ptr_EquipmentItemData(nint ptr) => new(ptr);
-            public static implicit operator nint(Ptr_EquipmentItemData obj) => obj._ptr;
-            public static implicit operator bool(Ptr_EquipmentItemData obj) => obj.Valid();
+            public static implicit operator Ptr_ShipBlueprintItemData(nint ptr) => new(ptr);
+            public static implicit operator nint(Ptr_ShipBlueprintItemData obj) => obj._ptr;
+            public static implicit operator bool(Ptr_ShipBlueprintItemData obj) => obj.Valid();
 
             public override string ToString()
             {
@@ -162,9 +165,9 @@ namespace Maple.CatQuest3
     }
 
     /// <summary>
-    /// ["ProjectStar"."ProjectStar.Data"."EquipmentItemData"]
+    /// ["ProjectStar".""."ShipBlueprintItemData"]
     /// </summary>
-    public partial class EquipmentItemData
+    public partial class ShipBlueprintItemData
     {
 
 
@@ -367,16 +370,6 @@ namespace Maple.CatQuest3
         /// <returns>struct System.IntPtr</returns>
         /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetCachedPtr")]
         ///  extern System.IntPtr GET_CACHED_PTR ();
-
-
-        /// <summary>
-        ///   System.ValueTuple<System.String,System.String> GetDescription(System.Int32 itemLevel, System.Int32& parameterValue)
-        /// </summary>
-        /// <param name="itemLevel">struct System.Int32</param>
-        /// <param name="parameterValue">struct System.Int32&</param>
-        /// <returns>struct System.ValueTuple<System.String,System.String></returns>
-        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetDescription", CallConvs = [typeof(CallConvCdecl)])]
-        extern void GET_DESCRIPTION(out REF_MONO_VALUETUPLE<PMonoString, PMonoString> desc, System.Int32 itemLevel, out System.Int32 parameterValue);
 
 
         /// <summary>
@@ -637,14 +630,6 @@ namespace Maple.CatQuest3
 
 
         /// <summary>
-        ///   System.Boolean ShowInspectorAsEquipmentItem()
-        /// </summary>
-        /// <returns>struct System.Boolean</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("ShowInspectorAsEquipmentItem")]
-        ///  extern System.Boolean SHOW_INSPECTOR_AS_EQUIPMENT_ITEM ();
-
-
-        /// <summary>
         ///   System.Boolean TryGetNearestAbilityThresholdLevel(LevelValueGauge level, System.Int32& nextThreshold)
         /// </summary>
         /// <param name="level">class LevelValueGauge</param>
@@ -659,7 +644,7 @@ namespace Maple.CatQuest3
         ///   System.Void .ctor()
         /// </summary>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute(".ctor", Search = typeof(Search_EquipmentItemData))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute(".ctor", Search = typeof(Search_ShipBlueprintItemData))]
         ///  extern void .CTOR_00 ();
 
 
@@ -667,7 +652,7 @@ namespace Maple.CatQuest3
         ///   System.Void .ctor()
         /// </summary>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute(".ctor", Search = typeof(Search_EquipmentItemData))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute(".ctor", Search = typeof(Search_ShipBlueprintItemData))]
         ///  extern void .CTOR_01 ();
 
 
@@ -675,7 +660,7 @@ namespace Maple.CatQuest3
         ///   System.Void .ctor()
         /// </summary>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute(".ctor", Search = typeof(Search_EquipmentItemData))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute(".ctor", Search = typeof(Search_ShipBlueprintItemData))]
         ///  extern void .CTOR_02 ();
 
 
@@ -683,8 +668,16 @@ namespace Maple.CatQuest3
         ///   System.Void .ctor()
         /// </summary>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute(".ctor", Search = typeof(Search_EquipmentItemData))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute(".ctor", Search = typeof(Search_ShipBlueprintItemData))]
         ///  extern void .CTOR_03 ();
+
+
+        /// <summary>
+        ///   System.Void .ctor()
+        /// </summary>
+        /// <returns>struct System.Void</returns>
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute(".ctor", Search = typeof(Search_ShipBlueprintItemData))]
+        ///  extern void .CTOR_04 ();
 
 
         /// <summary>
@@ -692,7 +685,7 @@ namespace Maple.CatQuest3
         /// </summary>
         /// <param name="className">class System.String</param>
         /// <returns>class UnityEngine.ScriptableObject</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("CreateInstance", Search = typeof(Search_EquipmentItemData))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("CreateInstance", Search = typeof(Search_ShipBlueprintItemData))]
         /// static extern nint CREATE_INSTANCE_00 (nint className);
 
 
@@ -701,7 +694,7 @@ namespace Maple.CatQuest3
         /// </summary>
         /// <param name="type">abstract class System.Type</param>
         /// <returns>class UnityEngine.ScriptableObject</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("CreateInstance", Search = typeof(Search_EquipmentItemData))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("CreateInstance", Search = typeof(Search_ShipBlueprintItemData))]
         /// static extern nint CREATE_INSTANCE_01 (nint type);
 
 
@@ -709,7 +702,7 @@ namespace Maple.CatQuest3
         /// static  T CreateInstance()
         /// </summary>
         /// <returns>class T</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("CreateInstance", Search = typeof(Search_EquipmentItemData))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("CreateInstance", Search = typeof(Search_ShipBlueprintItemData))]
         /// static extern nint CREATE_INSTANCE_02 ();
 
 
@@ -719,7 +712,7 @@ namespace Maple.CatQuest3
         /// <param name="type">abstract class System.Type</param>
         /// <param name="initialize">class System.Action<UnityEngine.ScriptableObject></param>
         /// <returns>class UnityEngine.ScriptableObject</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("CreateInstance", Search = typeof(Search_EquipmentItemData))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("CreateInstance", Search = typeof(Search_ShipBlueprintItemData))]
         /// static extern nint CREATE_INSTANCE_03 (nint type, nint initialize);
 
 
@@ -729,7 +722,7 @@ namespace Maple.CatQuest3
         /// <param name="obj">class UnityEngine.Object</param>
         /// <param name="t">struct System.Single</param>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Destroy", Search = typeof(Search_EquipmentItemData))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Destroy", Search = typeof(Search_ShipBlueprintItemData))]
         /// static extern void DESTROY_00 (nint obj, System.Single t);
 
 
@@ -738,7 +731,7 @@ namespace Maple.CatQuest3
         /// </summary>
         /// <param name="obj">class UnityEngine.Object</param>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Destroy", Search = typeof(Search_EquipmentItemData))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Destroy", Search = typeof(Search_ShipBlueprintItemData))]
         /// static extern void DESTROY_01 (nint obj);
 
 
@@ -748,7 +741,7 @@ namespace Maple.CatQuest3
         /// <param name="obj">class UnityEngine.Object</param>
         /// <param name="allowDestroyingAssets">struct System.Boolean</param>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("DestroyImmediate", Search = typeof(Search_EquipmentItemData))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("DestroyImmediate", Search = typeof(Search_ShipBlueprintItemData))]
         /// static extern void DESTROY_IMMEDIATE_00 (nint obj, System.Boolean allowDestroyingAssets);
 
 
@@ -757,7 +750,7 @@ namespace Maple.CatQuest3
         /// </summary>
         /// <param name="obj">class UnityEngine.Object</param>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("DestroyImmediate", Search = typeof(Search_EquipmentItemData))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("DestroyImmediate", Search = typeof(Search_ShipBlueprintItemData))]
         /// static extern void DESTROY_IMMEDIATE_01 (nint obj);
 
 
@@ -767,7 +760,7 @@ namespace Maple.CatQuest3
         /// <param name="obj">class UnityEngine.Object</param>
         /// <param name="t">struct System.Single</param>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("DestroyObject", Search = typeof(Search_EquipmentItemData))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("DestroyObject", Search = typeof(Search_ShipBlueprintItemData))]
         /// static extern void DESTROY_OBJECT_00 (nint obj, System.Single t);
 
 
@@ -776,7 +769,7 @@ namespace Maple.CatQuest3
         /// </summary>
         /// <param name="obj">class UnityEngine.Object</param>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("DestroyObject", Search = typeof(Search_EquipmentItemData))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("DestroyObject", Search = typeof(Search_ShipBlueprintItemData))]
         /// static extern void DESTROY_OBJECT_01 (nint obj);
 
 
@@ -784,7 +777,7 @@ namespace Maple.CatQuest3
         /// static  T FindAnyObjectByType()
         /// </summary>
         /// <returns>class T</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindAnyObjectByType", Search = typeof(Search_EquipmentItemData))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindAnyObjectByType", Search = typeof(Search_ShipBlueprintItemData))]
         /// static extern nint FIND_ANY_OBJECT_BY_TYPE_00 ();
 
 
@@ -793,7 +786,7 @@ namespace Maple.CatQuest3
         /// </summary>
         /// <param name="findObjectsInactive">enum UnityEngine.FindObjectsInactive</param>
         /// <returns>class T</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindAnyObjectByType", Search = typeof(Search_EquipmentItemData))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindAnyObjectByType", Search = typeof(Search_ShipBlueprintItemData))]
         /// static extern nint FIND_ANY_OBJECT_BY_TYPE_01 (UnityEngine.FindObjectsInactive findObjectsInactive);
 
 
@@ -802,7 +795,7 @@ namespace Maple.CatQuest3
         /// </summary>
         /// <param name="type">abstract class System.Type</param>
         /// <returns>class UnityEngine.Object</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindAnyObjectByType", Search = typeof(Search_EquipmentItemData))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindAnyObjectByType", Search = typeof(Search_ShipBlueprintItemData))]
         /// static extern nint FIND_ANY_OBJECT_BY_TYPE_02 (nint type);
 
 
@@ -812,7 +805,7 @@ namespace Maple.CatQuest3
         /// <param name="type">abstract class System.Type</param>
         /// <param name="findObjectsInactive">enum UnityEngine.FindObjectsInactive</param>
         /// <returns>class UnityEngine.Object</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindAnyObjectByType", Search = typeof(Search_EquipmentItemData))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindAnyObjectByType", Search = typeof(Search_ShipBlueprintItemData))]
         /// static extern nint FIND_ANY_OBJECT_BY_TYPE_03 (nint type, UnityEngine.FindObjectsInactive findObjectsInactive);
 
 
@@ -820,7 +813,7 @@ namespace Maple.CatQuest3
         /// static  T FindFirstObjectByType()
         /// </summary>
         /// <returns>class T</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindFirstObjectByType", Search = typeof(Search_EquipmentItemData))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindFirstObjectByType", Search = typeof(Search_ShipBlueprintItemData))]
         /// static extern nint FIND_FIRST_OBJECT_BY_TYPE_00 ();
 
 
@@ -829,7 +822,7 @@ namespace Maple.CatQuest3
         /// </summary>
         /// <param name="findObjectsInactive">enum UnityEngine.FindObjectsInactive</param>
         /// <returns>class T</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindFirstObjectByType", Search = typeof(Search_EquipmentItemData))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindFirstObjectByType", Search = typeof(Search_ShipBlueprintItemData))]
         /// static extern nint FIND_FIRST_OBJECT_BY_TYPE_01 (UnityEngine.FindObjectsInactive findObjectsInactive);
 
 
@@ -838,7 +831,7 @@ namespace Maple.CatQuest3
         /// </summary>
         /// <param name="type">abstract class System.Type</param>
         /// <returns>class UnityEngine.Object</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindFirstObjectByType", Search = typeof(Search_EquipmentItemData))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindFirstObjectByType", Search = typeof(Search_ShipBlueprintItemData))]
         /// static extern nint FIND_FIRST_OBJECT_BY_TYPE_02 (nint type);
 
 
@@ -848,7 +841,7 @@ namespace Maple.CatQuest3
         /// <param name="type">abstract class System.Type</param>
         /// <param name="findObjectsInactive">enum UnityEngine.FindObjectsInactive</param>
         /// <returns>class UnityEngine.Object</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindFirstObjectByType", Search = typeof(Search_EquipmentItemData))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindFirstObjectByType", Search = typeof(Search_ShipBlueprintItemData))]
         /// static extern nint FIND_FIRST_OBJECT_BY_TYPE_03 (nint type, UnityEngine.FindObjectsInactive findObjectsInactive);
 
 
@@ -856,7 +849,7 @@ namespace Maple.CatQuest3
         /// static  T FindObjectOfType()
         /// </summary>
         /// <returns>class T</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectOfType", Search = typeof(Search_EquipmentItemData))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectOfType", Search = typeof(Search_ShipBlueprintItemData))]
         /// static extern nint FIND_OBJECT_OF_TYPE_00 ();
 
 
@@ -865,7 +858,7 @@ namespace Maple.CatQuest3
         /// </summary>
         /// <param name="includeInactive">struct System.Boolean</param>
         /// <returns>class T</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectOfType", Search = typeof(Search_EquipmentItemData))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectOfType", Search = typeof(Search_ShipBlueprintItemData))]
         /// static extern nint FIND_OBJECT_OF_TYPE_01 (System.Boolean includeInactive);
 
 
@@ -874,7 +867,7 @@ namespace Maple.CatQuest3
         /// </summary>
         /// <param name="type">abstract class System.Type</param>
         /// <returns>class UnityEngine.Object</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectOfType", Search = typeof(Search_EquipmentItemData))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectOfType", Search = typeof(Search_ShipBlueprintItemData))]
         /// static extern nint FIND_OBJECT_OF_TYPE_02 (nint type);
 
 
@@ -884,7 +877,7 @@ namespace Maple.CatQuest3
         /// <param name="type">abstract class System.Type</param>
         /// <param name="includeInactive">struct System.Boolean</param>
         /// <returns>class UnityEngine.Object</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectOfType", Search = typeof(Search_EquipmentItemData))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectOfType", Search = typeof(Search_ShipBlueprintItemData))]
         /// static extern nint FIND_OBJECT_OF_TYPE_03 (nint type, System.Boolean includeInactive);
 
 
@@ -894,7 +887,7 @@ namespace Maple.CatQuest3
         /// <param name="type">abstract class System.Type</param>
         /// <param name="sortMode">enum UnityEngine.FindObjectsSortMode</param>
         /// <returns>class UnityEngine.Object[]</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsByType", Search = typeof(Search_EquipmentItemData))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsByType", Search = typeof(Search_ShipBlueprintItemData))]
         /// static extern nint FIND_OBJECTS_BY_TYPE_00 (nint type, UnityEngine.FindObjectsSortMode sortMode);
 
 
@@ -905,7 +898,7 @@ namespace Maple.CatQuest3
         /// <param name="findObjectsInactive">enum UnityEngine.FindObjectsInactive</param>
         /// <param name="sortMode">enum UnityEngine.FindObjectsSortMode</param>
         /// <returns>class UnityEngine.Object[]</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsByType", Search = typeof(Search_EquipmentItemData))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsByType", Search = typeof(Search_ShipBlueprintItemData))]
         /// static extern nint FIND_OBJECTS_BY_TYPE_01 (nint type, UnityEngine.FindObjectsInactive findObjectsInactive, UnityEngine.FindObjectsSortMode sortMode);
 
 
@@ -914,7 +907,7 @@ namespace Maple.CatQuest3
         /// </summary>
         /// <param name="sortMode">enum UnityEngine.FindObjectsSortMode</param>
         /// <returns>class T[]</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsByType", Search = typeof(Search_EquipmentItemData))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsByType", Search = typeof(Search_ShipBlueprintItemData))]
         /// static extern nint FIND_OBJECTS_BY_TYPE_02 (UnityEngine.FindObjectsSortMode sortMode);
 
 
@@ -924,7 +917,7 @@ namespace Maple.CatQuest3
         /// <param name="findObjectsInactive">enum UnityEngine.FindObjectsInactive</param>
         /// <param name="sortMode">enum UnityEngine.FindObjectsSortMode</param>
         /// <returns>class T[]</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsByType", Search = typeof(Search_EquipmentItemData))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsByType", Search = typeof(Search_ShipBlueprintItemData))]
         /// static extern nint FIND_OBJECTS_BY_TYPE_03 (UnityEngine.FindObjectsInactive findObjectsInactive, UnityEngine.FindObjectsSortMode sortMode);
 
 
@@ -933,7 +926,7 @@ namespace Maple.CatQuest3
         /// </summary>
         /// <param name="type">abstract class System.Type</param>
         /// <returns>class UnityEngine.Object[]</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsOfType", Search = typeof(Search_EquipmentItemData))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsOfType", Search = typeof(Search_ShipBlueprintItemData))]
         /// static extern nint FIND_OBJECTS_OF_TYPE_00 (nint type);
 
 
@@ -943,7 +936,7 @@ namespace Maple.CatQuest3
         /// <param name="type">abstract class System.Type</param>
         /// <param name="includeInactive">struct System.Boolean</param>
         /// <returns>class UnityEngine.Object[]</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsOfType", Search = typeof(Search_EquipmentItemData))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsOfType", Search = typeof(Search_ShipBlueprintItemData))]
         /// static extern nint FIND_OBJECTS_OF_TYPE_01 (nint type, System.Boolean includeInactive);
 
 
@@ -951,7 +944,7 @@ namespace Maple.CatQuest3
         /// static  T[] FindObjectsOfType()
         /// </summary>
         /// <returns>class T[]</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsOfType", Search = typeof(Search_EquipmentItemData))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsOfType", Search = typeof(Search_ShipBlueprintItemData))]
         /// static extern nint FIND_OBJECTS_OF_TYPE_02 ();
 
 
@@ -960,8 +953,28 @@ namespace Maple.CatQuest3
         /// </summary>
         /// <param name="includeInactive">struct System.Boolean</param>
         /// <returns>class T[]</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsOfType", Search = typeof(Search_EquipmentItemData))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsOfType", Search = typeof(Search_ShipBlueprintItemData))]
         /// static extern nint FIND_OBJECTS_OF_TYPE_03 (System.Boolean includeInactive);
+
+
+        /// <summary>
+        ///   System.ValueTuple<System.String,System.String> GetDescription(System.Int32 itemLevel, System.Int32& parameterValue)
+        /// </summary>
+        /// <param name="itemLevel">struct System.Int32</param>
+        /// <param name="parameterValue">struct System.Int32&</param>
+        /// <returns>struct System.ValueTuple<System.String,System.String></returns>
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetDescription", CallConvs = [typeof(CallConvCdecl)])]
+        extern void GET_DESCRIPTION(out REF_MONO_VALUETUPLE<PMonoString, PMonoString> desc, System.Int32 itemLevel, out System.Int32 parameterValue);
+
+
+        /// <summary>
+        ///   System.ValueTuple<System.String,System.String> GetDescription(System.Int32 itemLevel, System.Int32& parameterValue)
+        /// </summary>
+        /// <param name="itemLevel">struct System.Int32</param>
+        /// <param name="parameterValue">struct System.Int32&</param>
+        /// <returns>struct System.ValueTuple<System.String,System.String></returns>
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetDescription", Search = typeof(Search_ShipBlueprintItemData))]
+        ///  extern System.ValueTuple<System.String,System.String> GET_DESCRIPTION_01 (System.Int32 itemLevel, System.Int32& parameterValue);
 
 
         /// <summary>
@@ -971,7 +984,7 @@ namespace Maple.CatQuest3
         /// <param name="position">struct UnityEngine.Vector3</param>
         /// <param name="rotation">struct UnityEngine.Quaternion</param>
         /// <returns>class UnityEngine.Object</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_EquipmentItemData))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_ShipBlueprintItemData))]
         /// static extern nint INSTANTIATE_00 (nint original, UnityEngine.Vector3 position, UnityEngine.Quaternion rotation);
 
 
@@ -983,7 +996,7 @@ namespace Maple.CatQuest3
         /// <param name="rotation">struct UnityEngine.Quaternion</param>
         /// <param name="parent">class UnityEngine.Transform</param>
         /// <returns>class UnityEngine.Object</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_EquipmentItemData))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_ShipBlueprintItemData))]
         /// static extern nint INSTANTIATE_01 (nint original, UnityEngine.Vector3 position, UnityEngine.Quaternion rotation, nint parent);
 
 
@@ -992,7 +1005,7 @@ namespace Maple.CatQuest3
         /// </summary>
         /// <param name="original">class UnityEngine.Object</param>
         /// <returns>class UnityEngine.Object</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_EquipmentItemData))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_ShipBlueprintItemData))]
         /// static extern nint INSTANTIATE_02 (nint original);
 
 
@@ -1002,7 +1015,7 @@ namespace Maple.CatQuest3
         /// <param name="original">class UnityEngine.Object</param>
         /// <param name="parent">class UnityEngine.Transform</param>
         /// <returns>class UnityEngine.Object</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_EquipmentItemData))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_ShipBlueprintItemData))]
         /// static extern nint INSTANTIATE_03 (nint original, nint parent);
 
 
@@ -1013,7 +1026,7 @@ namespace Maple.CatQuest3
         /// <param name="parent">class UnityEngine.Transform</param>
         /// <param name="instantiateInWorldSpace">struct System.Boolean</param>
         /// <returns>class UnityEngine.Object</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_EquipmentItemData))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_ShipBlueprintItemData))]
         /// static extern nint INSTANTIATE_04 (nint original, nint parent, System.Boolean instantiateInWorldSpace);
 
 
@@ -1022,7 +1035,7 @@ namespace Maple.CatQuest3
         /// </summary>
         /// <param name="original">class T</param>
         /// <returns>class T</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_EquipmentItemData))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_ShipBlueprintItemData))]
         /// static extern nint INSTANTIATE_05 (nint original);
 
 
@@ -1033,7 +1046,7 @@ namespace Maple.CatQuest3
         /// <param name="position">struct UnityEngine.Vector3</param>
         /// <param name="rotation">struct UnityEngine.Quaternion</param>
         /// <returns>class T</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_EquipmentItemData))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_ShipBlueprintItemData))]
         /// static extern nint INSTANTIATE_06 (nint original, UnityEngine.Vector3 position, UnityEngine.Quaternion rotation);
 
 
@@ -1045,7 +1058,7 @@ namespace Maple.CatQuest3
         /// <param name="rotation">struct UnityEngine.Quaternion</param>
         /// <param name="parent">class UnityEngine.Transform</param>
         /// <returns>class T</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_EquipmentItemData))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_ShipBlueprintItemData))]
         /// static extern nint INSTANTIATE_07 (nint original, UnityEngine.Vector3 position, UnityEngine.Quaternion rotation, nint parent);
 
 
@@ -1055,7 +1068,7 @@ namespace Maple.CatQuest3
         /// <param name="original">class T</param>
         /// <param name="parent">class UnityEngine.Transform</param>
         /// <returns>class T</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_EquipmentItemData))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_ShipBlueprintItemData))]
         /// static extern nint INSTANTIATE_08 (nint original, nint parent);
 
 
@@ -1066,15 +1079,31 @@ namespace Maple.CatQuest3
         /// <param name="parent">class UnityEngine.Transform</param>
         /// <param name="worldPositionStays">struct System.Boolean</param>
         /// <returns>class T</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_EquipmentItemData))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_ShipBlueprintItemData))]
         /// static extern nint INSTANTIATE_09 (nint original, nint parent, System.Boolean worldPositionStays);
+
+
+        /// <summary>
+        ///   System.Boolean ShowInspectorAsEquipmentItem()
+        /// </summary>
+        /// <returns>struct System.Boolean</returns>
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("ShowInspectorAsEquipmentItem", Search = typeof(Search_ShipBlueprintItemData))]
+        ///  extern System.Boolean SHOW_INSPECTOR_AS_EQUIPMENT_ITEM_00 ();
+
+
+        /// <summary>
+        ///   System.Boolean ShowInspectorAsEquipmentItem()
+        /// </summary>
+        /// <returns>struct System.Boolean</returns>
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("ShowInspectorAsEquipmentItem", Search = typeof(Search_ShipBlueprintItemData))]
+        ///  extern System.Boolean SHOW_INSPECTOR_AS_EQUIPMENT_ITEM_01 ();
 
 
         /// <summary>
         ///   System.String ToString()
         /// </summary>
         /// <returns>class System.String</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("ToString", Search = typeof(Search_EquipmentItemData))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("ToString", Search = typeof(Search_ShipBlueprintItemData))]
         ///  extern nint TO_STRING_00 ();
 
 
@@ -1083,11 +1112,11 @@ namespace Maple.CatQuest3
         /// </summary>
         /// <param name="obj">class UnityEngine.Object</param>
         /// <returns>class System.String</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("ToString", Search = typeof(Search_EquipmentItemData))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("ToString", Search = typeof(Search_ShipBlueprintItemData))]
         /// static extern nint TO_STRING_01 (nint obj);
 
 
-        /// public static partial class Search_EquipmentItemData
+        /// public static partial class Search_ShipBlueprintItemData
         /// {
         /// 
         ///     
@@ -1126,6 +1155,16 @@ namespace Maple.CatQuest3
         ///   System.Void .ctor()
         /// </summary>
         /// public static bool .CTOR_03 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, ".ctor");
+        ///     
+        ///  
+        /// 
+
+
+        /// <summary>
+        ///   System.Void .ctor()
+        /// </summary>
+        /// public static bool .CTOR_04 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
         ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, ".ctor");
         ///     
         ///  
@@ -1433,6 +1472,26 @@ namespace Maple.CatQuest3
 
 
         /// <summary>
+        ///   System.ValueTuple<System.String,System.String> GetDescription(System.Int32 itemLevel, System.Int32& parameterValue)
+        /// </summary>
+        /// public static bool GET_DESCRIPTION_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetDescription", "System.Int32", "System.Int32&");
+        ///     
+        ///  
+        /// 
+
+
+        /// <summary>
+        ///   System.ValueTuple<System.String,System.String> GetDescription(System.Int32 itemLevel, System.Int32& parameterValue)
+        /// </summary>
+        /// public static bool GET_DESCRIPTION_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetDescription", "System.Int32", "System.Int32&");
+        ///     
+        ///  
+        /// 
+
+
+        /// <summary>
         /// static  UnityEngine.Object Instantiate(UnityEngine.Object original, UnityEngine.Vector3 position, UnityEngine.Quaternion rotation)
         /// </summary>
         /// public static bool INSTANTIATE_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
@@ -1527,6 +1586,26 @@ namespace Maple.CatQuest3
         /// </summary>
         /// public static bool INSTANTIATE_09 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
         ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "Instantiate", "T", "UnityEngine.Transform", "System.Boolean");
+        ///     
+        ///  
+        /// 
+
+
+        /// <summary>
+        ///   System.Boolean ShowInspectorAsEquipmentItem()
+        /// </summary>
+        /// public static bool SHOW_INSPECTOR_AS_EQUIPMENT_ITEM_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "ShowInspectorAsEquipmentItem");
+        ///     
+        ///  
+        /// 
+
+
+        /// <summary>
+        ///   System.Boolean ShowInspectorAsEquipmentItem()
+        /// </summary>
+        /// public static bool SHOW_INSPECTOR_AS_EQUIPMENT_ITEM_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "ShowInspectorAsEquipmentItem");
         ///     
         ///  
         /// 
